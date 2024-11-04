@@ -38,12 +38,12 @@ export default async function Home() {
                         </div>
                         <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
                             <p className="text-lg text-muted-foreground text-balance text-center md:text-left">
-                                Most of the time I&apos;m a <span className="font-semibold text-primary">full-stack web developer</span> but in my free time I like to make an Android app or go for a run.
+                                Most of the time I&apos;m a student and <span className="font-semibold text-primary">full-stack web developer</span> but in my free time I like to make an Android app or go for a run.
                             </p>
                         </div>
                         <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
                             <div className="w-full flex flex-col gap-2 items-center md:items-start">
-                                <p className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.</p>
+                                <p className="text-sm text-center md:text-left text-muted-foreground">You can ask me about anything or view my projects.</p>
                                 <div className="flex items-center gap-2">
                                     <Link href="#contact"><Button><Icons.Contact className="w-4 h-4" />Contact me</Button></Link>
                                     <Link href="#projects"><Button variant={"outline"}>View projects</Button></Link>

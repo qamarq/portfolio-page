@@ -69,7 +69,7 @@ export default function ContactForm() {
     };
 
     return (
-        <div style={{"--hero-width": "calc(100%)"} as React.CSSProperties} className='relative'>
+        <div style={{"--hero-width": "calc(100%)"} as React.CSSProperties} className='relative order-last md:order-first'>
             <div className='relative z-20 horizontal-line after:top-0'></div>
             <div className='relative p-10 bg-background/40 backdrop-blur-sm z-10'>
                 <Form {...form}>

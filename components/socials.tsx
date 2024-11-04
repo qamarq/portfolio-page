@@ -29,7 +29,9 @@ export default function Socials() {
     return (
         <div className="p-8">
             <h2 className="text-2xl font-cal">Socials & Accounts</h2>
-            <p className="text-muted-foreground text-balance">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.</p>
+            <p className="text-muted-foreground text-balance">
+                Here you can find all my social media accounts and other ways to contact
+            </p>
 
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {SOCIALS.map(social => (
