@@ -15,7 +15,7 @@ export default function GithubStarBtn({ stars, className }: { stars: number, cla
                     variant: 'rainbow',
                     size: "sm"
                 }),
-                'hidden md:inline-flex',
+                'inline-flex',
                 className
             )}
             target="_blank"

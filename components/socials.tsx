@@ -31,7 +31,7 @@ export default function Socials() {
             <h2 className="text-2xl font-cal">Socials & Accounts</h2>
             <p className="text-muted-foreground text-balance">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.</p>
 
-            <div className="mt-16 grid grid-cols-2 gap-6">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
                 {SOCIALS.map(social => (
                     <Link key={social.link} target="_blank" href={social.link} className="border p-4 flex items-center bg-background/30 hover:bg-rose-500/5 hover:text-rose-500 transition-all">
                         <social.icon className="w-4 h-4 mr-2" />

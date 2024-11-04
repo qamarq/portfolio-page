@@ -90,6 +90,7 @@ body {
 }
 
 /* after:absolute after:bottom-0 after:left-[calc((var(--hero-width) + 100px) / 2)] after:w-[calc(var(--hero-width) + 100px)] after:h-[1px] */
+
 .horizontal-line::after {
     content: '';
     position: absolute;
@@ -105,6 +106,14 @@ body {
         linear-gradient(#000, #000);
     -webkit-mask-composite: destination-in;
     mask-composite: exclude;
+}
+
+@media screen and (max-width: 768px) {
+    .horizontal-line::after {
+        left: -25px;
+        width: calc(100% + 50px);
+    }
+    
 }
 
 .vertical-line {

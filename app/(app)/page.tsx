@@ -26,23 +26,23 @@ export default async function Home() {
 
     return (
         <>
-            <section style={{"--hero-width": "72rem"} as CSSProperties} className="min-h-screen flex items-center justify-center max-w-[var(--hero-width)] mx-auto w-full">
-                <div className="grid grid-cols-5 w-full relative bg-opacity-[0.01] before:absolute before:bottom-1/2 before:left-0 before:top-0 before:h-full before:w-full before:opacity-0 before:[filter:blur(180px)] before:[background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] before:animate-image-glow">
-                    <div className="col-span-3 grid grid-rows-5 relative horizontal-line after:top-0">
+            <section style={{"--hero-width": "72rem", "--hero-width-phone": "100%"} as CSSProperties} className="min-h-screen flex items-center justify-center mx-auto w-full max-w-[var(--hero-width-phone)] lg:max-w-[var(--hero-width)]">
+                <div className="grid grid-cols-3 md:grid-cols-5 w-full relative bg-opacity-[0.01] before:absolute before:bottom-1/2 before:left-0 before:top-0 before:h-full before:w-full before:opacity-0 before:[filter:blur(180px)] before:[background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] before:animate-image-glow">
+                    <div className="col-span-3 grid grid-rows-5 relative horizontal-line after:top-0 order-last md:order-[unset]">
                         <div className="vertical-line z-10"></div>
                         <div className="vertical-line !left-[33%]"></div>
                         <div className="vertical-line !left-[66%]"></div>
                         <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
-                            <h1 className="w-full text-left font-cal translate-y-[1px] text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
+                            <h1 className="w-full text-center md:text-left font-cal translate-y-[1px] text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
                                 Hello there <Image unoptimized src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width={55} height={55} alt="Wavy hand gif" className="inline -translate-y-2"/><br/> I&apos;m Kamil Marczak</h1>
                         </div>
                         <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
-                            <p className="text-lg text-muted-foreground text-balance">
+                            <p className="text-lg text-muted-foreground text-balance text-center md:text-left">
                                 Most of the time I&apos;m a <span className="font-semibold text-primary">full-stack web developer</span> but in my free time I like to make an Android app or go for a run.
                             </p>
                         </div>
                         <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
-                            <div className="w-full flex flex-col gap-2">
+                            <div className="w-full flex flex-col gap-2 items-center md:items-start">
                                 <p className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.</p>
                                 <div className="flex items-center gap-2">
                                     <Link href="#contact"><Button><Icons.Contact className="w-4 h-4" />Contact me</Button></Link>
@@ -56,13 +56,13 @@ export default async function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="vertical-line !left-[unset] right-0"></div>
+                        <div className="hidden md:block vertical-line !left-[unset] right-0"></div>
                     </div>
-                    <div className="col-span-2 z-10">
+                    <div className="col-span-3 md:col-span-2 z-10">
                         <Image quality={100} src={MeImage} alt="Kamil Marczak" width={512} height={512} className="w-auto h-full object-cover" />
                     </div>
-                    <div className="vertical-line !left-[80%]"></div>
-                    <div className="vertical-line !left-[unset] right-0 z-10"></div>
+                    <div className="hidden md:block vertical-line !left-[80%]"></div>
+                    <div className="hidden md:block vertical-line !left-[unset] right-0 z-10"></div>
                 </div>
             </section>
             
@@ -133,10 +133,10 @@ export default async function Home() {
                 </div>
             </section>
 
-            <section className="max-w-6xl mx-auto py-20" id="projects">
+            <section className="max-w-6xl mx-auto py-20 px-5 md:px-0" id="projects">
                 <h1 className="w-full text-center font-cal translate-y-1 text-5xl">My <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">projects</span></h1>
 
-                <div className="mt-20 grid grid-cols-3 gap-12 gap-y-24">
+                <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
                     {projects.map((project) => (
                         <ProjectCard key={project.id} project={project} />
                     ))}
@@ -146,7 +146,7 @@ export default async function Home() {
             <section className="max-w-6xl mx-auto py-20 mb-36" id="contact">
                 <h1 className="w-full text-center font-cal translate-y-1 text-5xl"><span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">Contact</span> me</h1>
 
-                <div className="grid grid-cols-2 gap-10 mt-32">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">
                     <ContactForm />
                     <Socials />
                 </div>
