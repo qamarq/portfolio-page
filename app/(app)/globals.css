@@ -110,8 +110,8 @@ body {
 
 @media screen and (max-width: 768px) {
     .horizontal-line::after {
-        left: -25px;
-        width: calc(100% + 50px);
+        left: 0;
+        width: calc(100%);
     }
     
 }

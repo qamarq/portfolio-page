@@ -33,7 +33,7 @@ export default async function Home() {
                         <div className="vertical-line !left-[33%]"></div>
                         <div className="vertical-line !left-[66%]"></div>
                         <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
-                            <h1 className="w-full text-center md:text-left font-cal translate-y-[1px] text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
+                            <h1 className="w-full text-center md:text-left font-cal translate-y-[1px] text-5xl md:text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
                                 Hello there <Image unoptimized src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width={55} height={55} alt="Wavy hand gif" className="inline -translate-y-2"/><br/> I&apos;m Kamil Marczak</h1>
                         </div>
                         <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
@@ -62,7 +62,7 @@ export default async function Home() {
                         <Image quality={100} src={MeImage} alt="Kamil Marczak" width={512} height={512} className="w-auto h-full object-cover" />
                     </div>
                     <div className="hidden md:block vertical-line !left-[80%]"></div>
-                    <div className="hidden md:block vertical-line !left-[unset] right-0 z-10"></div>
+                    <div className="vertical-line !left-[unset] right-0 z-10"></div>
                 </div>
             </section>
             
