@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@payloadcms/db-mongodb": "3.0.0-beta.123",
+    "@payloadcms/email-resend": "3.0.0-beta.123",
     "@payloadcms/next": "3.0.0-beta.123",
     "@payloadcms/payload-cloud": "3.0.0-beta.123",
     "@payloadcms/richtext-lexical": "3.0.0-beta.123",

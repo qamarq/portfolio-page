@@ -14,6 +14,9 @@ importers:
       '@payloadcms/db-mongodb':
         specifier: 3.0.0-beta.123
         version: 3.0.0-beta.123(@aws-sdk/client-sso-oidc@3.682.0(@aws-sdk/client-sts@3.682.0))(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))
+      '@payloadcms/email-resend':
+        specifier: 3.0.0-beta.123
+        version: 3.0.0-beta.123(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))
       '@payloadcms/next':
         specifier: 3.0.0-beta.123
         version: 3.0.0-beta.123(@types/react@18.3.12)(graphql@16.9.0)(monaco-editor@0.52.0)(next@15.0.2(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(sass@1.77.4))(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3)
@@ -972,6 +975,12 @@ packages:
 
   '@payloadcms/email-nodemailer@3.0.0-beta.123':
     resolution: {integrity: sha512-/EAqOCZcoSaMdQec26Qpf4KD5BGxmA95kcpIdKgwwAM1j/b0pqKQ1Dqyfq6k1a0WQXpvSFxhhPevj7Ps0EklEw==}
+    engines: {node: ^18.20.2 || >=20.9.0}
+    peerDependencies:
+      payload: 3.0.0-beta.123
+
+  '@payloadcms/email-resend@3.0.0-beta.123':
+    resolution: {integrity: sha512-gGja2aByIJ/d00kMneJXGCgZjW9JuxZQSqixtQRQTwJVY3N+tnxu1p4qrayEfqbcJDyzJjnTBeMmFIoSzwNWSw==}
     engines: {node: ^18.20.2 || >=20.9.0}
     peerDependencies:
       payload: 3.0.0-beta.123
@@ -5040,6 +5049,10 @@ snapshots:
   '@payloadcms/email-nodemailer@3.0.0-beta.123(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))':
     dependencies:
       nodemailer: 6.9.10
+      payload: 3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3)
+
+  '@payloadcms/email-resend@3.0.0-beta.123(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))':
+    dependencies:
       payload: 3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3)
 
   '@payloadcms/graphql@3.0.0-beta.123(graphql@16.9.0)(payload@3.0.0-beta.123(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-02c0e824-20241028(react@19.0.0-rc-02c0e824-20241028))(react@19.0.0-rc-02c0e824-20241028)(typescript@5.6.3))(typescript@5.6.3)':
