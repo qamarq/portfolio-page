@@ -12,7 +12,7 @@ export default function Socials() {
         {
             icon: Icons.LinkedIn,
             name: 'Kamil Marczak',
-            link: 'https://www.linkedin.com/in/%F0%9F%94%A5-kamil-marczak-095b331a2/'
+            link: 'https://www.linkedin.com/in/kamilmarczak/'
         },
         {
             icon: Icons.Discord,

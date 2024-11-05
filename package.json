@@ -25,6 +25,7 @@
     "framer-motion": "^11.11.11",
     "graphql": "^16.8.1",
     "lucide-react": "^0.454.0",
+    "markdown-to-jsx": "^7.5.0",
     "mongoose": "^6.12.3",
     "next": "15.0.2",
     "next-safe-action": "^7.9.9",
