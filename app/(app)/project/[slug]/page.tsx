@@ -12,6 +12,53 @@ type ProjectPageProps = {
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata({ params }: ProjectPageProps) {
+    const { slug: paramsSlug } = await params;
+    const { isEnabled: isDraftMode } = await draftMode()
+    const payload = await getPayloadHMR({ config })
+
+    let project: Project | null = null;
+
+    try {
+        project = (await payload.find({
+            collection: 'projects',
+            where: { slug: { equals: paramsSlug } },
+            draft: isDraftMode,
+        })).docs[0];
+    } catch (error) {
+        console.error(error);
+    }
+
+    if (!project) return notFound()
+    return {
+        title: project.title,
+        description: project.shortDescription,
+        openGraph: {
+            title: project.title,
+            description: project.shortDescription,
+            url: `https://kamilmarczak.pl/project/${project.slug}`,
+            siteName: 'Kamil Marczak - Full-Stack Web Developer',
+            images: [{
+                url: typeof project.heroImage === "string" ? project.heroImage : project.heroImage.url,
+                width: 800,
+                height: 600,
+                alt: project.title,
+            }],
+            locale: 'en_US',
+            type: 'website'
+        },
+        twitter: {
+            cardType: 'summary_large_image',
+            title: project.title,
+            description: project.shortDescription,
+            site: '@kamilmarczak',
+            creator: '@qamarq_',
+            creatorId: '1403301074602270720',
+            images: [typeof project.heroImage === "string" ? project.heroImage : project.heroImage.url]
+        }
+    }
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug: paramsSlug } = await params;
     const { isEnabled: isDraftMode } = await draftMode()

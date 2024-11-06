@@ -20,7 +20,10 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Kamil Marczak - Full-Stack Web Developer",
+    title: {
+        template: "%s | Kamil Marczak's Portfolio",
+        default: "Kamil Marczak - Full-Stack Web Developer"
+    },
     description: "Explore Kamil Marczak's private portfolio showcasing expertise in mobile app development, web development using various frameworks, databases, and cybersecurity.",
     authors: {
         url: "https://kamilmarczak.pl",
@@ -37,7 +40,11 @@ export const metadata: Metadata = {
         "programming languages", 
         "Polish", 
         "English"
-    ]
+    ],
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
+    alternates: {
+        canonical: "./"
+    }
 };
 
 export default function RootLayout({
