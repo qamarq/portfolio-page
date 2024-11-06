@@ -29,8 +29,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect?: {};
+  globals: {
+    'main-page': MainPage;
+  };
+  globalsSelect?: {
+    'main-page': MainPageSelect<false> | MainPageSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -66,6 +70,7 @@ export interface User {
   id: string;
   name: string;
   avatar?: (string | null) | Media;
+  socialLink?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -109,6 +114,7 @@ export interface Project {
   tags: string[];
   githubLink?: string | null;
   previewUrl?: string | null;
+  authors?: (string | User)[] | null;
   content: {
     root: {
       type: string;
@@ -128,6 +134,7 @@ export interface Project {
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -197,6 +204,7 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   avatar?: T;
+  socialLink?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -237,11 +245,13 @@ export interface ProjectsSelect<T extends boolean = true> {
   tags?: T;
   githubLink?: T;
   previewUrl?: T;
+  authors?: T;
   content?: T;
   images?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -274,6 +284,46 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-page".
+ */
+export interface MainPage {
+  id: string;
+  clientsText: string;
+  socialsTitle: string;
+  socialsDescription: string;
+  socials: {
+    linkedInLink: string;
+    githubLink: string;
+    email: string;
+    discordName: string;
+    discordId: string;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-page_select".
+ */
+export interface MainPageSelect<T extends boolean = true> {
+  clientsText?: T;
+  socialsTitle?: T;
+  socialsDescription?: T;
+  socials?:
+    | T
+    | {
+        linkedInLink?: T;
+        githubLink?: T;
+        email?: T;
+        discordName?: T;
+        discordId?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

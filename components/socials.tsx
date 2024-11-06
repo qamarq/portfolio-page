@@ -1,36 +1,37 @@
 import Link from 'next/link'
 import React from 'react'
 import { Icons } from './icons'
+import { MainPage } from '@/payload-types'
 
-export default function Socials() {
+export default function Socials({ content }: { content: MainPage }) {
     const SOCIALS = [
         {
             icon: Icons.Github,
             name: 'Kamil Marczak',
-            link: 'https://github.com/qamarq'
+            link: content.socials.githubLink
         },
         {
             icon: Icons.LinkedIn,
             name: 'Kamil Marczak',
-            link: 'https://www.linkedin.com/in/kamilmarczak/'
+            link: content.socials.linkedInLink
         },
         {
             icon: Icons.Discord,
-            name: 'qamarq',
-            link: 'https://discord.com/users/699587760729882641'
+            name: content.socials.discordName,
+            link: `https://discord.com/users/${content.socials.discordId}`
         },
         {
             icon: Icons.Gmail,
-            name: 'km.wpwp.pl@gmail.com',
-            link: 'mailto:km.wpwp.pl@gmail.com',
+            name: content.socials.email,
+            link: `mailto:${content.socials.email}`,
         }
     ]
 
     return (
         <div className="p-8">
-            <h2 className="text-2xl font-cal">Socials & Accounts</h2>
+            <h2 className="text-2xl font-cal">{content.socialsTitle}</h2>
             <p className="text-muted-foreground text-balance">
-                Here you can find all my social media accounts and other ways to contact
+                {content.socialsDescription}
             </p>
 
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">

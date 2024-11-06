@@ -1,4 +1,4 @@
-import { Command, Loader2, Send } from "lucide-react";
+import { ArrowLeft, Command, Eye, Loader2, Send } from "lucide-react";
 import { SiAndroid, SiDiscord, SiFivem, SiGithub, SiGmail, SiLinkedin, SiNextdotjs, SiOpenai } from "react-icons/si";
 import { FaStar } from "react-icons/fa";
 import { cn } from "@/lib/utils";
@@ -20,4 +20,6 @@ export const Icons = {
     Loading: ({ className }: React.HTMLAttributes<HTMLDivElement>) => (
         <Loader2 className={cn("animate-spin w-4 h-4", className)} />   
     ),
+    ArrowLeft,
+    Eye
 }

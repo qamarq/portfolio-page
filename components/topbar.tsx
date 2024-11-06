@@ -2,6 +2,7 @@ import React from 'react'
 import { Icons } from './icons'
 import GithubStarBtn from './github-star'
 import Link from 'next/link'
+import { Button } from './ui/button';
 
 export default async function Topbar() {
     let stars = 0;
@@ -39,7 +40,13 @@ export default async function Topbar() {
                         Kamil <span className='bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent'>Marczak</span>
                     </h1>
                 </Link>
-                <div className='flex items-center justify-end'>
+                <div className='flex items-center justify-end gap-2'>
+                    <Link href="#projects" className='hidden lg:flex'>
+                        <Button size={"sm"} variant={"ghost"}>My projects</Button>
+                    </Link>
+                    <Link href="#contact" className='hidden lg:flex'>
+                        <Button size={"sm"} variant={"ghost"}>Contact me</Button>
+                    </Link>
                     <GithubStarBtn stars={stars} />
                 </div>
             </div>

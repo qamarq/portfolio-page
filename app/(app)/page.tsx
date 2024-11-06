@@ -24,6 +24,10 @@ export default async function Home() {
         depth: 2,
     })
 
+    const mainPageContent = await payload.findGlobal({
+        slug: 'main-page',
+    })
+
     return (
         <>
             <section style={{"--hero-width": "72rem", "--hero-width-phone": "100%"} as CSSProperties} className="min-h-screen flex items-center justify-center mx-auto w-full max-w-[var(--hero-width-phone)] lg:max-w-[var(--hero-width)]">
@@ -73,7 +77,7 @@ export default async function Home() {
                 <div className="py-14">
                     <div className="mx-auto max-w-screen-xl px-4 md:px-8">
                         <h2 className="text-center text-sm font-cal text-muted-foreground">
-                            Some of languages and technologies I know well
+                            {mainPageContent.clientsText}
                         </h2>
                         <div className="mt-6">
                             <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16 [&amp;_path]:fill-white">
@@ -148,7 +152,7 @@ export default async function Home() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">
                     <ContactForm />
-                    <Socials />
+                    <Socials content={mainPageContent} />
                 </div>
             </section>
         </>
