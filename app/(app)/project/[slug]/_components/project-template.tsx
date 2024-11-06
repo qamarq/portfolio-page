@@ -35,6 +35,7 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                     name,
                     avatar,
                     intials: name.split(' ')[0][0] + name.split(' ')[name.split(' ').length - 1][0],
+                    link: author.socialLink || 'https://kamilmarczak.pl'
                 }
             })
         } else {
@@ -69,15 +70,17 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                             </div>
                         ))} */}
                         {authors.map((author, index) => (
-                            <Badge key={index} variant={"default"}>
-                                <Avatar className='w-4 h-4'>
-                                    <AvatarImage src={author?.avatar || ''} />
-                                    <AvatarFallback>{author?.intials}</AvatarFallback>
-                                </Avatar>
-                                <div className='ml-2'>
-                                    <p className='text-sm font-medium font-cal translate-y-[1.5px]'>{author.name}</p>
-                                </div>
-                            </Badge>
+                            <Link key={index} href={author.link} target="_blank">
+                                <Badge variant={"default"}>
+                                    <Avatar className='w-4 h-4'>
+                                        <AvatarImage src={author?.avatar || ''} />
+                                        <AvatarFallback>{author?.intials}</AvatarFallback>
+                                    </Avatar>
+                                    <div className='ml-2'>
+                                        <p className='text-sm font-medium font-cal translate-y-[1.5px]'>{author.name}</p>
+                                    </div>
+                                </Badge>
+                            </Link>
                         ))}
                     </div>
                     <h1 className='text-5xl font-cal mt-7'>{data.title}</h1>
