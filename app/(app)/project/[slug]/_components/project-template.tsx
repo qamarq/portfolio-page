@@ -96,29 +96,29 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                             <Link href={data.githubLink} target='_blank'>
                                 <Button size={"sm"}>
                                     <Icons.Github className='w-5 h-5' />
-                                    Github
+                                    Github repository
                                 </Button>
                             </Link>
                         )}
                         {!data.githubLink && (
                             <Button size={"sm"} disabled>
                                 <Icons.Github className='w-5 h-5' />
-                                Github
+                                Github repository
                             </Button>
                         )}
 
                         {data.previewUrl && (
                             <Link href={data.previewUrl} target='_blank'>
                                 <Button size={"sm"}>
-                                    <Icons.Eye className='w-5 h-5' />
-                                    Preview
+                                    <Icons.Globe className='w-5 h-5' />
+                                    Live website
                                 </Button>
                             </Link>
                         )}
                         {!data.previewUrl && (
                             <Button size={"sm"} disabled>
-                                <Icons.Eye className='w-5 h-5' />
-                                Preview
+                                <Icons.Globe className='w-5 h-5' />
+                                Live website
                             </Button>
                         )}
                     </div>
