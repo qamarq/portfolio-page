@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -75,6 +76,7 @@ export default function RootLayout({
                         <Footer />
                     </ThemeProvider>
                     <Analytics/>
+                    <SpeedInsights />
                     <Toaster richColors />
                 </body>
             </html>
