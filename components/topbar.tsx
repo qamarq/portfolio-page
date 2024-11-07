@@ -3,8 +3,13 @@ import { Icons } from './icons'
 import GithubStarBtn from './github-star'
 import Link from 'next/link'
 import { Button } from './ui/button';
+import { getPayloadHMR } from "@payloadcms/next/utilities";
+import config from '@payload-config'
+import { headers } from 'next/headers';
 
 export default async function Topbar() {
+    const payload = await getPayloadHMR({ config })
+    const { user } = await payload.auth({ headers: (await headers()) })
     let stars = 0;
 
     try {
@@ -47,6 +52,11 @@ export default async function Topbar() {
                     <Link href="#contact" className='hidden lg:flex'>
                         <Button size={"sm"} variant={"ghost"}>Contact me</Button>
                     </Link>
+                    {user && (
+                        <Link href="/admin">
+                            <Button size={"sm"} variant={"ghost"}>Dashboard</Button>
+                        </Link>
+                    )}
                     <GithubStarBtn stars={stars} />
                 </div>
             </div>

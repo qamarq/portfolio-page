@@ -10,6 +10,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
+import { Suspense } from 'react';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -111,7 +112,9 @@ export default function RootLayout({
                         defaultTheme="dark"
                         enableSystem={false}
                         disableTransitionOnChange>
-                        <Topbar />
+                        <Suspense>
+                            <Topbar />
+                        </Suspense>
                         <main className='min-h-screen'>
                             {children}
                         </main>
