@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Project, User } from '@/payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
-import { Link } from 'next-view-transitions'
+import { Link, useTransitionRouter } from 'next-view-transitions'
 import React, { useMemo } from 'react'
 import { cleanString } from '@/lib/utils'
 
@@ -18,6 +18,7 @@ export default function ProjectTemplate({ project }: { project: Project }) {
         depth: 2,
         initialData: project,
     })
+    const router = useTransitionRouter()
 
     const authors = useMemo(() => {
         if (data) {
@@ -51,25 +52,11 @@ export default function ProjectTemplate({ project }: { project: Project }) {
     return (
         <div className='py-[76px] container mx-auto grid grid-cols-4 md:grid-cols-8 min-h-screen'>
             <div className='col-span-4 md:col-span-3 p-6 md:pr-12'>
-                <Link href="/#projects"><Button size={"sm"} variant={"ghost"}><Icons.ArrowLeft className="w-4 h-4" />Back to Projects</Button></Link>
+                <Button size={"sm"} variant={"ghost"} onClick={() => router.back() }><Icons.ArrowLeft className="w-4 h-4" />Back to Projects</Button>
 
                 <div className='mt-5 md:mt-10'>
                     <Image src={typeof data.heroImage === 'string' ? data.heroImage : data.heroImage.url || ''} width={1920} height={1080} alt={data.title} className='rounded-[0.5rem] border block md:hidden mb-5 w-full' />
                     <div className='flex flex-wrap gap-2'>
-                        {/* {authors.map((author, index) => (
-                            <div key={index} className='flex items-center mr-4'>
-                                <div className='w-10 h-10 rounded-full overflow-hidden'>
-                                    <Avatar>
-                                        <AvatarImage src={author?.avatar || ''} />
-                                        <AvatarFallback>{author?.intials}</AvatarFallback>
-                                    </Avatar>
-                                </div>
-                                <div className='ml-2'>
-                                    <p className='text-sm font-inter font-medium'>{author.name}</p>
-                                    <p className='text-xs font-inter text-gray-500'>Author</p>
-                                </div>
-                            </div>
-                        ))} */}
                         {authors.map((author, index) => (
                             <Link key={index} href={author.link} target="_blank">
                                 <Badge variant={"default"}>
