@@ -26,8 +26,8 @@ export default function ProjectCard({ project } : { project: Project }) {
                     <h1 style={{ viewTransitionName: `${cleanString(project.slug)}-title` }} className='font-cal text-2xl text-black dark:text-white group-hover:text-rose-500 transition-all'>{project.title}</h1>
                     <p style={{ viewTransitionName: `${cleanString(project.slug)}-desc` }} className='text-muted-foreground text-base text-balance'>{project.shortDescription}</p>
                     <div className='flex items-center flex-wrap mt-5 gap-2'>
-                        {project.tags.map(tag => (
-                            <Badge key={tag} variant={'default'}>{tag}</Badge>
+                        {project.tags.map((tag, index) => (
+                            <Badge key={tag} variant={'default'} style={{ viewTransitionName: `${cleanString(project.slug)}-badge-${cleanString(index)}` }}>{tag}</Badge>
                         ))}
                     </div>
                 </div>

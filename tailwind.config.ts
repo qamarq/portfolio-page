@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss';
 import tailwindAnimate from 'tailwindcss-animate';
-import tailwindViewTransitions from 'tailwindcss-view-transitions';
 
 const config: Config = {
     darkMode: ['class'],
@@ -148,11 +147,6 @@ const config: Config = {
             }
         },
     },
-    plugins: [tailwindAnimate, tailwindViewTransitions],
-    safelist: [
-        {
-            pattern: /vt-name-\[.*\]/,
-        }
-    ]
+    plugins: [tailwindAnimate],
 };
 export default config;

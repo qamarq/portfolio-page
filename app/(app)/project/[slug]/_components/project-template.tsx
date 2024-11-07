@@ -88,7 +88,7 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                     <p style={{ viewTransitionName: `${cleanString(project.slug)}-desc` }} className='mt-2 text-lg text-muted-foreground'>{data.shortDescription}</p>
                     <div className='mt-4 flex flex-wrap gap-2'>
                         {data.tags.map((tag, index) => (
-                            <Badge key={index} variant={"outline"}>{tag}</Badge>
+                            <Badge key={index} variant={"outline"} style={{ viewTransitionName: `${cleanString(project.slug)}-badge-${cleanString(index)}` }}>{tag}</Badge>
                         ))}
                     </div>
 
