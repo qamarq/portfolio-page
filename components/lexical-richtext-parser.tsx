@@ -101,8 +101,16 @@ const getFormattingStates = (decimalNumber: number) => {
     return formattingStates;
 }
 
+const randomUUID = () => {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0,
+            v = c === "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
+
 export const serializeLexicalEditor = (lexicalEditorContent: Project["content"]) => {
-    return <Element childrens={lexicalEditorContent.root.children as any} />
+    return <Element childrens={lexicalEditorContent.root.children as any} key={randomUUID()} />
 }
 
 const Element = ({ childrens }: { childrens: ElementProps[] }) => {
@@ -123,15 +131,15 @@ const Element = ({ childrens }: { childrens: ElementProps[] }) => {
         })
         switch (child.type) {
             case "paragraph":
-                return <p className={cn(formattedClasses, "text-md font-inter", { 
+                return <p key={randomUUID()} className={cn(formattedClasses, "text-md font-inter", { 
                     'text-right': child.format === 'right',
                     'text-center': child.format === 'center',
                     'text-justify': child.format === 'justify', 
                     'h-10': !child.children || child.children.length === 0
-                })}>{(child.children && child.children.length > 0) ? <Element childrens={child.children || []} /> : <span />}</p>
+                })}>{(child.children && child.children.length > 0) ? <Element childrens={child.children || []} key={randomUUID()} /> : <span key={randomUUID()} />}</p>
             case "heading":
                 const Tag = child.tag || "h1"
-                return <Tag className={cn(formattedClasses, 'font-semibold font-cal', {
+                return <Tag key={randomUUID()} className={cn(formattedClasses, 'font-semibold font-cal', {
                     "text-4xl font-bold": child.tag === "h1",
                     "text-3xl font-bold": child.tag === "h2",
                     "text-2xl": child.tag === "h3",
@@ -139,18 +147,18 @@ const Element = ({ childrens }: { childrens: ElementProps[] }) => {
                     "text-lg": child.tag === "h5",
                     "text-md": child.tag === "h6",
                 
-                })}>{<Element childrens={child.children || []} />}</Tag>
+                })}>{<Element childrens={child.children || []} key={randomUUID()} />}</Tag>
             case "text":
-                return <span className={formattedClasses}>{child.text}</span>
+                return <span key={randomUUID()} className={formattedClasses}>{child.text}</span>
             case "linebreak":
-                return <br />
+                return <br key={randomUUID()} />
             case "link":
-                return <Link className="text-[#3cff87] dark:text-[#00FFB6]" href={child.fields?.url || ''} target={child.fields?.newTab ? '_blank' : ''}>{<Element childrens={child.children || []} />}</Link>
+                return <Link key={randomUUID()} className="text-rose-500 dark:text-rose-500" href={child.fields?.url || ''} target={child.fields?.newTab ? '_blank' : ''}>{<Element childrens={child.children || []} key={randomUUID()} />}</Link>
             case "autolink":
-                return <Link className="text-[#3cff87] dark:text-[#00FFB6]" href={child.fields?.url || ''} target={child.fields?.newTab ? '_blank' : ''}>{<Element childrens={child.children || []} />}</Link>
+                return <Link key={randomUUID()} className="text-rose-500 dark:text-rose-500" href={child.fields?.url || ''} target={child.fields?.newTab ? '_blank' : ''}>{<Element childrens={child.children || []} key={randomUUID()} />}</Link>
             case "quote":
                 return (
-                    <blockquote className="text-xl italic font-semibold text-gray-900 dark:text-white border-zinc-400 bg-white/5 p-4 my-4 border-l-4 ">
+                    <blockquote key={randomUUID()} className="text-xl italic font-semibold text-gray-900 dark:text-white border-zinc-400 bg-white/5 p-4 my-4 border-l-4 ">
                         <svg className="w-8 h-8 text-gray-400 dark:text-gray-600 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 14">
                             <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z"/>
                         </svg>
@@ -158,19 +166,19 @@ const Element = ({ childrens }: { childrens: ElementProps[] }) => {
                     </blockquote>
                 )
             case "horizontalrule":
-                return <hr className="h-[1px] my-4 bg-zinc-600 rounded-lg" />
+                return <hr key={randomUUID()} className="h-[1px] my-4 bg-zinc-600 rounded-lg" />
             case "upload":
                 return (
-                    <Image src={child.value?.url || ''} width={500} height={500} alt="" className='h-full w-full text-transparent object-cover rounded-lg' unoptimized />
+                    <Image key={randomUUID()} src={child.value?.url || ''} width={500} height={500} alt="" className='h-full w-full text-transparent object-cover rounded-lg' unoptimized />
                 )
             case "list":
-                return <ul className={cn("ml-2 list-inside space-y-2", { 'list-disc': child.listType !== "number", 'list-decimal': child.listType === "number" })}>{<Element childrens={child.children || []} />}</ul>
+                return <ul key={randomUUID()} className={cn("ml-2 list-inside space-y-2", { 'list-disc': child.listType !== "number", 'list-decimal': child.listType === "number" })}>{<Element childrens={child.children || []} />}</ul>
             case "listitem":
-                return <li>{<Element childrens={child.children || []} />}</li>
+                return <li key={randomUUID()}>{<Element childrens={child.children || []} />}</li>
             case "block":
                 if (child.fields && child.fields.blockType === "tweet") {
                     return (
-                        <div data-theme={theme} className="w-full flex items-center justify-center">
+                        <div key={randomUUID()} data-theme={theme} className="w-full flex items-center justify-center">
                             <Tweet id={child.fields.tweetId || ''} />
                         </div>
                     )

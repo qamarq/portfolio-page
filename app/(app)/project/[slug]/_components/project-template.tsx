@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/button'
 import { Project, User } from '@/payload-types'
 import { useLivePreview } from '@payloadcms/live-preview-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import React, { useMemo } from 'react'
+import { cleanString } from '@/lib/utils'
 
 export default function ProjectTemplate({ project }: { project: Project }) {
     const { data } = useLivePreview({
@@ -83,8 +84,8 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                             </Link>
                         ))}
                     </div>
-                    <h1 className='text-5xl font-cal mt-7'>{data.title}</h1>
-                    <p className='mt-2 text-lg text-muted-foreground'>{data.shortDescription}</p>
+                    <h1 style={{ viewTransitionName: `${cleanString(project.slug)}-title` }} className='text-5xl font-cal mt-7'>{data.title}</h1>
+                    <p style={{ viewTransitionName: `${cleanString(project.slug)}-desc` }} className='mt-2 text-lg text-muted-foreground'>{data.shortDescription}</p>
                     <div className='mt-4 flex flex-wrap gap-2'>
                         {data.tags.map((tag, index) => (
                             <Badge key={index} variant={"outline"}>{tag}</Badge>
@@ -127,8 +128,8 @@ export default function ProjectTemplate({ project }: { project: Project }) {
                     )}
                 </div>
             </div>
-            <div className='col-span-4 md:col-span-5 px-6 md:p-6 md:pl-12 border-l'>
-                <Image src={typeof data.heroImage === 'string' ? data.heroImage : data.heroImage.url || ''} width={1920} height={1080} alt={data.title} className='rounded-[0.5rem] border hidden md:block object-cover' />
+            <div className='col-span-4 md:col-span-5 px-6 md:p-6 md:pl-12 md:border-l'>
+                <Image src={typeof data.heroImage === 'string' ? data.heroImage : data.heroImage.url || ''} width={1920} height={1080} alt={data.title} style={{ viewTransitionName: `${cleanString(project.slug)}-image` }} className='rounded-[0.5rem] border hidden md:block object-cover' />
                 <div className='space-y-2 md:mt-10'>
                     {html}
                 </div>

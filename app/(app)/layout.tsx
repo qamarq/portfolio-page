@@ -7,6 +7,7 @@ import Topbar from '@/components/topbar';
 import Footer from '@/components/footer';
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from '@/components/ui/sonner';
+import { ViewTransitions } from 'next-view-transitions'
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -53,28 +54,30 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className='scroll-smooth'>
-            <head>
-                <link rel="icon" href="/favicon.ico" sizes="any" />
-            </head>
+        <ViewTransitions>
+            <html lang="en" suppressHydrationWarning className='scroll-smooth'>
+                <head>
+                    <link rel="icon" href="/favicon.ico" sizes="any" />
+                </head>
 
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
-            >
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem={false}
-                    disableTransitionOnChange>
-                    <Topbar />
-                    <main className='min-h-screen'>
-                        {children}
-                    </main>
-                    <Footer />
-                </ThemeProvider>
-                <Analytics/>
-                <Toaster richColors />
-            </body>
-        </html>
+                <body
+                    className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+                >
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem={false}
+                        disableTransitionOnChange>
+                        <Topbar />
+                        <main className='min-h-screen'>
+                            {children}
+                        </main>
+                        <Footer />
+                    </ThemeProvider>
+                    <Analytics/>
+                    <Toaster richColors />
+                </body>
+            </html>
+        </ViewTransitions>
     );
 }
