@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Head from 'next/head';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
         template: "%s | Kamil Marczak's Portfolio",
         default: "Kamil Marczak - Full-Stack Web Developer"
     },
-    description: "Explore Kamil Marczak's private portfolio showcasing expertise in mobile app development, web development using various frameworks, databases, and cybersecurity.",
+    description: "Portfolio of Kamil Marczak, a web developer specializing in responsive design, front-end and back-end development, android development and cybersecurity. Explore projects and skills in creating modern, high-quality websites.",
     authors: {
         url: "https://kamilmarczak.pl",
         name: "Kamil Marczak"
@@ -46,6 +47,28 @@ export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
     alternates: {
         canonical: "./"
+    },
+    openGraph: {
+        title: "Kamil Marczak - Full-Stack Web Developer",
+        description: "Portfolio of Kamil Marczak, a web developer specializing in responsive design, front-end and back-end development, android development and cybersecurity. Explore projects and skills in creating modern, high-quality websites.",
+        url: `https://kamilmarczak.pl/`,
+        images: [{
+            url: "/assets/og-image.png",
+            width: 2360,
+            height: 1337,
+            alt: "Kamil Marczak - Full-Stack Web Developer",
+        }],
+        locale: 'en_US',
+        type: 'website'
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: "Kamil Marczak - Full-Stack Web Developer",
+        description: "Portfolio of Kamil Marczak, a web developer specializing in responsive design, front-end and back-end development, android development and cybersecurity. Explore projects and skills in creating modern, high-quality websites.",
+        site: '@kamilmarczak',
+        creator: '@qamarq_',
+        creatorId: '1403301074602270720',
+        images: ["/assets/og-image.png"]
     }
 };
 
@@ -54,12 +77,31 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    function personJsonLd() {
+        return {
+            __html: `{
+                "@context": "http://schema.org/",
+                "@type": "Person",
+                "name": "Kamil Marczak",
+                "image": "https://kamilmarczak.pl/assets/me.jpeg",
+                "url": "https://kamilmarczak.pl",
+                "jobTitle": "Full-Stack Web Developer",
+                "sameAs": ["https://www.linkedin.com/in/kamilmarczak/", "https://x.com/qamarq_"]
+            }
+            `,
+        };
+    }
     return (
         <ViewTransitions>
             <html lang="en" suppressHydrationWarning className='scroll-smooth'>
-                <head>
+                <Head>
                     <link rel="icon" href="/favicon.ico" sizes="any" />
-                </head>
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={personJsonLd()}
+                        key="product-jsonld"
+                    />
+                </Head>
 
                 <body
                     className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
