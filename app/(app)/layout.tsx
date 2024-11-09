@@ -10,7 +10,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -75,8 +75,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
+    projects,
+    contact
 }: Readonly<{
     children: React.ReactNode;
+    projects: React.ReactNode;
+    contact: React.ReactNode;
 }>) {
     function personJsonLd() {
         return {
@@ -117,6 +121,8 @@ export default function RootLayout({
                         </Suspense>
                         <main className='min-h-screen'>
                             {children}
+                            {projects}
+                            {contact}
                         </main>
                         <Footer />
                     </ThemeProvider>
