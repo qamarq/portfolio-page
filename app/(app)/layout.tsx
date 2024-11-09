@@ -75,12 +75,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
     children,
-    projects,
-    contact
 }: Readonly<{
     children: React.ReactNode;
-    projects: React.ReactNode;
-    contact: React.ReactNode;
 }>) {
     function personJsonLd() {
         return {
@@ -121,8 +117,6 @@ export default function RootLayout({
                         </Suspense>
                         <main className='min-h-screen'>
                             {children}
-                            {projects}
-                            {contact}
                         </main>
                         <Footer />
                     </ThemeProvider>
