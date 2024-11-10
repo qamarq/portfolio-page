@@ -11,6 +11,7 @@ import { ViewTransitions } from 'next-view-transitions'
 // import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import React, { Suspense } from 'react';
+import Script from 'next/script';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -97,12 +98,6 @@ export default function RootLayout({
             <html lang="en" suppressHydrationWarning className='scroll-smooth'>
                 <Head>
                     <link rel="icon" href="/favicon.ico" sizes="any" />
-                    <script
-                        type="application/ld+json"
-                        dangerouslySetInnerHTML={personJsonLd()}
-                        key="product-jsonld"
-                    />
-                    <script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.hash.outbound-links.tagged-events.js"></script>
                 </Head>
 
                 <body
@@ -124,6 +119,13 @@ export default function RootLayout({
                     {/* <Analytics/>
                     <SpeedInsights /> */}
                     <Toaster richColors />
+                    <Script 
+                        id="person-schema"
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={personJsonLd()}
+                        key="product-jsonld"
+                    />
+                    <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.hash.outbound-links.tagged-events.js"></Script>
                 </body>
             </html>
         </ViewTransitions>
