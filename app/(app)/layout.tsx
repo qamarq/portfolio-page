@@ -125,7 +125,7 @@ export default function RootLayout({
                         dangerouslySetInnerHTML={personJsonLd()}
                         key="product-jsonld"
                     />
-                    <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.hash.outbound-links.tagged-events.js"></Script>
+                    <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.outbound-links.tagged-events.js"></Script>
                 </body>
             </html>
         </ViewTransitions>

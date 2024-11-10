@@ -20,6 +20,12 @@ import { sendForm } from '@/actions/sendEmail';
 import { toast } from 'sonner';
 import Captcha from 'react-google-recaptcha';
 
+declare global {
+    interface Window {
+        plausible?: (eventName: string, options?: Record<string, unknown>) => void;
+    }
+}
+
 const formSchema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -55,13 +61,16 @@ export default function ContactForm() {
                 if (res?.data?.success) {
                     form.reset();
                     toast.success('Message sent successfully!');
+                    if (window.plausible) window.plausible('Contact form submitted');
                 } else {
+                    if (window.plausible) window.plausible('Contact form error');
                     toast.error(res?.data?.message || 'Failed to send message');
                 }
 
             } catch (error) {
                 console.error(error);
                 toast.error('Failed to send message');
+                if (window.plausible) window.plausible('Contact form error');
             } finally {
                 captchaRef.current?.reset();
             }
