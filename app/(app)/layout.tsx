@@ -5,10 +5,10 @@ import "cal-sans";
 import { ThemeProvider } from '@/components/theme-provider';
 import Topbar from '@/components/topbar';
 import Footer from '@/components/footer';
-import { Analytics } from "@vercel/analytics/react"
+// import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
-import { SpeedInsights } from '@vercel/speed-insights/next';
+// import { SpeedInsights } from '@vercel/speed-insights/next';
 import Head from 'next/head';
 import React, { Suspense } from 'react';
 
@@ -102,6 +102,7 @@ export default function RootLayout({
                         dangerouslySetInnerHTML={personJsonLd()}
                         key="product-jsonld"
                     />
+                    <script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.hash.outbound-links.tagged-events.js"></script>
                 </Head>
 
                 <body
@@ -120,8 +121,8 @@ export default function RootLayout({
                         </main>
                         <Footer />
                     </ThemeProvider>
-                    <Analytics/>
-                    <SpeedInsights />
+                    {/* <Analytics/>
+                    <SpeedInsights /> */}
                     <Toaster richColors />
                 </body>
             </html>
