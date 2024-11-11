@@ -103,7 +103,7 @@ export default function RootLayout({
                         domain="kamilmarczak.pl" 
                         trackOutboundLinks 
                         selfHosted
-                        customDomain="analytics.kamilmarczak.pl"
+                        customDomain="https://analytics.kamilmarczak.pl"
                     />
                 </head>
 
