@@ -1,9 +1,9 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
-import { withPlausibleProxy } from "next-plausible";
+// import { withPlausibleProxy } from "next-plausible";
 
 const nextConfig: NextConfig = {
   /* config options here */
 };
 
-export default withPlausibleProxy()(withPayload(nextConfig));
+export default withPayload(nextConfig);

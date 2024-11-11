@@ -9,7 +9,7 @@ import Footer from '@/components/footer';
 import { Toaster } from '@/components/ui/sonner';
 import { ViewTransitions } from 'next-view-transitions'
 // import { SpeedInsights } from '@vercel/speed-insights/next';
-import Head from 'next/head';
+// import Head from 'next/head';
 import React, { Suspense } from 'react';
 import Script from 'next/script';
 import PlausibleProvider from 'next-plausible';
@@ -96,44 +96,43 @@ export default function RootLayout({
     }
     return (
         <ViewTransitions>
-            <PlausibleProvider 
-                domain="kamilmarczak.pl" 
-                trackOutboundLinks 
-                selfHosted
-                customDomain="analytics.kamilmarczak.pl"
-            >
-                <html lang="en" suppressHydrationWarning className='scroll-smooth'>
-                    <Head>
-                        <link rel="icon" href="/favicon.ico" sizes="any" />
-                    </Head>
+            <html lang="en" suppressHydrationWarning className='scroll-smooth'>
+                <head>
+                    <link rel="icon" href="/favicon.ico" sizes="any" />
+                    <PlausibleProvider 
+                        domain="kamilmarczak.pl" 
+                        trackOutboundLinks 
+                        selfHosted
+                        customDomain="analytics.kamilmarczak.pl"
+                    />
+                </head>
 
-                    <body
-                        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
-                    >
-                        <ThemeProvider
-                            attribute="class"
-                            defaultTheme="dark"
-                            enableSystem={false}
-                            disableTransitionOnChange>
-                            <Suspense>
-                                <Topbar />
-                            </Suspense>
-                            <main className='min-h-screen'>
-                                {children}
-                            </main>
-                            <Footer />
-                        </ThemeProvider>
-                        <Toaster richColors />
-                        <Script 
-                            id="person-schema"
-                            type="application/ld+json"
-                            dangerouslySetInnerHTML={personJsonLd()}
-                            key="product-jsonld"
-                        />
-                        {/* <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.outbound-links.tagged-events.js"></Script> */}
-                    </body>
-                </html>
-            </PlausibleProvider>
+                <body
+                    className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+                >
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem={false}
+                        disableTransitionOnChange>
+                        <Suspense>
+                            <Topbar />
+                        </Suspense>
+                        <main className='min-h-screen'>
+                            {children}
+                        </main>
+                        <Footer />
+                    </ThemeProvider>
+                    <Toaster richColors />
+                    <Script 
+                        id="person-schema"
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={personJsonLd()}
+                        key="product-jsonld"
+                    />
+                    {/* <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.outbound-links.tagged-events.js"></Script> */}
+                </body>
+            </html>
         </ViewTransitions>
     );
 }
