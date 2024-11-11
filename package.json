@@ -33,6 +33,7 @@
     "markdown-to-jsx": "^7.5.0",
     "mongoose": "^6.12.3",
     "next": "15.0.2",
+    "next-plausible": "^3.12.4",
     "next-safe-action": "^7.9.9",
     "next-themes": "^0.3.0",
     "next-view-transitions": "^0.3.2",
