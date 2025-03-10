@@ -2,15 +2,21 @@ import Image from 'next/image'
 import MeImage from '@/public/assets/me.jpeg'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
-import { CSSProperties } from 'react'
+import { CSSProperties, Suspense } from 'react'
 import { Badge } from '@/components/ui/badge'
-
+import config from '@payload-config'
 import NextSvg from '@/public/assets/next.svg'
 import VercelSvg from '@/public/assets/vercel.svg'
 import GithubSvg from '@/public/assets/github.svg'
 import AndroidSvg from '@/public/assets/android.svg'
 import PayloadSvg from '@/public/assets/payload.svg'
 import Link from 'next/link'
+import { getPayloadHMR } from '@payloadcms/next/utilities'
+import ContactForm from '@/components/contact-form'
+import Socials from '@/components/socials'
+import ProjectCard, { ProjectCardPlaceholder } from '@/components/project-card'
+
+export const experimental_ppr = true
 
 export default function Home() {
   return (
@@ -170,9 +176,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* project section */}
+      <section className="max-w-6xl mx-auto py-20 px-5 md:px-0" id="projects">
+        <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
+          My{' '}
+          <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
+            projects
+          </span>
+        </h1>
 
-      {/* contact section */}
+        <Suspense fallback={<ProjectsSuspense />}>
+          <ProjectsPage />
+        </Suspense>
+      </section>
+
+      <section className="max-w-6xl mx-auto py-20 mb-36" id="contact">
+        <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
+          <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
+            Contact
+          </span>{' '}
+          me
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">
+          <ContactForm />
+
+          <Suspense fallback={null}>
+            <ContactPage />
+          </Suspense>
+        </div>
+      </section>
     </>
+  )
+}
+
+async function ContactPage() {
+  const payload = await getPayloadHMR({ config })
+
+  const mainPageContent = await payload.findGlobal({
+    slug: 'main-page',
+  })
+
+  return <Socials content={mainPageContent} />
+}
+
+async function ProjectsPage() {
+  const payload = await getPayloadHMR({ config })
+  const { docs: projects } = await payload.find({
+    collection: 'projects',
+    depth: 2,
+  })
+
+  return (
+    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
+      {projects.map((project) => (
+        <ProjectCard key={project.id} project={project} />
+      ))}
+    </div>
+  )
+}
+
+function ProjectsSuspense() {
+  return (
+    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
+      {Array.from({ length: 6 }).map((_, index) => (
+        <ProjectCardPlaceholder key={index} />
+      ))}
+    </div>
   )
 }
