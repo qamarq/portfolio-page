@@ -1,4 +1,4 @@
-import { FieldHook } from "payload"
+import { FieldHook } from 'payload'
 
 const format = (val: string): string =>
   val
@@ -24,9 +24,9 @@ const formatSlug =
     // return value
     const fallbackData = data?.[fallback] || originalDoc?.[fallback]
 
-      if (fallbackData && typeof fallbackData === 'string') {
-        return format(fallbackData)
-      }
+    if (fallbackData && typeof fallbackData === 'string') {
+      return format(fallbackData)
+    }
   }
 
 export default formatSlug

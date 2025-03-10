@@ -8,331 +8,336 @@
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
-  };
+    users: UserAuthOperations
+  }
   collections: {
-    users: User;
-    media: Media;
-    projects: Project;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
+    users: User
+    media: Media
+    projects: Project
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
   collectionsSelect?: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    projects: ProjectsSelect<false> | ProjectsSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    users: UsersSelect<false> | UsersSelect<true>
+    media: MediaSelect<false> | MediaSelect<true>
+    projects: ProjectsSelect<false> | ProjectsSelect<true>
+    'payload-locked-documents':
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>
+    'payload-preferences':
+      | PayloadPreferencesSelect<false>
+      | PayloadPreferencesSelect<true>
+    'payload-migrations':
+      | PayloadMigrationsSelect<false>
+      | PayloadMigrationsSelect<true>
+  }
   db: {
-    defaultIDType: string;
-  };
+    defaultIDType: string
+  }
   globals: {
-    'main-page': MainPage;
-  };
+    'main-page': MainPage
+  }
   globalsSelect?: {
-    'main-page': MainPageSelect<false> | MainPageSelect<true>;
-  };
-  locale: null;
+    'main-page': MainPageSelect<false> | MainPageSelect<true>
+  }
+  locale: null
   user: User & {
-    collection: 'users';
-  };
+    collection: 'users'
+  }
   jobs?: {
-    tasks: unknown;
-    workflows?: unknown;
-  };
+    tasks: unknown
+    workflows?: unknown
+  }
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   login: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   registerFirstUser: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   unlock: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
-  name: string;
-  avatar?: (string | null) | Media;
-  socialLink?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
+  id: string
+  name: string
+  avatar?: (string | null) | Media
+  socialLink?: string | null
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
+  password?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
-  alt: string;
-  _key?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
+  id: string
+  alt: string
+  _key?: string | null
+  updatedAt: string
+  createdAt: string
+  url?: string | null
+  thumbnailURL?: string | null
+  filename?: string | null
+  mimeType?: string | null
+  filesize?: number | null
+  width?: number | null
+  height?: number | null
+  focalX?: number | null
+  focalY?: number | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects".
  */
 export interface Project {
-  id: string;
-  heroImage: string | Media;
-  title: string;
-  shortDescription: string;
-  tags: string[];
-  githubLink?: string | null;
-  previewUrl?: string | null;
-  authors?: (string | User)[] | null;
+  id: string
+  heroImage: string | Media
+  title: string
+  shortDescription: string
+  tags: string[]
+  githubLink?: string | null
+  previewUrl?: string | null
+  authors?: (string | User)[] | null
   content: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  images?: (string | Media)[] | null;
-  slug?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+        type: string
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  }
+  images?: (string | Media)[] | null
+  slug?: string | null
+  updatedAt: string
+  createdAt: string
+  _status?: ('draft' | 'published') | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: string
   document?:
     | ({
-        relationTo: 'users';
-        value: string | User;
+        relationTo: 'users'
+        value: string | User
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'media'
+        value: string | Media
       } | null)
     | ({
-        relationTo: 'projects';
-        value: string | Project;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'projects'
+        value: string | Project
+      } | null)
+  globalSlug?: string | null
   user: {
-    relationTo: 'users';
-    value: string | User;
-  };
-  updatedAt: string;
-  createdAt: string;
+    relationTo: 'users'
+    value: string | User
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: string
   user: {
-    relationTo: 'users';
-    value: string | User;
-  };
-  key?: string | null;
+    relationTo: 'users'
+    value: string | User
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: string
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T;
-  avatar?: T;
-  socialLink?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
+  name?: T
+  avatar?: T
+  socialLink?: T
+  updatedAt?: T
+  createdAt?: T
+  email?: T
+  resetPasswordToken?: T
+  resetPasswordExpiration?: T
+  salt?: T
+  hash?: T
+  loginAttempts?: T
+  lockUntil?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  _key?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
+  alt?: T
+  _key?: T
+  updatedAt?: T
+  createdAt?: T
+  url?: T
+  thumbnailURL?: T
+  filename?: T
+  mimeType?: T
+  filesize?: T
+  width?: T
+  height?: T
+  focalX?: T
+  focalY?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "projects_select".
  */
 export interface ProjectsSelect<T extends boolean = true> {
-  heroImage?: T;
-  title?: T;
-  shortDescription?: T;
-  tags?: T;
-  githubLink?: T;
-  previewUrl?: T;
-  authors?: T;
-  content?: T;
-  images?: T;
-  slug?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
+  heroImage?: T
+  title?: T
+  shortDescription?: T
+  tags?: T
+  githubLink?: T
+  previewUrl?: T
+  authors?: T
+  content?: T
+  images?: T
+  slug?: T
+  updatedAt?: T
+  createdAt?: T
+  _status?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  document?: T
+  globalSlug?: T
+  user?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  user?: T
+  key?: T
+  value?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  batch?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-page".
  */
 export interface MainPage {
-  id: string;
-  clientsText: string;
-  socialsTitle: string;
-  socialsDescription: string;
+  id: string
+  clientsText: string
+  socialsTitle: string
+  socialsDescription: string
   socials: {
-    linkedInLink: string;
-    githubLink: string;
-    email: string;
-    discordName: string;
-    discordId: string;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
+    linkedInLink: string
+    githubLink: string
+    email: string
+    discordName: string
+    discordId: string
+  }
+  updatedAt?: string | null
+  createdAt?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "main-page_select".
  */
 export interface MainPageSelect<T extends boolean = true> {
-  clientsText?: T;
-  socialsTitle?: T;
-  socialsDescription?: T;
+  clientsText?: T
+  socialsTitle?: T
+  socialsDescription?: T
   socials?:
     | T
     | {
-        linkedInLink?: T;
-        githubLink?: T;
-        email?: T;
-        discordName?: T;
-        discordId?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
+        linkedInLink?: T
+        githubLink?: T
+        email?: T
+        discordName?: T
+        discordId?: T
+      }
+  updatedAt?: T
+  createdAt?: T
+  globalType?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown;
+  [k: string]: unknown
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

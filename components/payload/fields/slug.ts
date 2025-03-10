@@ -18,5 +18,5 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
         beforeValidate: [formatSlug(fieldToUse)],
       },
     },
-    overrides,
+    overrides
   )

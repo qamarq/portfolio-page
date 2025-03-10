@@ -17,7 +17,6 @@ To run this project locally, you need:
 - **Node.js** (v16 or higher recommended)
 - **npm** or **yarn** for dependency management
 
-
 ### Installation
 
 1. **Clone the repository**:
@@ -32,31 +31,33 @@ To run this project locally, you need:
    ```bash
    pnpm install
    ```
-4. **Setup .env***:
+4. **Setup .env\***:
    ```bash
    cp .env.example .env
    ```
    And fill `.env` with your own data & keys
 
 ### Running the Development Server
+
 After installing the dependencies, start the local development server:
+
 ```bash
 pnpm dev
 ```
 
 This will run the application at http://localhost:3000. Open it in your browser to see the portfolio in action.
 
-
 ### Building for Production
+
 To build a production-ready version of the site, run:
+
 ```bash
 pnpm build & pnpm start
 ```
 
-
 ## Contributing
-Feel free to open issues or pull requests if you have suggestions or improvements.
 
+Feel free to open issues or pull requests if you have suggestions or improvements.
 
 ---
 
