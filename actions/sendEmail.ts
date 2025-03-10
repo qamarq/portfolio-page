@@ -30,7 +30,8 @@ export const sendForm = actionClient
         to: ['km.wpwp.pl@gmail.com'],
         replyTo: parsedInput.email,
         subject: 'New contact form message',
-        react: EmailTemplate(parsedInput),
+        text: `${parsedInput.name} <${parsedInput.email}>:\n\n${parsedInput.message}`,
+        react: await EmailTemplate(parsedInput),
       })
 
       if (error) {
