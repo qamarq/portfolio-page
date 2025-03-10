@@ -120,7 +120,7 @@ export default function Home() {
               Some of languages and technologies I know well
             </h2>
             <div className="mt-6">
-              <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16 [&amp;_path]:fill-white">
+              <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16">
                 <li>
                   <Image
                     alt="Next.JS"

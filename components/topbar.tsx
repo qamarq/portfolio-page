@@ -43,7 +43,7 @@ export default async function Topbar() {
           <Icons.Logo className="w-7 h-7" />
           <h1 className="font-cal translate-y-[2px] text-2xl">
             Kamil{' '}
-            <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
               Marczak
             </span>
           </h1>
