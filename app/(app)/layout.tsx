@@ -5,11 +5,8 @@ import 'cal-sans'
 import { ThemeProvider } from '@/components/theme-provider'
 import Topbar from '@/components/topbar'
 import Footer from '@/components/footer'
-// import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from '@/components/ui/sonner'
 import { ViewTransitions } from 'next-view-transitions'
-// import { SpeedInsights } from '@vercel/speed-insights/next';
-// import Head from 'next/head';
 import React, { Suspense } from 'react'
 import Script from 'next/script'
 import PlausibleProvider from 'next-plausible'
@@ -80,6 +77,8 @@ export const metadata: Metadata = {
   },
 }
 
+export const experimental_ppr = true
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -134,7 +133,6 @@ export default function RootLayout({
             dangerouslySetInnerHTML={personJsonLd()}
             key="product-jsonld"
           />
-          {/* <Script defer data-domain="kamilmarczak.pl" src="https://analytics.kamilmarczak.pl/js/script.outbound-links.tagged-events.js"></Script> */}
         </body>
       </html>
     </ViewTransitions>
