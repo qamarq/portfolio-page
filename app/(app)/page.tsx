@@ -4,17 +4,18 @@ import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { CSSProperties, Suspense } from 'react'
 import { Badge } from '@/components/ui/badge'
-import config from '@payload-config'
 import NextSvg from '@/public/assets/next.svg'
 import VercelSvg from '@/public/assets/vercel.svg'
 import GithubSvg from '@/public/assets/github.svg'
 import AndroidSvg from '@/public/assets/android.svg'
 import PayloadSvg from '@/public/assets/payload.svg'
 import Link from 'next/link'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
 import ContactForm from '@/components/contact-form'
-import Socials from '@/components/socials'
-import ProjectCard, { ProjectCardPlaceholder } from '@/components/project-card'
+import {
+  ProjectsSection,
+  ProjectsSuspense,
+} from './_components/ProjectsSection'
+import { SocialsSection } from './_components/SocialsSection'
 
 export const experimental_ppr = true
 
@@ -185,7 +186,7 @@ export default function Home() {
         </h1>
 
         <Suspense fallback={<ProjectsSuspense />}>
-          <ProjectsPage />
+          <ProjectsSection />
         </Suspense>
       </section>
 
@@ -201,46 +202,10 @@ export default function Home() {
           <ContactForm />
 
           <Suspense fallback={null}>
-            <ContactPage />
+            <SocialsSection />
           </Suspense>
         </div>
       </section>
     </>
-  )
-}
-
-async function ContactPage() {
-  const payload = await getPayloadHMR({ config })
-
-  const mainPageContent = await payload.findGlobal({
-    slug: 'main-page',
-  })
-
-  return <Socials content={mainPageContent} />
-}
-
-async function ProjectsPage() {
-  const payload = await getPayloadHMR({ config })
-  const { docs: projects } = await payload.find({
-    collection: 'projects',
-    depth: 2,
-  })
-
-  return (
-    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
-      {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} />
-      ))}
-    </div>
-  )
-}
-
-function ProjectsSuspense() {
-  return (
-    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
-      {Array.from({ length: 6 }).map((_, index) => (
-        <ProjectCardPlaceholder key={index} />
-      ))}
-    </div>
   )
 }

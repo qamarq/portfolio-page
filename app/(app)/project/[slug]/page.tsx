@@ -1,4 +1,4 @@
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import config from '@payload-config'
 import { draftMode } from 'next/headers'
 import React from 'react'
@@ -11,11 +11,12 @@ type ProjectPageProps = {
 }
 
 export const dynamic = 'force-dynamic'
+export const experimental_ppr = true
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug: paramsSlug } = await params
   const { isEnabled: isDraftMode } = await draftMode()
-  const payload = await getPayloadHMR({ config })
+  const payload = await getPayload({ config })
 
   let project: Project | null = null
 
@@ -73,7 +74,7 @@ export async function generateMetadata({ params }: ProjectPageProps) {
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug: paramsSlug } = await params
   const { isEnabled: isDraftMode } = await draftMode()
-  const payload = await getPayloadHMR({ config })
+  const payload = await getPayload({ config })
 
   let project: Project | null = null
 

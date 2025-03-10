@@ -3,12 +3,12 @@ import { Icons } from './icons'
 import GithubStarBtn from './github-star'
 import Link from 'next/link'
 import { Button } from './ui/button'
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload } from 'payload'
 import config from '@payload-config'
 import { headers } from 'next/headers'
 
 export default async function Topbar() {
-  const payload = await getPayloadHMR({ config })
+  const payload = await getPayload({ config })
   const { user } = await payload.auth({ headers: await headers() })
   let stars = 0
 

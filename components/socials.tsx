@@ -35,9 +35,9 @@ export default function Socials({ content }: { content: MainPage }) {
       </p>
 
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-        {SOCIALS.map((social) => (
+        {SOCIALS.map((social, index) => (
           <Link
-            key={social.link}
+            key={`${social.link}-${index}`}
             target="_blank"
             href={social.link}
             className="border p-4 flex items-center bg-background/30 hover:bg-rose-500/5 hover:text-rose-500 transition-all"
