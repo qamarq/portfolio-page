@@ -36,7 +36,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             )}
           />
         </div>
-        <div className="p-6 relative horizontal-line bg-background/40 backdrop-blur-sm grow flex flex-col">
+        <div className="p-6 relative horizontal-line bg-background/40 backdrop-blur-xs grow flex flex-col">
           <h1
             style={{ viewTransitionName: `${cleanString(project.slug)}-title` }}
             className="font-cal text-2xl text-black dark:text-white group-hover:text-rose-500 transition-all"
@@ -63,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-        <div className="vertical-line !left-[unset] right-0"></div>
+        <div className="vertical-line left-[unset]! right-0"></div>
       </div>
       <div className="absolute bottom-1/2 left-0 top-0 h-full w-full opacity-0 blur-[180px] [background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] animate-image-glow"></div>
     </Link>
@@ -81,7 +81,7 @@ export const ProjectCardPlaceholder = () => {
         <div className="relative horizontal-line overflow-hidden bg-white/10">
           <Skeleton className="w-full h-60 bg-background" />
         </div>
-        <div className="p-6 relative horizontal-line bg-background/40 backdrop-blur-sm grow flex flex-col">
+        <div className="p-6 relative horizontal-line bg-background/40 backdrop-blur-xs grow flex flex-col">
           <Skeleton className="h-7 w-36 rounded-[0.5rem] mb-3" />
           <Skeleton className="h-4 w-full rounded-[0.5rem] mt-1" />
           <Skeleton className="h-4 w-3/4 rounded-[0.5rem] mt-1" />
@@ -93,7 +93,7 @@ export const ProjectCardPlaceholder = () => {
             ))}
           </div>
         </div>
-        <div className="vertical-line !left-[unset] right-0"></div>
+        <div className="vertical-line left-[unset]! right-0"></div>
       </div>
       <div className="absolute bottom-1/2 left-0 top-0 h-full w-full opacity-0 blur-[180px] [background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] animate-image-glow"></div>
     </div>

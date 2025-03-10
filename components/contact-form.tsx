@@ -78,7 +78,7 @@ export default function ContactForm() {
       className="relative order-last md:order-first"
     >
       <div className="relative z-20 horizontal-line after:top-0"></div>
-      <div className="relative p-10 bg-background/40 backdrop-blur-sm z-10">
+      <div className="relative p-10 bg-background/40 backdrop-blur-xs z-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <Captcha
@@ -159,7 +159,7 @@ export default function ContactForm() {
       </div>
       <div className="vertical-line z-10"></div>
       <div className="relative horizontal-line z-10"></div>
-      <div className="vertical-line !left-[unset] right-0 z-10"></div>
+      <div className="vertical-line left-[unset]! right-0 z-10"></div>
       <div className="absolute bottom-1/2 left-0 top-0 h-full w-full opacity-0 blur-[180px] [background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] animate-image-glow"></div>
     </div>
   )
