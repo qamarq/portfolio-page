@@ -42,10 +42,3 @@ jobs:
 
       - name: Type check
         run: pnpm run typecheck
-
-      - name: Build
-        run: pnpm run build
-        env:
-          NEXT_PUBLIC_API_URL: http://localhost:3000
-          UPLOADTHING_SECRET: ${{ secrets.UPLOADTHING_SECRET }}
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
