@@ -9,7 +9,10 @@ import { Toaster } from '@/components/ui/sonner'
 import { ViewTransitions } from 'next-view-transitions'
 import React, { Suspense } from 'react'
 import Script from 'next/script'
-import PlausibleProvider from 'next-plausible'
+import { routing } from '@/i18n/routing'
+import { notFound } from 'next/navigation'
+import { getMessages, setRequestLocale } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -77,10 +80,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode
+  params: Promise<{ locale: string }>
 }>) {
   function personJsonLd() {
     return {
@@ -96,42 +105,47 @@ export default function RootLayout({
             `,
     }
   }
+  const { locale } = await params
+  if (!routing.locales.includes(locale as any)) {
+    notFound()
+  }
+
+  const messages = await getMessages()
+
+  setRequestLocale(locale)
+
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning className="scroll-smooth">
         <head>
           <link rel="icon" href="/favicon.ico" sizes="any" />
-          <PlausibleProvider
-            domain="kamilmarczak.pl"
-            trackOutboundLinks
-            selfHosted
-            customDomain="https://analytics.kamilmarczak.pl"
-          />
         </head>
 
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            forcedTheme="dark"
-            enableSystem={false}
-            disableTransitionOnChange
-          >
-            <Suspense>
-              <Topbar />
-            </Suspense>
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </ThemeProvider>
-          <Toaster richColors />
-          <Script
-            id="person-schema"
-            type="application/ld+json"
-            dangerouslySetInnerHTML={personJsonLd()}
-            key="product-jsonld"
-          />
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              forcedTheme="dark"
+              enableSystem={false}
+              disableTransitionOnChange
+            >
+              <Suspense>
+                <Topbar />
+              </Suspense>
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </ThemeProvider>
+            <Toaster richColors />
+            <Script
+              id="person-schema"
+              type="application/ld+json"
+              dangerouslySetInnerHTML={personJsonLd()}
+              key="product-jsonld"
+            />
+          </NextIntlClientProvider>
         </body>
       </html>
     </ViewTransitions>

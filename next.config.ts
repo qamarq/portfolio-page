@@ -1,6 +1,6 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 import type { NextConfig } from 'next'
-// import { withPlausibleProxy } from "next-plausible";
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -8,4 +8,6 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default withPayload(nextConfig)
+const withNextIntl = createNextIntlPlugin()
+
+export default withNextIntl(withPayload(nextConfig))

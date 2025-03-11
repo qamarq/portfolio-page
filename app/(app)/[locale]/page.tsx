@@ -2,7 +2,7 @@ import Image from 'next/image'
 import MeImage from '@/public/assets/me.jpeg'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
-import { CSSProperties, Suspense } from 'react'
+import { CSSProperties, Suspense, use } from 'react'
 import { Badge } from '@/components/ui/badge'
 import NextSvg from '@/public/assets/next.svg'
 import VercelSvg from '@/public/assets/vercel.svg'
@@ -16,10 +16,23 @@ import {
   ProjectsSuspense,
 } from './_components/ProjectsSection'
 import { SocialsSection } from './_components/SocialsSection'
+import { routing } from '@/i18n/routing'
+import { setRequestLocale } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
 export const experimental_ppr = true
 
-export default function Home() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export default function Home({
+  params,
+}: Readonly<{ params: Promise<{ locale: string }> }>) {
+  const { locale } = use(params)
+  setRequestLocale(locale)
+  const t = useTranslations('HomePage')
+
   return (
     <>
       <section
