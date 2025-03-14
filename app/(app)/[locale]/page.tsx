@@ -51,7 +51,7 @@ export default function Home({
             <div className="vertical-line !left-[66%]"></div>
             <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
               <h1 className="w-full text-center md:text-left font-cal translate-y-[1px] text-5xl md:text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
-                Hello there{' '}
+                {t('hello')}{' '}
                 <Image
                   unoptimized
                   src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif"
@@ -60,23 +60,22 @@ export default function Home({
                   alt="Wavy hand gif"
                   className="inline -translate-y-2"
                 />
-                <br /> I&apos;m Kamil Marczak
+                <br /> {t('name')}
               </h1>
             </div>
             <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
               <p className="text-lg text-muted-foreground text-balance text-center md:text-left">
-                Most of the time I&apos;m a student and{' '}
+                {t('aboutFirst')}{' '}
                 <span className="font-semibold text-primary">
                   full-stack web developer
                 </span>{' '}
-                but in my free time I like to make an Android app or go for a
-                run.
+                {t('aboutSecond')}
               </p>
             </div>
             <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
               <div className="w-full flex flex-col gap-2 items-center md:items-start">
                 <p className="text-sm text-center md:text-left text-muted-foreground">
-                  You can ask me about anything or view my projects.
+                  {t('motto')}
                 </p>
                 <div className="flex items-center gap-2">
                   <Link href="#contact">
