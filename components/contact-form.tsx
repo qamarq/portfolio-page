@@ -20,6 +20,7 @@ import { sendForm } from '@/actions/sendEmail'
 import { toast } from 'sonner'
 import Captcha from 'react-google-recaptcha'
 import { usePlausible } from 'next-plausible'
+import { useTranslations } from 'next-intl'
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -29,6 +30,7 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
+  const t = useTranslations('ContactSection')
   const plausible = usePlausible()
   const captchaRef = useRef<Captcha>(null)
   const [isPending, startTransition] = React.useTransition()
@@ -80,7 +82,10 @@ export default function ContactForm() {
       <div className="relative z-20 horizontal-line after:top-0"></div>
       <div className="relative p-10 bg-background/40 backdrop-blur-xs z-10">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-6"
+          >
             <Captcha
               ref={captchaRef}
               size="invisible"
@@ -93,7 +98,7 @@ export default function ContactForm() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t('name')}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="John Smith"
@@ -129,7 +134,7 @@ export default function ContactForm() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel>{t('message')}</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="I'm writing to you cause..."
@@ -147,11 +152,16 @@ export default function ContactForm() {
                 onClick={() => form.reset()}
                 disabled={isPending}
                 variant="outline"
+                className="cursor-pointer"
               >
                 Reset
               </Button>
-              <Button disabled={isPending} type="submit">
-                {isPending && <Icons.Loading />} Submit form
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="cursor-pointer"
+              >
+                {isPending && <Icons.Loading />} {t('sendBtn')}
               </Button>
             </div>
           </form>

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import MeImage from '@/public/assets/me.jpeg'
 import { Button } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
-import { CSSProperties, Suspense } from 'react'
+import { CSSProperties, Suspense, use } from 'react'
 import { Badge } from '@/components/ui/badge'
 import NextSvg from '@/public/assets/next.svg'
 import VercelSvg from '@/public/assets/vercel.svg'
@@ -16,10 +16,23 @@ import {
   ProjectsSuspense,
 } from './_components/ProjectsSection'
 import { SocialsSection } from './_components/SocialsSection'
+import { Locales, routing } from '@/i18n/routing'
+import { setRequestLocale } from 'next-intl/server'
+import { useTranslations } from 'next-intl'
 
 export const experimental_ppr = true
 
-export default function Home() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export default function Home({
+  params,
+}: Readonly<{ params: Promise<{ locale: Locales }> }>) {
+  const { locale } = use(params)
+  setRequestLocale(locale)
+  const t = useTranslations('HomePage')
+
   return (
     <>
       <section
@@ -38,7 +51,7 @@ export default function Home() {
             <div className="vertical-line !left-[66%]"></div>
             <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
               <h1 className="w-full text-center md:text-left font-cal translate-y-[1px] text-5xl md:text-7xl bg-gradient-to-b from-slate-50 to-rose-500 bg-clip-text text-transparent">
-                Hello there{' '}
+                {t('hello')}{' '}
                 <Image
                   unoptimized
                   src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif"
@@ -47,33 +60,32 @@ export default function Home() {
                   alt="Wavy hand gif"
                   className="inline -translate-y-2"
                 />
-                <br /> I&apos;m Kamil Marczak
+                <br /> {t('name')}
               </h1>
             </div>
             <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
               <p className="text-lg text-muted-foreground text-balance text-center md:text-left">
-                Most of the time I&apos;m a student and{' '}
+                {t('about.1')}{' '}
                 <span className="font-semibold text-primary">
-                  full-stack web developer
+                  {t('about.2')}
                 </span>{' '}
-                but in my free time I like to make an Android app or go for a
-                run.
+                {t('about.3')}
               </p>
             </div>
             <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
               <div className="w-full flex flex-col gap-2 items-center md:items-start">
                 <p className="text-sm text-center md:text-left text-muted-foreground">
-                  You can ask me about anything or view my projects.
+                  {t('motto')}
                 </p>
                 <div className="flex items-center gap-2">
                   <Link href="#contact">
                     <Button>
                       <Icons.Contact className="w-4 h-4" />
-                      Contact me
+                      {t('contactBtn')}
                     </Button>
                   </Link>
                   <Link href="#projects">
-                    <Button variant={'outline'}>View projects</Button>
+                    <Button variant={'outline'}>{t('viewProjectsBtn')}</Button>
                   </Link>
                 </div>
                 <div className="flex items-center gap-2 mt-4">
@@ -117,7 +129,7 @@ export default function Home() {
         <div className="py-14">
           <div className="mx-auto max-w-screen-xl px-4 md:px-8">
             <h2 className="text-center text-sm font-cal text-muted-foreground">
-              Some of languages and technologies I know well
+              {t('technologies')}
             </h2>
             <div className="mt-6">
               <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16">
@@ -179,23 +191,23 @@ export default function Home() {
 
       <section className="max-w-6xl mx-auto py-20 px-5 md:px-0" id="projects">
         <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
-          My{' '}
+          {t('projects.1')}{' '}
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
-            projects
+            {t('projects.2')}
           </span>
         </h1>
 
         <Suspense fallback={<ProjectsSuspense />}>
-          <ProjectsSection />
+          <ProjectsSection locale={locale} />
         </Suspense>
       </section>
 
       <section className="max-w-6xl mx-auto py-20 mb-36" id="contact">
         <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
-            Contact
+            {t('contact.1')}
           </span>{' '}
-          me
+          {t('contact.2')}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">

@@ -1,4 +1,3 @@
-// storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -12,6 +11,8 @@ import { Media } from './collections/Media'
 import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { Projects } from './collections/Projects'
 import MainPage from './globals/MainPage'
+import { en } from '@payloadcms/translations/languages/en'
+import { pl } from '@payloadcms/translations/languages/pl'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,6 +23,14 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+  },
+  i18n: {
+    supportedLanguages: { en, pl },
+    fallbackLanguage: 'en',
+  },
+  localization: {
+    locales: ['en', 'pl'],
+    defaultLocale: 'en',
   },
   collections: [Users, Media, Projects],
   globals: [MainPage],

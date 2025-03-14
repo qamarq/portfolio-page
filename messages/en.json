@@ -1,0 +1,42 @@
+{
+  "Metadata": {
+    "titleTemplate": "%s | Kamil Marczak's Portfolio",
+    "titleDefault": "Kamil Marczak - Full-Stack Web Developer",
+    "description": "Portfolio of Kamil Marczak, a web developer specializing in responsive design, front-end and back-end development and cybersecurity. Explore projects and skills in creating modern, high-quality websites.",
+    "keywords": "Kamil Marczak, Kamil Marczak Developer, Kamil Marczak Dev, Portfolio, Web Developer, Full-Stack, Front-End, Back-End, Cybersecurity, Responsive Design, Modern Websites, High-Quality Websites, Cybersecurity"
+  },
+  "HomePage": {
+    "hello": "Hello there",
+    "name": "I'm Kamil Marczak",
+    "about": {
+      "1": "Most of the time I'm a student and",
+      "2": "full-stack web developer",
+      "3": "but in my free time I am active in the Solvro IT Student Science Club at WUST."
+    },
+    "motto": "You can ask me about anything or view my projects.",
+    "contactBtn": "Contact me",
+    "viewProjectsBtn": "View projects",
+    "technologies": "Some of languages and technologies I know well",
+    "projects": {
+      "1": "My",
+      "2": "Projects"
+    },
+    "contact": {
+      "1": "Contact",
+      "2": "Me"
+    }
+  },
+  "ContactSection": {
+    "name": "Name",
+    "message": "Message",
+    "sendBtn": "Submit form",
+    "socials": "Socials & Accounts",
+    "socialsDescription": "Here you can find all my social media accounts and other ways to contact."
+  },
+  "Topbar": {
+    "projects": "My projects",
+    "contact": "Contact me",
+    "dashboard": "Dashboard",
+    "star": "Star on GitHub"
+  }
+}

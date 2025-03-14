@@ -7,21 +7,6 @@ const MainPage: GlobalConfig = {
   },
   fields: [
     {
-      name: 'clientsText',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'socialsTitle',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'socialsDescription',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'socials',
       type: 'group',
       fields: [

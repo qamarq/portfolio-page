@@ -49,11 +49,13 @@ export const Projects: CollectionConfig = {
       type: 'text',
       name: 'title',
       required: true,
+      localized: true,
     },
     {
       type: 'textarea',
       name: 'shortDescription',
       required: true,
+      localized: true,
     },
     {
       type: 'text',

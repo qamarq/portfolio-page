@@ -2,8 +2,11 @@ import Link from 'next/link'
 import React from 'react'
 import { Icons } from './icons'
 import { MainPage } from '@/payload-types'
+import { useTranslations } from 'next-intl'
 
 export default function Socials({ content }: { content: MainPage }) {
+  const t = useTranslations('ContactSection')
+
   const SOCIALS = [
     {
       icon: Icons.Github,
@@ -29,9 +32,9 @@ export default function Socials({ content }: { content: MainPage }) {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-cal">{content.socialsTitle}</h2>
+      <h2 className="text-2xl font-cal">{t('socials')}</h2>
       <p className="text-muted-foreground text-balance">
-        {content.socialsDescription}
+        {t('socialsDescription')}
       </p>
 
       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
