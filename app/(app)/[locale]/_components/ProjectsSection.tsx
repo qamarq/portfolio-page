@@ -1,12 +1,14 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import ProjectCard, { ProjectCardPlaceholder } from '@/components/project-card'
+import { Locales } from '@/i18n/routing'
 
-export async function ProjectsSection() {
+export async function ProjectsSection({ locale }: { locale: Locales }) {
   const payload = await getPayload({ config })
   const { docs: projects } = await payload.find({
     collection: 'projects',
     depth: 2,
+    locale,
   })
 
   return (

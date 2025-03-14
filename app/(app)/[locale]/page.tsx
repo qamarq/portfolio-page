@@ -16,7 +16,7 @@ import {
   ProjectsSuspense,
 } from './_components/ProjectsSection'
 import { SocialsSection } from './_components/SocialsSection'
-import { routing } from '@/i18n/routing'
+import { Locales, routing } from '@/i18n/routing'
 import { setRequestLocale } from 'next-intl/server'
 import { useTranslations } from 'next-intl'
 
@@ -28,7 +28,7 @@ export function generateStaticParams() {
 
 export default function Home({
   params,
-}: Readonly<{ params: Promise<{ locale: string }> }>) {
+}: Readonly<{ params: Promise<{ locale: Locales }> }>) {
   const { locale } = use(params)
   setRequestLocale(locale)
   const t = useTranslations('HomePage')
@@ -65,11 +65,11 @@ export default function Home({
             </div>
             <div className="p-8 row-span-1 relative horizontal-line bg-background/40 backdrop-blur-sm">
               <p className="text-lg text-muted-foreground text-balance text-center md:text-left">
-                {t('aboutFirst')}{' '}
+                {t('about.1')}{' '}
                 <span className="font-semibold text-primary">
-                  full-stack web developer
+                  {t('about.2')}
                 </span>{' '}
-                {t('aboutSecond')}
+                {t('about.3')}
               </p>
             </div>
             <div className="p-8 row-span-2 flex items-center justify-center relative horizontal-line bg-background/40 backdrop-blur-sm">
@@ -81,11 +81,11 @@ export default function Home({
                   <Link href="#contact">
                     <Button>
                       <Icons.Contact className="w-4 h-4" />
-                      Contact me
+                      {t('contactBtn')}
                     </Button>
                   </Link>
                   <Link href="#projects">
-                    <Button variant={'outline'}>View projects</Button>
+                    <Button variant={'outline'}>{t('viewProjectsBtn')}</Button>
                   </Link>
                 </div>
                 <div className="flex items-center gap-2 mt-4">
@@ -129,7 +129,7 @@ export default function Home({
         <div className="py-14">
           <div className="mx-auto max-w-screen-xl px-4 md:px-8">
             <h2 className="text-center text-sm font-cal text-muted-foreground">
-              Some of languages and technologies I know well
+              {t('technologies')}
             </h2>
             <div className="mt-6">
               <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16">
@@ -191,23 +191,23 @@ export default function Home({
 
       <section className="max-w-6xl mx-auto py-20 px-5 md:px-0" id="projects">
         <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
-          My{' '}
+          {t('projects.1')}{' '}
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
-            projects
+            {t('projects.2')}
           </span>
         </h1>
 
         <Suspense fallback={<ProjectsSuspense />}>
-          <ProjectsSection />
+          <ProjectsSection locale={locale} />
         </Suspense>
       </section>
 
       <section className="max-w-6xl mx-auto py-20 mb-36" id="contact">
         <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
-            Contact
+            {t('contact.1')}
           </span>{' '}
-          me
+          {t('contact.2')}
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">

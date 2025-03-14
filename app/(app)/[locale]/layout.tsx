@@ -7,12 +7,13 @@ import Topbar from '@/components/topbar'
 import Footer from '@/components/footer'
 import { Toaster } from '@/components/ui/sonner'
 import { ViewTransitions } from 'next-view-transitions'
-import React, { Suspense, use } from 'react'
+import React, { Suspense } from 'react'
 import Script from 'next/script'
-import { routing } from '@/i18n/routing'
+import { Locales, routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
-import { NextIntlClientProvider, useTranslations } from 'next-intl'
+import { NextIntlClientProvider } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -30,9 +31,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
-  const { locale } = use(params)
-  setRequestLocale(locale)
-  const t = useTranslations('Metadata')
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Metadata' })
 
   return {
     title: {
@@ -87,7 +87,7 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locales }>
 }>) {
   function personJsonLd() {
     return {
@@ -104,7 +104,7 @@ export default async function RootLayout({
     }
   }
   const { locale } = await params
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale)) {
     notFound()
   }
 
@@ -115,10 +115,6 @@ export default async function RootLayout({
   return (
     <ViewTransitions>
       <html lang={locale} suppressHydrationWarning className="scroll-smooth">
-        <head>
-          <link rel="icon" href="/favicon.ico" sizes="any" />
-        </head>
-
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
         >
@@ -131,7 +127,7 @@ export default async function RootLayout({
               disableTransitionOnChange
             >
               <Suspense>
-                <Topbar />
+                <Topbar locale={locale} />
               </Suspense>
               <main className="min-h-screen">{children}</main>
               <Footer />

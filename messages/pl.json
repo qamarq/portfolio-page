@@ -1,0 +1,42 @@
+{
+  "Metadata": {
+    "titleTemplate": "%s | Kamil Marczak's Portfolio",
+    "titleDefault": "Kamil Marczak - Full-Stack Web Developer",
+    "description": "Portfolio Kamila Marczaka, programisty webowego specjalizującego się w responsywnym designie, front-endzie, back-endzie i cyberbezpieczeństwie. Odkryj projekty i umiejętności w tworzeniu nowoczesnych, wysokiej jakości stron internetowych.",
+    "keywords": "Kamil Marczak, Kamil Marczak Developer, Kamil Marczak Dev, Portfolio, Web Developer, Full-Stack, Front-End, Back-End, Cybersecurity, Responsive Design, Modern Websites, High-Quality Websites, Cybersecurity"
+  },
+  "HomePage": {
+    "hello": "Witaj",
+    "name": "Kamil Marczak",
+    "about": {
+      "1": "Większość czasu jestem studentem i",
+      "2": "full-stack web developerem",
+      "3": "ale w wolnym czasie udzielam się w Kole Naukowym Solvro na PWr."
+    },
+    "motto": "Możesz zapytać mnie o wszystko lub zobaczyć moje projekty.",
+    "contactBtn": "Napisz do mnie",
+    "viewProjectsBtn": "Zobacz projekty",
+    "technologies": "Niektóre języki i technologie, które dobrze znam",
+    "projects": {
+      "1": "Moje",
+      "2": "Projekty"
+    },
+    "contact": {
+      "1": "Napisz",
+      "2": "do mnie"
+    }
+  },
+  "ContactSection": {
+    "name": "Imię",
+    "message": "Wiadomość",
+    "sendBtn": "Wyślij formularz",
+    "socials": "Moje socialki",
+    "socialsDescription": "Tutaj znajdziesz wszystkie moje konta w mediach społecznościowych i inne sposoby kontaktu."
+  },
+  "Topbar": {
+    "projects": "Moje projekty",
+    "contact": "Kontakt",
+    "dashboard": "Dashboard",
+    "star": "Walnij gwiazdkę"
+  }
+}

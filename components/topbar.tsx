@@ -6,8 +6,11 @@ import { Button } from './ui/button'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { headers } from 'next/headers'
+import { getTranslations } from 'next-intl/server'
+import { Locales } from '@/i18n/routing'
 
-export default async function Topbar() {
+export default async function Topbar({ locale }: { locale: Locales }) {
+  const t = await getTranslations({ locale, namespace: 'Topbar' })
   const payload = await getPayload({ config })
   const { user } = await payload.auth({ headers: await headers() })
   let stars = 0
@@ -51,18 +54,18 @@ export default async function Topbar() {
         <div className="flex items-center justify-end gap-2">
           <Link href="#projects" className="hidden lg:flex">
             <Button size={'sm'} variant={'ghost'}>
-              My projects
+              {t('projects')}
             </Button>
           </Link>
           <Link href="#contact" className="hidden lg:flex">
             <Button size={'sm'} variant={'ghost'}>
-              Contact me
+              {t('contact')}
             </Button>
           </Link>
           {user && (
             <Link href="/admin">
               <Button size={'sm'} variant={'ghost'}>
-                Dashboard
+                {t('dashboard')}
               </Button>
             </Link>
           )}
