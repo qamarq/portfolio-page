@@ -1,6 +1,25 @@
+import config from '@payload-config'
+import { getPayload } from 'payload'
 import type { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const payload = await getPayload({ config })
+  const { docs: projects } = await payload.find({
+    collection: 'projects',
+    depth: 2,
+    locale: 'en',
+  })
+
+  const generateProjectUrls = projects.map((project) => ({
+    url: `https://kamilmarczak.pl/projects/${project.slug}`,
+    lastModified: project.updatedAt,
+    alternates: {
+      languages: {
+        en: `https://kamilmarczak.pl/en/projects/${project.slug}`,
+        pl: `https://kamilmarczak.pl/pl/projects/${project.slug}`,
+      },
+    },
+  }))
   return [
     {
       url: 'https://kamilmarczak.pl',
@@ -12,25 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
-    {
-      url: 'https://kamilmarczak.pl/',
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          es: 'https://kamilmarczak.pl/es/about',
-          de: 'https://kamilmarczak.pl/de/about',
-        },
-      },
-    },
-    {
-      url: 'https://kamilmarczak.pl/blog',
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          es: 'https://kamilmarczak.pl/es/blog',
-          de: 'https://kamilmarczak.pl/de/blog',
-        },
-      },
-    },
+    ...generateProjectUrls,
   ]
 }
