@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import type { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  console.log('Payload secret:', process.env)
   const payload = await getPayload({ config })
   const { docs: projects } = await payload.find({
     collection: 'projects',
