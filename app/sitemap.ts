@@ -1,25 +1,27 @@
-import config from '@payload-config'
-import { getPayload } from 'payload'
 import type { MetadataRoute } from 'next'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  console.log('Payload secret:', process.env)
-  const payload = await getPayload({ config })
-  const { docs: projects } = await payload.find({
-    collection: 'projects',
-    depth: 2,
-    locale: 'en',
-  })
+const projects = [
+  'planer-university-scheduler',
+  'hackerium',
+  'netnook',
+  '4lop',
+  'adam-marczak',
+  'islandhouse',
+  'glg-partner',
+  'precimed',
+]
 
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const generateProjectUrls = projects.map((project) => ({
-    url: `https://kamilmarczak.pl/projects/${project.slug}`,
-    lastModified: project.updatedAt,
+    url: `https://kamilmarczak.pl/projects/${project}`,
+    lastModified: new Date(),
     alternates: {
       languages: {
-        en: `https://kamilmarczak.pl/en/projects/${project.slug}`,
-        pl: `https://kamilmarczak.pl/pl/projects/${project.slug}`,
+        en: `https://kamilmarczak.pl/en/projects/${project}`,
+        pl: `https://kamilmarczak.pl/pl/projects/${project}`,
       },
     },
+    priority: 0.8,
   }))
   return [
     {
@@ -31,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           pl: 'https://kamilmarczak.pl/pl',
         },
       },
+      priority: 1,
     },
     ...generateProjectUrls,
   ]
