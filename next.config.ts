@@ -10,4 +10,4 @@ const nextConfig: NextConfig = {
 
 const withNextIntl = createNextIntlPlugin()
 
-export default withNextIntl(withPayload(nextConfig))
+export default withPayload(withNextIntl(nextConfig))
