@@ -44,12 +44,12 @@ export default async function Topbar({ locale }: { locale: Locales }) {
       <div className="container mx-auto p-5 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
           <Icons.Logo className="w-7 h-7" />
-          <h1 className="font-cal translate-y-[2px] text-2xl">
+          <h2 className="font-cal translate-y-[2px] text-2xl">
             Kamil{' '}
             <span className="bg-linear-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
               Marczak
             </span>
-          </h1>
+          </h2>
         </Link>
         <div className="flex items-center justify-end gap-2">
           <Link href="#projects" className="hidden lg:flex">

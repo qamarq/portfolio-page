@@ -190,12 +190,12 @@ export default function Home({
       </section>
 
       <section className="max-w-6xl mx-auto py-20 px-5 md:px-0" id="projects">
-        <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
+        <h2 className="w-full text-center font-cal translate-y-1 text-5xl">
           {t('projects.1')}{' '}
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
             {t('projects.2')}
           </span>
-        </h1>
+        </h2>
 
         <Suspense fallback={<ProjectsSuspense />}>
           <ProjectsSection locale={locale} />
@@ -203,12 +203,12 @@ export default function Home({
       </section>
 
       <section className="max-w-6xl mx-auto py-20 mb-36" id="contact">
-        <h1 className="w-full text-center font-cal translate-y-1 text-5xl">
+        <h2 className="w-full text-center font-cal translate-y-1 text-5xl">
           <span className="bg-gradient-to-r from-rose-400 to-rose-600 bg-clip-text text-transparent">
             {t('contact.1')}
           </span>{' '}
           {t('contact.2')}
-        </h1>
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-32 px-5 md:px-0">
           <ContactForm />

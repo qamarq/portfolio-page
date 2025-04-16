@@ -44,12 +44,12 @@ export default function ProjectCard({
           />
         </div>
         <div className="p-6 relative horizontal-line bg-background/40 backdrop-blur-xs grow flex flex-col">
-          <h1
+          <h3
             style={{ viewTransitionName: `${cleanString(project.slug)}-title` }}
             className="font-cal text-2xl text-black dark:text-white group-hover:text-rose-500 transition-all"
           >
             {project.title}
-          </h1>
+          </h3>
           <p
             style={{ viewTransitionName: `${cleanString(project.slug)}-desc` }}
             className="text-muted-foreground text-base text-balance"

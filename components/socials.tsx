@@ -32,7 +32,7 @@ export default function Socials({ content }: { content: MainPage }) {
 
   return (
     <div className="p-8">
-      <h2 className="text-2xl font-cal">{t('socials')}</h2>
+      <h3 className="text-2xl font-cal">{t('socials')}</h3>
       <p className="text-muted-foreground text-balance">
         {t('socialsDescription')}
       </p>

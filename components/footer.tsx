@@ -6,7 +6,7 @@ export default function Footer() {
       <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
         © {new Date().getFullYear()} Kamil Marczak. All rights reserved.
       </p>
-      <h1 className="font-cal">Made with ❤️ by Kamil Marczak</h1>
+      <p className="font-cal">Made with ❤️ by Kamil Marczak</p>
     </div>
   )
 }
