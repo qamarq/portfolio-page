@@ -50,7 +50,7 @@ export async function generateMetadata({
     keywords: t('keywords').split(', '),
     metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
     alternates: {
-      canonical: 'https://kamilmarczak.pl/',
+      canonical: 'https://kamilmarczak.pl/en',
     },
     openGraph: {
       title: t('titleDefault'),
