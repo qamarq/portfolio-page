@@ -14,6 +14,7 @@ import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
+import Head from 'next/head'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -49,7 +50,7 @@ export async function generateMetadata({
     keywords: t('keywords').split(', '),
     metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
     alternates: {
-      canonical: 'https://kamilmarczak.pl/en',
+      canonical: 'https://kamilmarczak.pl/',
     },
     openGraph: {
       title: t('titleDefault'),
@@ -113,6 +114,23 @@ export default async function RootLayout({
   return (
     <ViewTransitions>
       <html lang={locale} suppressHydrationWarning className="scroll-smooth">
+        <Head>
+          <link
+            rel="alternate"
+            hrefLang="en"
+            href="https://kamilmarczak.pl/en"
+          />
+          <link
+            rel="alternate"
+            hrefLang="pl"
+            href="https://kamilmarczak.pl/pl"
+          />
+          <link
+            rel="alternate"
+            hrefLang="x-default"
+            href="https://kamilmarczak.pl/"
+          />
+        </Head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
         >

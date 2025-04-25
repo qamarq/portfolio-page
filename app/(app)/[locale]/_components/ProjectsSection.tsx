@@ -14,7 +14,7 @@ export async function ProjectsSection({ locale }: { locale: Locales }) {
   return (
     <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 gap-y-24">
       {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} locale={locale} />
+        <ProjectCard key={project.id} project={project} />
       ))}
     </div>
   )

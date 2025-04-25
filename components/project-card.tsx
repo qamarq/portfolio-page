@@ -5,18 +5,11 @@ import { Badge } from './ui/badge'
 import { Link } from 'next-view-transitions'
 import { cleanString, cn } from '@/lib/utils'
 import { Skeleton } from './ui/skeleton'
-import { Locales } from '@/i18n/routing'
 
-export default function ProjectCard({
-  project,
-  locale,
-}: {
-  project: Project
-  locale: Locales
-}) {
+export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
-      href={`/${locale}/project/${project.slug}`}
+      href={`/project/${project.slug}`}
       style={
         {
           '--hero-width': 'calc(100%)',
