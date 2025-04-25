@@ -31,6 +31,8 @@ export default function ProjectCard({ project }: { project: Project }) {
             alt={project.title}
             width={512}
             height={512}
+            quality={90}
+            placeholder="blur"
             className={cn(
               'w-full h-60 object-cover group-hover:scale-90 transition-all object-center transition-item'
             )}
