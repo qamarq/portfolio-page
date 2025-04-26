@@ -7,14 +7,14 @@ import { notFound } from 'next/navigation'
 import ProjectTemplate from './_components/project-template'
 
 type ProjectPageProps = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string; locale: string }>
 }
 
 export const dynamic = 'force-dynamic'
 export const experimental_ppr = true
 
 export async function generateMetadata({ params }: ProjectPageProps) {
-  const { slug: paramsSlug } = await params
+  const { slug: paramsSlug, locale } = await params
   const { isEnabled: isDraftMode } = await draftMode()
   const payload = await getPayload({ config })
 
@@ -36,6 +36,13 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   return {
     title: project.title,
     description: project.shortDescription,
+    alternates: {
+      canonical: `https://kamilmarczak.pl/${locale}/project/${project.slug}`,
+      languages: {
+        en: 'https://kamilmarczak.pl/en/project/' + project.slug,
+        pl: 'https://kamilmarczak.pl/pl/project/' + project.slug,
+      },
+    },
     openGraph: {
       title: project.title,
       description: project.shortDescription,

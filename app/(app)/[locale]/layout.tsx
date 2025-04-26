@@ -41,17 +41,12 @@ export async function generateMetadata({
       default: t('titleDefault'),
     },
     description: t('description'),
-    authors: {
-      url: 'https://kamilmarczak.pl',
-      name: 'Kamil Marczak',
-    },
     creator: 'Kamil Marczak',
+    publisher: 'Kamil Marczak',
+    authors: [{ name: 'Kamil Marczak' }],
     robots: 'index, follow',
     keywords: t('keywords').split(', '),
     metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
-    alternates: {
-      canonical: 'https://kamilmarczak.pl/en',
-    },
     openGraph: {
       title: t('titleDefault'),
       description: t('description'),
@@ -66,6 +61,13 @@ export async function generateMetadata({
       ],
       locale,
       type: 'website',
+    },
+    alternates: {
+      canonical: `https://kamilmarczak.pl/${locale}`,
+      languages: {
+        en: 'https://kamilmarczak.pl/en',
+        pl: 'https://kamilmarczak.pl/pl',
+      },
     },
     twitter: {
       card: 'summary_large_image',
