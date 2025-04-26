@@ -108,11 +108,13 @@ export default function Home({
           </div>
           <div className="col-span-3 md:col-span-2 z-10">
             <Image
-              quality={100}
+              quality={90}
               src={MeImage}
               alt="Kamil Marczak"
-              width={512}
-              height={512}
+              width={460}
+              height={600}
+              priority
+              placeholder="blur"
               className="w-auto h-full object-cover"
             />
           </div>
