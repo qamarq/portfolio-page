@@ -79,13 +79,15 @@ export default function Home({
                 </p>
                 <div className="flex items-center gap-2">
                   <Link href="#contact">
-                    <Button>
+                    <Button className="cursor-pointer">
                       <Icons.Contact className="w-4 h-4" />
                       {t('contactBtn')}
                     </Button>
                   </Link>
-                  <Link href="#projects">
-                    <Button variant={'outline'}>{t('viewProjectsBtn')}</Button>
+                  <Link href="/assets/Kamil_Marczak_CV.pdf" download>
+                    <Button className="cursor-pointer" variant={'outline'}>
+                      {t('downloadCvBtn')}
+                    </Button>
                   </Link>
                 </div>
                 <div className="flex items-center gap-2 mt-4">
