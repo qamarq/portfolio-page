@@ -11,7 +11,6 @@ type ProjectPageProps = {
 }
 
 export const dynamic = 'force-dynamic'
-export const experimental_ppr = true
 
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { slug: paramsSlug, locale } = await params

@@ -20,8 +20,6 @@ import { Locales, routing } from '@/i18n/routing'
 import { setRequestLocale } from 'next-intl/server'
 import { useTranslations } from 'next-intl'
 
-export const experimental_ppr = true
-
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
