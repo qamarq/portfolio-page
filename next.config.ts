@@ -1,9 +1,12 @@
-import { withPayload } from '@payloadcms/next/withPayload'
-import type { NextConfig } from 'next'
-import createNextIntlPlugin from 'next-intl/plugin'
+import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {}
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+      { protocol: "https", hostname: "lastfm.freetls.fastly.net" },
+    ],
+  },
+};
 
-const withNextIntl = createNextIntlPlugin()
-
-export default withPayload(withNextIntl(nextConfig))
+export default nextConfig;

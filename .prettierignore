@@ -1,3 +1,5 @@
+.next
+node_modules
 pnpm-lock.yaml
-payload-types.ts
-importMap.js
+AGENTS.md
+PLAN.md
