@@ -1,5 +1,19 @@
 import type { Service } from "@/lib/types";
 import { getHomelabServices } from "@/lib/homelab";
+import { SkeletonBar } from "./Skeleton";
+
+export function HomelabCardSkeleton() {
+  return (
+    <div className="card">
+      <p className="card-label">homelab</p>
+      <div className="flex flex-col gap-2.5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <SkeletonBar key={i} className="h-3.5 w-full" />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function HeartbeatBars({ heartbeats }: { heartbeats: Service["heartbeats"] }) {
   return (

@@ -1,4 +1,25 @@
 import { getRecentCommits } from "@/lib/github";
+import { SkeletonBar } from "./Skeleton";
+
+export function CommitsCardSkeleton() {
+  return (
+    <div className="card">
+      <div className="mb-4 flex items-center gap-2 text-[var(--text-secondary)]">
+        <p className="font-mono text-[13px] font-medium tracking-[0.05em]">
+          RECENT COMMITS
+        </p>
+      </div>
+      <div className="flex flex-col gap-5">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="flex flex-col gap-1.5">
+            <SkeletonBar className="h-3.5 w-full" />
+            <SkeletonBar className="h-3 w-32" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export async function CommitsCard() {
   const commits = await getRecentCommits();

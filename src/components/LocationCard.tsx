@@ -1,9 +1,9 @@
-import { getWeather } from "@/lib/weather";
+import { Suspense } from "react";
 import { ClockDisplay } from "./ClockDisplay";
+import { WeatherCondition, WeatherTemp } from "./WeatherInfo";
+import { SkeletonBar } from "./Skeleton";
 
-export async function LocationCard() {
-  const weather = await getWeather();
-
+export function LocationCard() {
   return (
     <div className="card">
       <p className="card-label">location</p>
@@ -11,17 +11,15 @@ export async function LocationCard() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-[13px] text-[var(--text-primary)]">Wrocław, PL</p>
-          <p className="font-mono text-[11px] text-(--text-muted)">
-            {weather?.condition ?? "no data"}
-          </p>
+          <Suspense fallback={<SkeletonBar className="h-3.5 w-20" />}>
+            <WeatherCondition />
+          </Suspense>
         </div>
         <div className="text-right">
           <ClockDisplay timeZone="Europe/Warsaw" />
-          {weather && (
-            <p className="font-mono text-[11px] text-(--text-muted)">
-              {weather.temp}°C
-            </p>
-          )}
+          <Suspense fallback={<SkeletonBar className="ml-auto h-3.5 w-10" />}>
+            <WeatherTemp />
+          </Suspense>
         </div>
       </div>
     </div>

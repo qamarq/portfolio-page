@@ -1,5 +1,19 @@
 import Image from "next/image";
 import { getContributions } from "@/lib/github";
+import { SkeletonBar } from "./Skeleton";
+
+export function ActivityCardSkeleton() {
+  return (
+    <div className="card">
+      <p className="card-label">activity</p>
+      <SkeletonBar className="mb-3 h-4 w-48" />
+      <SkeletonBar className="h-[88px] w-full" />
+      <div className="mt-2 flex justify-end">
+        <SkeletonBar className="h-3 w-32" />
+      </div>
+    </div>
+  );
+}
 
 const HEATMAP_COLORS: Record<number, string> = {
   0: "var(--heatmap-0)",

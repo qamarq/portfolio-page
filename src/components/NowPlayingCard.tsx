@@ -1,5 +1,21 @@
 import Image from "next/image";
 import { getNowPlaying } from "@/lib/lastfm";
+import { SkeletonBar } from "./Skeleton";
+
+export function NowPlayingCardSkeleton() {
+  return (
+    <div className="card">
+      <p className="card-label">now playing</p>
+      <div className="flex items-center gap-3">
+        <SkeletonBar className="h-12 w-12 shrink-0 rounded-md" />
+        <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+          <SkeletonBar className="h-3.5 w-32" />
+          <SkeletonBar className="h-3 w-20" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export async function NowPlayingCard() {
   const data = await getNowPlaying();

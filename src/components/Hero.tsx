@@ -1,7 +1,8 @@
-import { Star } from "lucide-react";
+import { Suspense } from "react";
 import Image from "next/image";
 import { Tag } from "./Tag";
-import { getRepoStars } from "@/lib/github";
+import { RepoStars } from "./RepoStars";
+import { SkeletonBar } from "./Skeleton";
 import { getAboutContent } from "@/lib/content";
 
 const PORTFOLIO_REPO = "qamarq/portfolio-page";
@@ -14,9 +15,8 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
-export async function Hero() {
+export function Hero() {
   const about = getAboutContent();
-  const stars = await getRepoStars(PORTFOLIO_REPO);
 
   return (
     <div className="card">
@@ -53,22 +53,9 @@ export async function Hero() {
         ))}
       </div>
 
-      {stars !== null && (
-        <a
-          href={`https://github.com/${PORTFOLIO_REPO}`}
-          target="_blank"
-          rel="noopener"
-          className="group mt-3 inline-flex w-fit items-center gap-1.5 rounded-md border border-(--border) px-2.5 py-1 font-mono text-xs transition-colors hover:border-(--border-hover)"
-        >
-          <span className="flex items-center gap-1 text-(--warning) transition-[filter] group-hover:brightness-125">
-            <Star className="h-3 w-3 fill-current" fill="#f98345" />
-            {stars}
-          </span>
-          <span className="text-(--text-muted)">
-            view source of this website
-          </span>
-        </a>
-      )}
+      <Suspense fallback={<SkeletonBar className="mt-3 h-7 w-48" />}>
+        <RepoStars repo={PORTFOLIO_REPO} />
+      </Suspense>
     </div>
   );
 }

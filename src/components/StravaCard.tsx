@@ -13,7 +13,25 @@ import {
   Waves,
 } from "lucide-react";
 import { getStravaData } from "@/lib/strava";
+import { SkeletonBar } from "./Skeleton";
 import type { ActivitySummary, ActivityType } from "@/lib/types";
+
+export function StravaCardSkeleton() {
+  return (
+    <div className="card">
+      <p className="card-label">strava</p>
+      <SkeletonBar className="h-6 w-32" />
+      <SkeletonBar className="mt-1.5 h-1 w-full" />
+      <SkeletonBar className="mt-3 h-6 w-32" />
+      <SkeletonBar className="mt-1.5 h-1 w-full" />
+      <div className="mt-4 flex flex-col gap-2 border-t border-(--muted-bg) pt-3">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <SkeletonBar key={i} className="h-3.5 w-full" />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 // Keyed by Strava's raw activity `type` string for specific icons,
 // falls back to a generic icon per category (run/ride/other).
