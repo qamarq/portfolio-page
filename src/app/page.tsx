@@ -16,7 +16,7 @@ import { CVCard } from "@/components/CVCard";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-[1200px] px-5">
+    <div className="mx-auto max-w-300 px-5">
       <Topbar />
       <div className="grid grid-cols-1 gap-3 py-3 lg:grid-cols-[2fr_1fr]">
         <div className="flex flex-col gap-3">
@@ -24,10 +24,11 @@ export default function Home() {
           <Suspense fallback={<ActivityCardSkeleton />}>
             <ActivityCard />
           </Suspense>
-          <Suspense fallback={<CommitsCardSkeleton />}>
-            <CommitsCard />
-          </Suspense>
-          <ProjectsGrid />
+          <ProjectsGrid>
+            <Suspense fallback={<CommitsCardSkeleton />}>
+              <CommitsCard />
+            </Suspense>
+          </ProjectsGrid>
         </div>
         <div className="flex flex-col gap-3">
           <Suspense fallback={<StravaCardSkeleton />}>

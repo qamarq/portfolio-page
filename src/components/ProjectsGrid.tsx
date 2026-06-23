@@ -11,11 +11,12 @@ const BADGE_STYLES: Record<ProjectStatus, string> = {
     "bg-[var(--badge-shipped-bg)] text-[var(--badge-shipped-text)] border-[var(--badge-shipped-border)]",
 };
 
-export function ProjectsGrid() {
+export function ProjectsGrid({ children }: { children?: React.ReactNode }) {
   const projects = getProjects();
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {children}
       {projects.map((project) => (
         <div key={project.name} className="card">
           <div className="flex items-start justify-between gap-2">

@@ -25,7 +25,7 @@ export async function CommitsCard() {
   const commits = await getRecentCommits();
 
   return (
-    <div className="card">
+    <div className="card row-span-2">
       <div className="mb-4 flex items-center gap-2 text-[var(--text-secondary)]">
         <p className="font-mono text-[13px] font-medium tracking-[0.05em]">
           RECENT COMMITS
