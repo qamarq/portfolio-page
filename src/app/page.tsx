@@ -13,6 +13,7 @@ import {
 import { LocationCard } from "@/components/LocationCard";
 import { ContactCard } from "@/components/ContactCard";
 import { CVCard } from "@/components/CVCard";
+import { BlogCard } from "@/components/BlogCard";
 
 export default function Home() {
   return (
@@ -44,6 +45,9 @@ export default function Home() {
           <LocationCard />
           <ContactCard />
         </div>
+      </div>
+      <div className="pb-3">
+        <BlogCard />
       </div>
     </div>
   );

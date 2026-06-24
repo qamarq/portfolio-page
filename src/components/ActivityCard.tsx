@@ -66,7 +66,7 @@ export async function ActivityCard() {
         )}
       </div>
 
-      <div className="mt-2 flex items-center justify-between">
+      <div className="mt-4 flex items-center justify-between">
         {organizations.length > 0 ? (
           <div className="flex items-center gap-1.5">
             <span className="font-mono text-[10px] text-(--text-muted)">
@@ -100,8 +100,8 @@ export async function ActivityCard() {
           <span />
         )}
 
-        <div className="flex gap-1 font-mono text-[10px] text-(--text-muted)">
-          <span>less</span>
+        <div className="flex gap-1 font-mono items-center text-[10px] text-(--text-muted)">
+          <span className="mr-1">less</span>
           {[0, 1, 2, 3, 4].map((level) => (
             <span
               key={level}
@@ -109,7 +109,7 @@ export async function ActivityCard() {
               style={{ background: HEATMAP_COLORS[level] }}
             />
           ))}
-          <span>more</span>
+          <span className="ml-1">more</span>
         </div>
       </div>
     </div>

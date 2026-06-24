@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kamil Marczak — Fullstack Engineer",
+  title: "Kamil Marczak — Fullstack Developer",
   description:
-    "CTO @ Solvro · Fullstack Engineer · Wrocław, PL. Personal dashboard with live GitHub, Strava, and homelab data.",
+    "CTO @ Solvro · Fullstack Developer · Wrocław, PL. Personal dashboard with live GitHub, Strava, and homelab data.",
 };
 
 export default function RootLayout({

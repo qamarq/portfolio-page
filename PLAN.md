@@ -123,7 +123,7 @@ Max width: `1200px`, centered, padding `20px`.
 ### `Hero`
 - Avatar: 50×50 circle, teal border, `KM` initials in mono
 - Name: 20px, weight 500, `text-primary`
-- Title: 12px mono teal — `CTO @ Solvro · Fullstack Engineer · Wrocław, PL`
+- Title: 12px mono teal — `CTO @ Solvro · Fullstack Developer · Wrocław, PL`
 - Bio: 13px, `text-muted`, line-height 1.65
   > "I build tools that actually matter. Leading ~50 engineers at Solvro, shipping stock analytics at AlerGeek Ventures, and running a self-hosted homelab on Proxmox for fun."
 - Tags: teal = Next.js, Elixir, Ash Framework / blue = TypeScript, Prisma, Node.js / purple = Proxmox, Docker
@@ -278,7 +278,7 @@ Layout:
 │ RESUME                   │
 │                          │
 │  Kamil Marczak           │
-│  Fullstack Engineer      │
+│  Fullstack Developer      │
 │  Last updated: Jun 2025  │
 │                          │
 │  [↓ Download PDF]        │
@@ -304,7 +304,7 @@ export function CVCard() {
       <p className="card-label">resume</p>
       <div className="mb-4">
         <p className="text-sm font-medium text-primary">Kamil Marczak</p>
-        <p className="text-xs text-muted mt-0.5">Fullstack Engineer</p>
+        <p className="text-xs text-muted mt-0.5">Fullstack Developer</p>
         <p className="text-xs text-muted font-mono mt-3">last updated: Jun 2025</p>
       </div>
       <a

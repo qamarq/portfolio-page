@@ -27,7 +27,9 @@ export function CVCard() {
         <p className="text-sm font-medium text-[var(--text-primary)]">
           Kamil Marczak
         </p>
-        <p className="mt-0.5 text-xs text-(--text-muted)">Fullstack Engineer</p>
+        <p className="mt-0.5 text-xs text-(--text-muted)">
+          Fullstack Developer
+        </p>
         {lastUpdated && (
           <p className="mt-3 font-mono text-xs text-(--text-muted)">
             last updated: {lastUpdated}

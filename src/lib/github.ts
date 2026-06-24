@@ -1,6 +1,8 @@
+import { withCache } from "./cache";
 import type { Commit, HeatmapData, Organization } from "./types";
 
 const GITHUB_USERNAME = "qamarq";
+const ONE_HOUR_MS = 60 * 60 * 1000;
 const MONTHS = [
   "Jan",
   "Feb",
@@ -74,7 +76,7 @@ function mockHeatmap(): HeatmapData {
   };
 }
 
-export async function getContributions(): Promise<HeatmapData> {
+async function getContributionsImpl(): Promise<HeatmapData> {
   const token = process.env.GITHUB_TOKEN;
   if (!token) return mockHeatmap();
 
@@ -169,6 +171,11 @@ export async function getContributions(): Promise<HeatmapData> {
   }
 }
 
+export const getContributions = withCache(getContributionsImpl, {
+  ttlMs: ONE_HOUR_MS,
+  maxSize: 1,
+});
+
 function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
   const hours = Math.floor(seconds / 3600);
@@ -194,7 +201,7 @@ async function fetchCommitMessage(
   }
 }
 
-export async function getRecentCommits(): Promise<Commit[]> {
+async function getRecentCommitsImpl(): Promise<Commit[]> {
   try {
     const res = await fetch(
       `https://api.github.com/users/${GITHUB_USERNAME}/events`,
@@ -230,6 +237,11 @@ export async function getRecentCommits(): Promise<Commit[]> {
   }
 }
 
+export const getRecentCommits = withCache(getRecentCommitsImpl, {
+  ttlMs: ONE_HOUR_MS,
+  maxSize: 1,
+});
+
 function mockCommits(): Commit[] {
   return [
     {
@@ -261,7 +273,7 @@ function mockCommits(): Commit[] {
   ];
 }
 
-export async function getRepoStars(repo: string): Promise<number | null> {
+async function getRepoStarsImpl(repo: string): Promise<number | null> {
   try {
     const res = await fetch(`https://api.github.com/repos/${repo}`, {
       headers: authHeaders(),
@@ -276,3 +288,8 @@ export async function getRepoStars(repo: string): Promise<number | null> {
     return null;
   }
 }
+
+export const getRepoStars = withCache(getRepoStarsImpl, {
+  ttlMs: ONE_HOUR_MS,
+  keyFn: (repo) => repo,
+});

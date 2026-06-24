@@ -104,16 +104,21 @@ export async function StravaCard() {
     );
   }
 
-  const { weeklyRunKm, weeklyRideKm, runGoalKm, rideGoalKm, recentActivities } =
-    data;
+  const {
+    monthlyRunKm,
+    monthlyRideKm,
+    runGoalKm,
+    rideGoalKm,
+    recentActivities,
+  } = data;
 
   const runProgress = Math.min(
     100,
-    Math.round((weeklyRunKm / runGoalKm) * 100),
+    Math.round((monthlyRunKm / runGoalKm) * 100),
   );
   const rideProgress = Math.min(
     100,
-    Math.round((weeklyRideKm / rideGoalKm) * 100),
+    Math.round((monthlyRideKm / rideGoalKm) * 100),
   );
 
   return (
@@ -122,8 +127,11 @@ export async function StravaCard() {
 
       <div className="flex items-center gap-2">
         <Footprints className="h-4 w-4 shrink-0 text-(--accent)" />
-        <span className="font-mono text-lg text-foreground">{weeklyRunKm}</span>
+        <span className="font-mono text-lg text-foreground">{monthlyRunKm}</span>
         <span className="text-xs text-(--text-muted)">km running</span>
+        <span className="ml-auto font-mono text-xs text-(--text-muted)">
+          {runProgress}%
+        </span>
       </div>
       <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-(--muted-bg)">
         <div
@@ -135,9 +143,12 @@ export async function StravaCard() {
       <div className="mt-3 flex items-center gap-2">
         <Bike className="h-4 w-4 shrink-0 text-(--blue)" />
         <span className="font-mono text-lg text-foreground">
-          {weeklyRideKm}
+          {monthlyRideKm}
         </span>
         <span className="text-xs text-(--text-muted)">km cycling</span>
+        <span className="ml-auto font-mono text-xs text-(--text-muted)">
+          {rideProgress}%
+        </span>
       </div>
       <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-(--muted-bg)">
         <div

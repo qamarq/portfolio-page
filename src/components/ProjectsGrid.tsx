@@ -20,7 +20,8 @@ export function ProjectsGrid({ children }: { children?: React.ReactNode }) {
       {projects.map((project) => (
         <div key={project.name} className="card">
           <div className="flex items-start justify-between gap-2">
-            <p className="text-[13px] font-medium text-[var(--text-primary)]">
+            <p className="flex items-center gap-1.5 text-[13px] font-medium text-[var(--text-primary)]">
+              {project.icon}
               {project.name}
             </p>
             <span

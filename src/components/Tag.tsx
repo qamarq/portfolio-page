@@ -7,11 +7,12 @@ const TAG_STYLES: Record<TagType["color"], string> = {
     "bg-[var(--tag-purple-bg)] text-[var(--tag-purple-text)] border-[var(--tag-purple-border)]",
 };
 
-export function Tag({ label, color }: TagType) {
+export function Tag({ label, color, icon }: TagType) {
   return (
     <span
-      className={`rounded-md border px-2 py-0.5 font-mono text-[11px] ${TAG_STYLES[color]}`}
+      className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono text-[11px] ${TAG_STYLES[color]}`}
     >
+      {icon}
       {label}
     </span>
   );

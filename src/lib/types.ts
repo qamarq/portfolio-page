@@ -1,8 +1,11 @@
+import type { ReactNode } from "react";
+
 export type TagColor = "teal" | "blue" | "purple";
 
 export interface Tag {
   label: string;
   color: TagColor;
+  icon?: ReactNode;
 }
 
 export type ProjectStatus = "active" | "wip" | "shipped";
@@ -14,6 +17,15 @@ export interface Project {
   tags: Tag[];
   websiteUrl: string | null;
   githubUrl: string | null;
+  icon?: ReactNode;
+}
+
+export interface AboutContent {
+  name: string;
+  title: string;
+  avatar: string | null;
+  tags: Tag[];
+  bio: string;
 }
 
 export interface Commit {
@@ -56,8 +68,8 @@ export interface ActivitySummary {
 }
 
 export interface StravaData {
-  weeklyRunKm: number;
-  weeklyRideKm: number;
+  monthlyRunKm: number;
+  monthlyRideKm: number;
   runGoalKm: number;
   rideGoalKm: number;
   recentActivities: ActivitySummary[];
@@ -74,4 +86,16 @@ export interface NowPlayingData {
 export interface WeatherData {
   temp: number;
   condition: string;
+}
+
+export interface BlogPostMeta {
+  slug: string;
+  title: string;
+  date: string; // ISO date, e.g. "2026-05-01"
+  excerpt: string;
+  tags: Tag[];
+}
+
+export interface BlogPost extends BlogPostMeta {
+  html: string;
 }

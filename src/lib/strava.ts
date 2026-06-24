@@ -1,7 +1,9 @@
+import { withCache } from "./cache";
 import type { ActivitySummary, StravaData } from "./types";
 
 const RUN_GOAL_KM = 50;
 const RIDE_GOAL_KM = 150;
+const THIRTY_MINUTES_MS = 30 * 60 * 1000;
 
 async function getAccessToken(): Promise<string | null> {
   const { STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, STRAVA_REFRESH_TOKEN } =
@@ -93,14 +95,16 @@ function toActivitySummary(activity: StravaActivity): ActivitySummary {
   };
 }
 
-export async function getStravaData(): Promise<StravaData | null> {
+async function getStravaDataImpl(): Promise<StravaData | null> {
   const token = await getAccessToken();
   if (!token) return null;
 
   try {
-    const after = Math.floor(Date.now() / 1000) - 30 * 24 * 3600;
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const after = Math.floor(monthStart.getTime() / 1000);
     const res = await fetch(
-      `https://www.strava.com/api/v3/athlete/activities?after=${after}&per_page=50`,
+      `https://www.strava.com/api/v3/athlete/activities?after=${after}&per_page=100`,
       {
         headers: { Authorization: `Bearer ${token}` },
         next: { revalidate: 3600 },
@@ -116,23 +120,18 @@ export async function getStravaData(): Promise<StravaData | null> {
         new Date(b.start_date).getTime() - new Date(a.start_date).getTime(),
     );
 
-    const weekAgo = Date.now() - 7 * 24 * 3600 * 1000;
-    const lastWeek = activities.filter(
-      (a) => new Date(a.start_date).getTime() >= weekAgo,
-    );
-
-    const weeklyRunKm =
-      lastWeek
+    const monthlyRunKm =
+      activities
         .filter((a) => a.type.includes("Run"))
         .reduce((sum, a) => sum + a.distance, 0) / 1000;
-    const weeklyRideKm =
-      lastWeek
+    const monthlyRideKm =
+      activities
         .filter((a) => a.type.includes("Ride"))
         .reduce((sum, a) => sum + a.distance, 0) / 1000;
 
     return {
-      weeklyRunKm: Math.round(weeklyRunKm * 10) / 10,
-      weeklyRideKm: Math.round(weeklyRideKm * 10) / 10,
+      monthlyRunKm: Math.round(monthlyRunKm * 10) / 10,
+      monthlyRideKm: Math.round(monthlyRideKm * 10) / 10,
       runGoalKm: RUN_GOAL_KM,
       rideGoalKm: RIDE_GOAL_KM,
       recentActivities: activities.slice(0, 5).map(toActivitySummary),
@@ -141,3 +140,8 @@ export async function getStravaData(): Promise<StravaData | null> {
     return null;
   }
 }
+
+export const getStravaData = withCache(getStravaDataImpl, {
+  ttlMs: THIRTY_MINUTES_MS,
+  maxSize: 1,
+});

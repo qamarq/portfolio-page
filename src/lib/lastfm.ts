@@ -1,4 +1,7 @@
+import { withCache } from "./cache";
 import type { NowPlayingData } from "./types";
+
+const THREE_MINUTES_MS = 3 * 60 * 1000;
 
 function pickImage(image: { size: string; "#text": string }[] | undefined) {
   if (!image) return null;
@@ -17,7 +20,7 @@ function timeAgo(unixSeconds: number): string {
   return `${Math.floor(hours / 24)}d ago`;
 }
 
-export async function getNowPlaying(): Promise<NowPlayingData | null> {
+async function getNowPlayingImpl(): Promise<NowPlayingData | null> {
   const apiKey = process.env.LASTFM_API_KEY;
   const username = process.env.LASTFM_USERNAME;
   if (!apiKey || !username) return null;
@@ -47,3 +50,8 @@ export async function getNowPlaying(): Promise<NowPlayingData | null> {
     return null;
   }
 }
+
+export const getNowPlaying = withCache(getNowPlayingImpl, {
+  ttlMs: THREE_MINUTES_MS,
+  maxSize: 1,
+});
