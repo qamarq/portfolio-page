@@ -127,7 +127,9 @@ export async function StravaCard() {
 
       <div className="flex items-center gap-2">
         <Footprints className="h-4 w-4 shrink-0 text-(--accent)" />
-        <span className="font-mono text-lg text-foreground">{monthlyRunKm}</span>
+        <span className="font-mono text-lg text-foreground">
+          {monthlyRunKm}
+        </span>
         <span className="text-xs text-(--text-muted)">km running</span>
         <span className="ml-auto font-mono text-xs text-(--text-muted)">
           {runProgress}%

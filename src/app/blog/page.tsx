@@ -33,9 +33,7 @@ export default function BlogIndexPage() {
           back home
         </Link>
 
-        <h1 className="mt-6 text-xl font-medium text-(--text-primary)">
-          Blog
-        </h1>
+        <h1 className="mt-6 text-xl font-medium text-(--text-primary)">Blog</h1>
         <p className="mt-1 text-sm text-(--text-muted)">
           Case studies and write-ups on things I&apos;ve built and broken.
         </p>

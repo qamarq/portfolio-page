@@ -14,7 +14,11 @@ interface CacheOptions<Args extends unknown[]> {
 // a single request instead of racing.
 export function withCache<Args extends unknown[], T>(
   fn: (...args: Args) => Promise<T>,
-  { ttlMs, maxSize = 50, keyFn = (...args) => JSON.stringify(args) }: CacheOptions<Args>,
+  {
+    ttlMs,
+    maxSize = 50,
+    keyFn = (...args) => JSON.stringify(args),
+  }: CacheOptions<Args>,
 ): (...args: Args) => Promise<T> {
   const cache = new Map<string, CacheEntry<T>>();
 
