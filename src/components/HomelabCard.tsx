@@ -17,14 +17,14 @@ export function HomelabCardSkeleton() {
 
 function HeartbeatBars({ heartbeats }: { heartbeats: Service["heartbeats"] }) {
   return (
-    <div className="flex items-center gap-[2px]">
+    <div className="flex items-center gap-0.5">
       {heartbeats.map((status, i) => (
         <span
           key={i}
-          className="h-2.5 w-[3px] rounded-full"
+          className="h-2.5 w-0.75 rounded-full"
           style={{
             background:
-              status === "ok" ? "var(--status-ok)" : "var(--status-warn)",
+              status === "ok" ? "var(--status-ok)" : "var(--status-danger)",
           }}
         />
       ))}
@@ -42,7 +42,7 @@ function ServiceRow({ service }: { service: Service }) {
             service.status === "ok" ? "var(--status-ok)" : "var(--status-warn)",
         }}
       />
-      <span className="min-w-0 flex-1 truncate text-[var(--text-secondary)]">
+      <span className="min-w-0 flex-1 truncate text-(--text-secondary)">
         {service.name}
       </span>
       <HeartbeatBars heartbeats={service.heartbeats} />

@@ -41,8 +41,9 @@
   --heatmap-3: #26a641;
   --heatmap-4: #39d353;
 
-  --status-ok: #39d353;
+  --status-ok: #26de79;
   --status-warn: #f6ad55;
+  --status-danger: #d62649;
 }
 
 @theme inline {
