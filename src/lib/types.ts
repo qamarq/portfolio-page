@@ -80,7 +80,11 @@ export interface NowPlayingData {
   artist: string;
   albumArt: string | null;
   isLive: boolean;
-  scrobbledAt: string | null; // e.g. "2h ago", null if currently playing
+  scrobbledAt: string | null;
+  // only present when isLive=true
+  progressMs?: number;
+  durationMs?: number;
+  fetchedAt?: number; // Date.now() on server at fetch time
 }
 
 export interface WeatherData {

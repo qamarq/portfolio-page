@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { getNowPlaying } from "@/lib/lastfm";
+import { getNowPlaying } from "@/lib/spotify";
 import { SkeletonBar } from "./Skeleton";
+import { NowPlayingProgress } from "./NowPlayingProgress";
 
 export function NowPlayingCardSkeleton() {
   return (
@@ -29,7 +30,16 @@ export async function NowPlayingCard() {
     );
   }
 
-  const { track, artist, albumArt, isLive, scrobbledAt } = data;
+  const {
+    track,
+    artist,
+    albumArt,
+    isLive,
+    scrobbledAt,
+    progressMs,
+    durationMs,
+    fetchedAt,
+  } = data;
 
   return (
     <div className="card">
@@ -63,6 +73,17 @@ export async function NowPlayingCard() {
           )}
         </span>
       </div>
+
+      {isLive &&
+        progressMs !== undefined &&
+        durationMs !== undefined &&
+        fetchedAt !== undefined && (
+          <NowPlayingProgress
+            progressMs={progressMs}
+            durationMs={durationMs}
+            fetchedAt={fetchedAt}
+          />
+        )}
     </div>
   );
 }
