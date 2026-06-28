@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0a0a0f;
+  --card: #0f1117;
+  --border: #1e2a3a;
+  --border-hover: #2a3a50;
+  --muted-bg: #141a24;
+
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-muted: #4a5568;
+  --accent: #64ffda;
+  --blue: #63b3ed;
+  --purple: #b794f4;
+  --warning: #f6ad55;
+
+  --tag-teal-bg: #0d2a25;
+  --tag-teal-text: #64ffda;
+  --tag-teal-border: #1a4a3f;
+  --tag-blue-bg: #0d1a2e;
+  --tag-blue-text: #63b3ed;
+  --tag-blue-border: #1a3050;
+  --tag-purple-bg: #1a1228;
+  --tag-purple-text: #b794f4;
+  --tag-purple-border: #2d1f4a;
+
+  --badge-active-bg: #0e4429;
+  --badge-active-text: #39d353;
+  --badge-active-border: #006d32;
+  --badge-wip-bg: #2a1f0a;
+  --badge-wip-text: #f6ad55;
+  --badge-wip-border: #5a3a0a;
+  --badge-shipped-bg: #0d1a2e;
+  --badge-shipped-text: #63b3ed;
+  --badge-shipped-border: #1a3050;
+
+  --heatmap-0: #161b22;
+  --heatmap-1: #0e4429;
+  --heatmap-2: #006d32;
+  --heatmap-3: #26a641;
+  --heatmap-4: #39d353;
+
+  --status-ok: #26de79;
+  --status-warn: #f6ad55;
+  --status-danger: #d62649;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: border-color 150ms ease;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+}
+
+.card-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.cv-download-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 0.5px solid var(--accent);
+  border-radius: 8px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 150ms ease;
+}
+
+.cv-download-btn:hover {
+  background: #64ffda1a;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1.75em;
+  margin-bottom: 0.6em;
+}
+
+.blog-content h1 {
+  font-size: 1.4em;
+}
+
+.blog-content h2 {
+  font-size: 1.2em;
+}
+
+.blog-content h3 {
+  font-size: 1.05em;
+}
+
+.blog-content p {
+  margin-top: 1em;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.blog-content ul,
+.blog-content ol {
+  margin-top: 1em;
+  padding-left: 1.4em;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.blog-content ul {
+  list-style: disc;
+}
+
+.blog-content ol {
+  list-style: decimal;
+}
+
+.blog-content li + li {
+  margin-top: 0.3em;
+}
+
+.blog-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.blog-content a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.blog-content code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--muted-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+}
+
+.blog-content pre {
+  margin-top: 1em;
+  background: var(--muted-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  overflow-x: auto;
+}
+
+.blog-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.blog-content blockquote {
+  margin-top: 1em;
+  border-left: 2px solid var(--accent);
+  padding-left: 1em;
+  color: var(--text-muted);
+}
