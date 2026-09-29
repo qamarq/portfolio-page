@@ -5,9 +5,9 @@ now: Web developer w Alergeek Ventures
 lead: Buduję szybkie, dopracowane aplikacje webowe i mobilne, od schematu bazy danych po ostatni piksel. Na co dzień w **Alergeek Ventures**, po godzinach **RozliczKorki** i **Solvro Planer**, z którego korzystają tysiące studentów PWr.
 
 stats:
-  - value: '50,5'
+  - value: '420'
     unit: tys.
-    label: wyświetleń Solvro Planera w wersji 1.0
+    label: wyświetleń Solvro Planera
   - value: '8'
     label: sklepów i stron zrobionych dla klientów
   - value: '3,4'

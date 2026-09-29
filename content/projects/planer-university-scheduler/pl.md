@@ -3,7 +3,7 @@ description: Planer pomaga studentom PWr ułożyć plan zajęć bez ręcznego ż
 type: Aplikacja webowa
 role: Główny kontrybutor
 period: 12/2024 – obecnie
-stat: 50,5 tys. wyświetleń
+stat: 420 tys. wyświetleń
 ---
 
 ## Cel projektu
@@ -26,7 +26,7 @@ Jestem głównym kontrybutorem projektu: ponad 130 commitów i 110 pull request�
 
 Dane z publicznego dashboardu dla wersji 1.0:
 
-<Stats data="50,5k|wyświetleń;13,2k|wizyt;7,17k|unikalnych osób;3m 58s|średni czas wizyty" />
+<Stats data="420k|wyświetleń;13,2k|wizyt;7,17k|unikalnych osób;3m 58s|średni czas wizyty" />
 
 ## Uruchom lokalnie
 

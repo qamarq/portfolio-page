@@ -5,7 +5,7 @@ type: Web app
 role: Top contributor
 org: KN Solvro
 period: 12/2024 – now
-stat: 50.5k views
+stat: 420k views
 featured: true
 order: 20
 cover: /projects/planer-university-scheduler.webp
@@ -34,7 +34,7 @@ I am the top contributor to the project, with over 130 commits and 110 pull requ
 
 Numbers from the public dashboard for version 1.0:
 
-<Stats data="50.5k|page views;13.2k|visits;7.17k|unique visitors;3m 58s|avg. visit" />
+<Stats data="420k|page views;13.2k|visits;7.17k|unique visitors;3m 58s|avg. visit" />
 
 ## Run it locally
 
