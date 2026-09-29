@@ -51,7 +51,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
   const tNav = useTranslations('Nav')
   const locale = useLocale()
   const router = useRouter()
-  const switchLocale = useSwitchLocale()
+  const { switchLocale } = useSwitchLocale()
   const scrollToSection = useScrollToSection()
   const toggleTheme = useThemeToggle()
   const copyEmail = useCopyEmail(email)

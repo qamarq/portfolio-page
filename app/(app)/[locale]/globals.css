@@ -648,6 +648,14 @@
     400ms ease-in both vt-rise;
 }
 
+::view-transition-old(.locale-fade) {
+  animation: 160ms ease-in both vt-fade reverse;
+}
+
+::view-transition-new(.locale-fade) {
+  animation: 240ms ease-out 80ms both vt-fade;
+}
+
 ::view-transition-group(site-header) {
   animation: none;
   z-index: 100;
