@@ -1,6 +1,6 @@
 'use client'
 
-import { createElement, useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
 type RevealProps = {
@@ -12,42 +12,41 @@ type RevealProps = {
 }
 
 export function Reveal({
-  as = 'div',
+  as: Tag = 'div',
   delay,
   className,
   id,
   children,
 }: RevealProps) {
-  const ref = useRef<HTMLElement>(null)
+  const [element, setElement] = useState<HTMLElement | null>(null)
 
   useEffect(() => {
-    const element = ref.current
-    if (!element) return
+    if (!element || element.getAttribute('data-reveal') === 'in') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     // Content already on screen stays put; only what is below the fold animates in.
     if (element.getBoundingClientRect().top < window.innerHeight * 0.92) return
 
-    element.dataset.reveal = ''
+    element.setAttribute('data-reveal', '')
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
-        element.dataset.reveal = 'in'
+        element.setAttribute('data-reveal', 'in')
         observer.disconnect()
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.1 }
     )
     observer.observe(element)
     return () => observer.disconnect()
-  }, [])
+  }, [element])
 
-  return createElement(
-    as,
-    {
-      ref,
-      id,
-      className,
-      style: delay ? ({ '--delay': `${delay}s` } as CSSProperties) : undefined,
-    },
-    children
+  return (
+    <Tag
+      ref={setElement}
+      id={id}
+      className={className}
+      style={delay ? ({ '--delay': `${delay}s` } as CSSProperties) : undefined}
+    >
+      {children}
+    </Tag>
   )
 }

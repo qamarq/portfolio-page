@@ -53,7 +53,7 @@
     "longest": "najdłuższa seria",
     "longestOngoing": "najdłuższa seria, trwa nadal",
     "record": "Rekord: {count, plural, one {# kontrybucja} few {# kontrybucje} many {# kontrybucji} other {# kontrybucji}} · {date}",
-    "source": "Dane z GitHub API, odświeżane codziennie",
+    "source": "Dane z GitHub API, odświeżane co godzinę",
     "less": "Mniej",
     "more": "Więcej",
     "none": "Brak kontrybucji · {date}",

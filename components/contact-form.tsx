@@ -79,7 +79,7 @@ export default function ContactForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={(event) => form.handleSubmit(onSubmit)(event)}
         className="grid gap-[18px] self-start rounded-[22px] border border-line bg-panel p-[clamp(22px,3vw,32px)] shadow-soft"
       >
         {CAPTCHA_SITE_KEY && (

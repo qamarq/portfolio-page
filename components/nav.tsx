@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { usePathname, useRouter } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
 import { cn } from '@/lib/utils'
 import { Icons } from './icons'
 import { SectionLink } from './section-link'
 import { useThemeToggle } from './use-theme-toggle'
 import { OPEN_COMMAND_MENU } from './command-menu'
+import { useActiveSection } from './section-spy'
+import { useSwitchLocale } from './use-switch-locale'
 import { buttonVariants } from './ui/button'
 
 const SECTIONS = ['projects', 'experience', 'contact'] as const
@@ -16,11 +17,10 @@ const SECTIONS = ['projects', 'experience', 'contact'] as const
 export function Nav() {
   const t = useTranslations('Nav')
   const locale = useLocale()
-  const pathname = usePathname()
-  const router = useRouter()
+  const switchLocale = useSwitchLocale()
   const toggleTheme = useThemeToggle()
+  const active = useActiveSection()
   const [scrolled, setScrolled] = useState(false)
-  const [active, setActive] = useState<string | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -29,27 +29,11 @@ export function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
-    setActive(null)
-    if (pathname !== '/') return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting)
-            setActive(entry.target.id === 'top' ? null : entry.target.id)
-        }
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    )
-    for (const id of ['top', ...SECTIONS]) {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    }
-    return () => observer.disconnect()
-  }, [pathname])
-
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
+    <header
+      className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]"
+      style={{ viewTransitionName: 'site-header' }}
+    >
       <div
         className={cn(
           'pointer-events-auto mx-auto mt-3 flex w-[calc(100%-24px)] max-w-[1264px] items-center gap-1.5 rounded-full border border-transparent py-2 pr-2 pl-3 transition-[max-width,background-color,border-color,box-shadow] duration-[600ms] ease-soft',
@@ -98,7 +82,7 @@ export function Nav() {
                 key={code}
                 type="button"
                 aria-pressed={code === locale}
-                onClick={() => router.replace(pathname, { locale: code })}
+                onClick={() => switchLocale(code)}
                 className="cursor-pointer rounded-full px-2 py-1 tracking-[0.06em] text-faint uppercase aria-pressed:bg-fg aria-pressed:text-bg"
               >
                 {code}

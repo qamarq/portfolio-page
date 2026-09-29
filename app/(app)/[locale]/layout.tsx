@@ -8,14 +8,11 @@ import Footer from '@/components/footer'
 import { CommandMenu } from '@/components/command-menu'
 import { SmoothScroll } from '@/components/smooth-scroll'
 import { Toaster } from '@/components/ui/sonner'
-import { ViewTransitions } from 'next-view-transitions'
 import React from 'react'
 import Script from 'next/script'
-import { Locales, routing } from '@/i18n/routing'
-import { notFound } from 'next/navigation'
-import { getMessages, setRequestLocale } from 'next-intl/server'
+import { routing } from '@/i18n/routing'
 import { NextIntlClientProvider } from 'next-intl'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { getProjects, getSite } from '@/lib/content'
 
 const monaSans = Mona_Sans({
@@ -30,13 +27,9 @@ const geistMono = localFont({
   weight: '100 900',
 })
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'Metadata' })
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const t = await getTranslations('Metadata')
 
   return {
     title: {
@@ -93,20 +86,13 @@ export function generateStaticParams() {
 
 export default async function RootLayout({
   children,
-  params,
-}: Readonly<{
-  children: React.ReactNode
-  params: Promise<{ locale: Locales }>
-}>) {
-  const { locale } = await params
-  if (!routing.locales.includes(locale)) {
-    notFound()
-  }
-  setRequestLocale(locale)
-  const messages = await getMessages()
-  const t = await getTranslations('Nav')
-  const site = getSite(locale)
-  const projects = getProjects(locale)
+}: LayoutProps<'/[locale]'>) {
+  const locale = await getLocale()
+  const [t, site, projects] = await Promise.all([
+    getTranslations('Nav'),
+    getSite(locale),
+    getProjects(locale),
+  ])
 
   const personJsonLd = {
     '@context': 'https://schema.org',
@@ -121,59 +107,57 @@ export default async function RootLayout({
   }
 
   return (
-    <ViewTransitions>
-      <html lang={locale} suppressHydrationWarning>
-        <body
-          className={`${monaSans.variable} ${geistMono.variable} overflow-x-hidden`}
-        >
-          <NextIntlClientProvider messages={messages}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="dark"
-              enableSystem={false}
-              themes={['dark', 'light']}
-              disableTransitionOnChange
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={`${monaSans.variable} ${geistMono.variable} overflow-x-hidden`}
+      >
+        <NextIntlClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            themes={['dark', 'light']}
+            disableTransitionOnChange
+          >
+            <a
+              href="#main"
+              className="fixed top-[-60px] left-3 z-[100] rounded-[10px] bg-fg px-3.5 py-2.5 text-bg focus:top-3"
             >
-              <a
-                href="#main"
-                className="fixed top-[-60px] left-3 z-[100] rounded-[10px] bg-fg px-3.5 py-2.5 text-bg focus:top-3"
-              >
-                {t('skip')}
-              </a>
-              <SmoothScroll />
-              <Nav />
-              <main id="main" className="min-h-screen">
-                {children}
-              </main>
-              <Footer repo={site.github.repo} cv={site.cv} />
-              <CommandMenu
-                email={site.email}
-                cv={site.cv}
-                projects={projects.map((project) => ({
-                  slug: project.slug,
-                  title: project.title,
-                  type: project.type,
-                  cover: project.cover,
-                  keywords: `${project.description} ${project.tags.join(' ')}`,
-                }))}
-                links={site.socials.flatMap((social) =>
-                  social.icon === 'github' || social.icon === 'linkedin'
-                    ? [{ ...social, icon: social.icon }]
-                    : []
-                )}
-              />
-              <Toaster />
-            </ThemeProvider>
-            <Script
-              id="person-schema"
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify(personJsonLd),
-              }}
+              {t('skip')}
+            </a>
+            <SmoothScroll />
+            <Nav />
+            <main id="main" className="min-h-screen">
+              {children}
+            </main>
+            <Footer repo={site.github.repo} cv={site.cv} />
+            <CommandMenu
+              email={site.email}
+              cv={site.cv}
+              projects={projects.map((project) => ({
+                slug: project.slug,
+                title: project.title,
+                type: project.type,
+                cover: project.cover,
+                keywords: `${project.description} ${project.tags.join(' ')}`,
+              }))}
+              links={site.socials.flatMap((social) =>
+                social.icon === 'github' || social.icon === 'linkedin'
+                  ? [{ ...social, icon: social.icon }]
+                  : []
+              )}
             />
-          </NextIntlClientProvider>
-        </body>
-      </html>
-    </ViewTransitions>
+            <Toaster />
+          </ThemeProvider>
+          <Script
+            id="person-schema"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personJsonLd),
+            }}
+          />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }

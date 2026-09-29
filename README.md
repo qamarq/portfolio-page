@@ -87,6 +87,14 @@ Frontmatter is validated with zod in `lib/content.ts`, so a typo fails the build
 
 The GitHub heatmap needs `GITHUB_TOKEN` in `.env`. Without it the section is hidden.
 
+## Caching and navigation
+
+The site runs on Next.js 16 with `cacheComponents` and `partialPrefetching` enabled.
+
+- Content loaders in `lib/content.ts` use `'use cache'` with `cacheLife('max')`. The GitHub stars and heatmap in `lib/github.ts` refresh hourly.
+- Project links use `prefetch={true}`, so a case study opens with its content already on screen and the cover morphs through a React `<ViewTransition>`.
+- `pnpm test:e2e` builds the site and runs Playwright tests with the `instant()` helper from `@next/playwright`, which fail if a navigation has to wait for the network.
+
 ## Contributing
 
 Feel free to open issues or pull requests if you have suggestions or improvements.

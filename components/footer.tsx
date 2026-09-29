@@ -1,7 +1,14 @@
+import { cacheLife } from 'next/cache'
 import { getTranslations } from 'next-intl/server'
 import { getRepoStars } from '@/lib/github'
 import { Icons } from './icons'
 import { SectionLink } from './section-link'
+
+async function getYear() {
+  'use cache'
+  cacheLife('days')
+  return new Date().getFullYear()
+}
 
 export default async function Footer({
   repo,
@@ -10,10 +17,11 @@ export default async function Footer({
   repo: string
   cv: string
 }) {
-  const [t, tNav, stars] = await Promise.all([
+  const [t, tNav, stars, year] = await Promise.all([
     getTranslations('Footer'),
     getTranslations('Nav'),
     getRepoStars(repo),
+    getYear(),
   ])
 
   return (
@@ -59,7 +67,7 @@ export default async function Footer({
           )}
         </a>
         <span className="font-mono text-[0.74rem] text-faint">
-          © {new Date().getFullYear()} Kamil Marczak · {t('built')}
+          © {year} Kamil Marczak · {t('built')}
         </span>
       </div>
     </footer>
