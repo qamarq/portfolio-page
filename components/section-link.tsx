@@ -2,14 +2,11 @@
 
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
-import { useLenis } from 'lenis/react'
 import type { ComponentProps } from 'react'
 
 type SectionLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
   section: string
 }
-
-export const SCROLL_OFFSET = -88
 
 // Routes stay mounted in a hidden <Activity>, so a section can exist in the DOM without being on screen.
 function findVisible(id: string) {
@@ -18,19 +15,12 @@ function findVisible(id: string) {
 }
 
 export function useScrollToSection() {
-  const lenis = useLenis()
-
   return (section: string) => {
     const element = findVisible(section)
     if (!element) return false
     const top = section === 'top'
-    if (lenis) {
-      lenis.scrollTo(top ? 0 : element, { offset: top ? 0 : SCROLL_OFFSET })
-    } else if (top) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    if (top) window.scrollTo({ top: 0, behavior: 'smooth' })
+    else element.scrollIntoView({ behavior: 'smooth' })
     history.replaceState(
       null,
       '',

@@ -2,7 +2,6 @@ import { getFormatter, getTranslations } from 'next-intl/server'
 import { getContributions } from '@/lib/github'
 import { buttonVariants } from './ui/button'
 import { Icons } from './icons'
-import { Reveal } from './reveal'
 import { GithubHeatmap } from './github-heatmap'
 
 export async function GithubActivity({ username }: { username: string }) {
@@ -28,7 +27,7 @@ export async function GithubActivity({ username }: { username: string }) {
   ]
 
   return (
-    <Reveal className="mt-[clamp(64px,8vw,104px)] grid gap-7">
+    <div className="mt-[clamp(64px,8vw,104px)] grid gap-7">
       <div className="rule" aria-hidden />
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
         <div className="grid min-w-0 gap-3.5">
@@ -107,6 +106,6 @@ export async function GithubActivity({ username }: { username: string }) {
           <span className="ml-1">{t('more')}</span>
         </span>
       </div>
-    </Reveal>
+    </div>
   )
 }

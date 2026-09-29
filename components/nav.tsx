@@ -30,15 +30,14 @@ export function Nav() {
   }, [])
 
   return (
-    <header
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]"
-      style={{ viewTransitionName: 'site-header' }}
-    >
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
+      {/* The transition name sits on the pill: on an ancestor it would make the header a backdrop root and cancel the blur. */}
       <div
+        style={{ viewTransitionName: 'site-header' }}
         className={cn(
           'pointer-events-auto mx-auto mt-3 flex w-[calc(100%-24px)] max-w-[1264px] items-center gap-1.5 rounded-full border border-transparent py-2 pr-2 pl-3 transition-[max-width,background-color,border-color,box-shadow] duration-[600ms] ease-soft',
           scrolled &&
-            'max-w-[860px] border-line bg-panel/80 shadow-soft backdrop-blur-[16px] backdrop-saturate-150'
+            'max-w-[860px] border-line bg-panel/70 shadow-soft backdrop-blur-xl backdrop-saturate-150'
         )}
       >
         <SectionLink

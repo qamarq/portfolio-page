@@ -6,7 +6,6 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Nav } from '@/components/nav'
 import Footer from '@/components/footer'
 import { CommandMenu } from '@/components/command-menu'
-import { SmoothScroll } from '@/components/smooth-scroll'
 import { Toaster } from '@/components/ui/sonner'
 import React from 'react'
 import Script from 'next/script'
@@ -125,7 +124,6 @@ export default async function RootLayout({
             >
               {t('skip')}
             </a>
-            <SmoothScroll />
             <Nav />
             <main id="main" className="min-h-screen">
               {children}

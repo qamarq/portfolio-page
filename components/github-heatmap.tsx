@@ -141,12 +141,7 @@ export function GithubHeatmap({
               <i
                 key={index}
                 onPointerEnter={(event) => show(index, event.currentTarget)}
-                className={`heat-cell heat-${level(count)} block aspect-square rounded-[3px] hover:outline-[1.5px] hover:outline-offset-1 hover:outline-fg ${index === counts.length - 1 ? 'shadow-[inset_0_0_0_1.5px_var(--fg)]' : ''}`}
-                style={
-                  {
-                    '--col': Math.floor((index + lead) / 7),
-                  } as React.CSSProperties
-                }
+                className={`heat-${level(count)} block aspect-square rounded-[3px] hover:outline-[1.5px] hover:outline-offset-1 hover:outline-fg ${index === counts.length - 1 ? 'shadow-[inset_0_0_0_1.5px_var(--fg)]' : ''}`}
               />
             ))}
           </div>
