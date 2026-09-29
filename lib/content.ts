@@ -3,7 +3,7 @@ import 'server-only'
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
-import { cache } from 'react'
+import { cacheLife, cacheTag } from 'next/cache'
 import { z } from 'zod'
 import { Locales, routing } from '@/i18n/routing'
 
@@ -110,13 +110,22 @@ function parse<T extends z.ZodTypeAny>(schema: T, data: unknown, dir: string) {
   return result.data as z.infer<T>
 }
 
-export const getSite = cache((locale: Locales): Site => {
+// Content only changes on deploy, so it is cached for as long as possible.
+export async function getSite(locale: Locales): Promise<Site> {
+  'use cache'
+  cacheLife('max')
+  cacheTag('content')
+
   const dir = path.join(CONTENT_DIR, 'site')
   const { data, content } = readLocalized(dir, locale)
   return { ...parse(siteSchema, data, dir), bio: content }
-})
+}
 
-export const getProjects = cache((locale: Locales): Project[] => {
+export async function getProjects(locale: Locales): Promise<Project[]> {
+  'use cache'
+  cacheLife('max')
+  cacheTag('content')
+
   const root = path.join(CONTENT_DIR, 'projects')
   return fs
     .readdirSync(root, { withFileTypes: true })
@@ -131,8 +140,9 @@ export const getProjects = cache((locale: Locales): Project[] => {
       }
     })
     .sort((a, b) => a.order - b.order)
-})
+}
 
-export function getProject(locale: Locales, slug: string) {
-  return getProjects(locale).find((project) => project.slug === slug)
+export async function getProject(locale: Locales, slug: string) {
+  const projects = await getProjects(locale)
+  return projects.find((project) => project.slug === slug)
 }

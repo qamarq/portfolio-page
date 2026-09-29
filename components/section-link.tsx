@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useLocale } from 'next-intl'
 import { useLenis } from 'lenis/react'
-import { usePathname } from '@/i18n/navigation'
 import type { ComponentProps } from 'react'
 
 type SectionLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
@@ -12,23 +11,30 @@ type SectionLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
 
 export const SCROLL_OFFSET = -88
 
+// Routes stay mounted in a hidden <Activity>, so a section can exist in the DOM without being on screen.
+function findVisible(id: string) {
+  const element = document.getElementById(id)
+  return element?.checkVisibility() ? element : null
+}
+
 export function useScrollToSection() {
   const lenis = useLenis()
 
   return (section: string) => {
-    const target = section === 'top' ? 0 : document.getElementById(section)
-    if (target === null) return false
+    const element = findVisible(section)
+    if (!element) return false
+    const top = section === 'top'
     if (lenis) {
-      lenis.scrollTo(target, { offset: section === 'top' ? 0 : SCROLL_OFFSET })
-    } else if (typeof target === 'number') {
+      lenis.scrollTo(top ? 0 : element, { offset: top ? 0 : SCROLL_OFFSET })
+    } else if (top) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
-      target.scrollIntoView({ behavior: 'smooth' })
+      element.scrollIntoView({ behavior: 'smooth' })
     }
     history.replaceState(
       null,
       '',
-      section === 'top' ? window.location.pathname : `#${section}`
+      top ? window.location.pathname : `#${section}`
     )
     return true
   }
@@ -36,16 +42,15 @@ export function useScrollToSection() {
 
 export function SectionLink({ section, onClick, ...props }: SectionLinkProps) {
   const locale = useLocale()
-  const pathname = usePathname()
   const scrollToSection = useScrollToSection()
-  const isHome = pathname === '/'
 
   return (
     <Link
       href={section === 'top' ? `/${locale}` : `/${locale}#${section}`}
+      transitionTypes={['nav-back']}
       onClick={(event) => {
         onClick?.(event)
-        if (!isHome || event.metaKey || event.ctrlKey) return
+        if (event.metaKey || event.ctrlKey) return
         if (scrollToSection(section)) event.preventDefault()
       }}
       {...props}

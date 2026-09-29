@@ -1,10 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { Link } from 'next-view-transitions'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Icons } from './icons'
+import { Morph } from './page-transition'
 
 type Row = {
   slug: string
@@ -78,6 +79,8 @@ export function ProjectIndex({
           <li key={row.slug} className="relative isolate">
             <Link
               href={`/${locale}/project/${row.slug}`}
+              prefetch={true}
+              transitionTypes={['nav-forward']}
               onMouseEnter={(event) => {
                 if (!enabled) return
                 target.current = { x: event.clientX, y: event.clientY }
@@ -97,12 +100,11 @@ export function ProjectIndex({
                 height={108}
                 className="row-span-2 aspect-[4/3] w-[72px] rounded-lg border border-line object-cover object-top min-[900px]:hidden"
               />
-              <span
-                className="type-h3 text-[1.3rem] font-[680] transition-transform duration-500 ease-soft group-hover:translate-x-2 min-[900px]:text-[clamp(1.4rem,2.2vw,1.9rem)]"
-                style={{ viewTransitionName: `project-${row.slug}-title` }}
-              >
-                {row.title}
-              </span>
+              <Morph name={`project-${row.slug}-title`}>
+                <span className="type-h3 w-fit text-[1.3rem] font-[680] transition-transform duration-500 ease-soft group-hover:translate-x-2 min-[900px]:text-[clamp(1.4rem,2.2vw,1.9rem)]">
+                  {row.title}
+                </span>
+              </Morph>
               <span className="col-start-2 text-[0.88rem] text-muted min-[900px]:col-start-auto min-[900px]:text-[0.95rem]">
                 {row.type}
               </span>

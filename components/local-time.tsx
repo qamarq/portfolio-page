@@ -10,14 +10,16 @@ function format(timeZone: string) {
   }).format(new Date())
 }
 
+// The clock only renders in the browser; the prerendered shell cannot know the current time.
 export function LocalTime({ timeZone }: { timeZone: string }) {
-  const [time, setTime] = useState(() => format(timeZone))
+  const [time, setTime] = useState<string | null>(null)
 
   useEffect(() => {
-    setTime(format(timeZone))
-    const interval = setInterval(() => setTime(format(timeZone)), 20000)
+    const update = () => setTime(format(timeZone))
+    update()
+    const interval = setInterval(update, 20000)
     return () => clearInterval(interval)
   }, [timeZone])
 
-  return <time suppressHydrationWarning>{time}</time>
+  return <time className="inline-block min-w-[5ch] tabular-nums">{time}</time>
 }

@@ -5,12 +5,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { useLenis } from 'lenis/react'
-import { useTransitionRouter } from 'next-view-transitions'
-import { usePathname, useRouter } from '@/i18n/navigation'
+import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
 import { useCopyEmail } from './copy-email'
 import { useScrollToSection } from './section-link'
 import { useThemeToggle } from './use-theme-toggle'
+import { useSwitchLocale } from './use-switch-locale'
 
 export const OPEN_COMMAND_MENU = 'command-menu:open'
 
@@ -51,9 +51,8 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
   const t = useTranslations('Command')
   const tNav = useTranslations('Nav')
   const locale = useLocale()
-  const pathname = usePathname()
   const router = useRouter()
-  const transitionRouter = useTransitionRouter()
+  const switchLocale = useSwitchLocale()
   const lenis = useLenis()
   const scrollToSection = useScrollToSection()
   const toggleTheme = useThemeToggle()
@@ -66,12 +65,12 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
 
   const goToSection = useCallback(
     (section: string) => {
-      if (pathname === '/' && scrollToSection(section)) return
-      transitionRouter.push(
-        section === 'top' ? `/${locale}` : `/${locale}#${section}`
-      )
+      if (scrollToSection(section)) return
+      router.push(section === 'top' ? `/${locale}` : `/${locale}#${section}`, {
+        transitionTypes: ['nav-back'],
+      })
     },
-    [pathname, scrollToSection, transitionRouter, locale]
+    [scrollToSection, router, locale]
   )
 
   const items = useMemo<Item[]>(() => {
@@ -115,7 +114,10 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
             className="h-5 w-7 shrink-0 rounded-[4px] border border-line object-cover object-top"
           />
         ),
-        run: () => transitionRouter.push(`/${locale}/project/${project.slug}`),
+        run: () =>
+          router.push(`/${locale}/project/${project.slug}`, {
+            transitionTypes: ['nav-forward'],
+          }),
       })),
       {
         group: 'actions',
@@ -135,8 +137,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
         group: 'actions',
         label: t('language'),
         icon: <Icons.Globe />,
-        run: () =>
-          router.replace(pathname, { locale: locale === 'pl' ? 'en' : 'pl' }),
+        run: () => switchLocale(locale === 'pl' ? 'en' : 'pl'),
       },
       ...links.map<Item>((link) => {
         const LinkIcon = Icons[link.icon]
@@ -157,9 +158,8 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
     cv,
     links,
     locale,
-    pathname,
     router,
-    transitionRouter,
+    switchLocale,
     goToSection,
     copyEmail,
     toggleTheme,
@@ -168,11 +168,20 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
   const shown = useMemo(() => {
     const q = normalize(query.trim())
     if (!q) return items
-    return items.filter((item) =>
-      normalize(
-        `${item.label} ${item.hint ?? ''} ${item.keywords ?? ''}`
-      ).includes(q)
-    )
+    const groups: Item['group'][] = ['navigate', 'projects', 'actions']
+    return items
+      .filter((item) =>
+        normalize(
+          `${item.label} ${item.hint ?? ''} ${item.keywords ?? ''}`
+        ).includes(q)
+      )
+      .map((item) => ({ item, byLabel: normalize(item.label).includes(q) }))
+      .sort(
+        (a, b) =>
+          groups.indexOf(a.item.group) - groups.indexOf(b.item.group) ||
+          Number(b.byLabel) - Number(a.byLabel)
+      )
+      .map(({ item }) => item)
   }, [items, query])
 
   const open = useCallback(() => {
@@ -226,8 +235,6 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
     close()
     setTimeout(() => item.run?.(), 60)
   }
-
-  let lastGroup: Item['group'] | null = null
 
   return (
     <dialog
@@ -287,7 +294,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
         )}
         {shown.map((item, index) => {
           const header =
-            item.group !== lastGroup ? (
+            item.group !== shown[index - 1]?.group ? (
               <p
                 role="presentation"
                 className="label px-2.5 pt-2.5 pb-1.5 text-[0.68rem]"
@@ -295,7 +302,6 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
                 {t(item.group)}
               </p>
             ) : null
-          lastGroup = item.group
           const className =
             'flex w-full cursor-pointer items-center gap-3 rounded-[10px] px-3 py-2.5 text-left text-[0.95rem] text-muted aria-selected:bg-line-soft aria-selected:text-fg [&>svg]:size-4 [&>svg]:shrink-0 aria-selected:[&>svg]:text-accent'
           const content = (

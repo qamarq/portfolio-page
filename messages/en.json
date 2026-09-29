@@ -53,7 +53,7 @@
     "longest": "longest streak",
     "longestOngoing": "longest streak, still going",
     "record": "Record: {count, plural, one {# contribution} other {# contributions}} · {date}",
-    "source": "GitHub API data, refreshed daily",
+    "source": "GitHub API data, refreshed hourly",
     "less": "Less",
     "more": "More",
     "none": "No contributions · {date}",

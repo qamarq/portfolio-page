@@ -1,5 +1,7 @@
 import 'server-only'
 
+import { cacheLife, cacheTag } from 'next/cache'
+
 const token = process.env.GITHUB_TOKEN ?? process.env.GITHUB_OAUTH_TOKEN
 
 export type Contributions = {
@@ -53,10 +55,13 @@ const CALENDAR_QUERY = `query ($login: String!) {
 }`
 
 export async function getRepoStars(repo: string) {
+  'use cache'
+  cacheLife('hours')
+  cacheTag('github')
+
   try {
     const response = await fetch(`https://api.github.com/repos/${repo}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
-      next: { revalidate: 3600 },
     })
     if (!response.ok) return null
     const data = await response.json()
@@ -72,6 +77,10 @@ export async function getRepoStars(repo: string) {
 export async function getContributions(
   login: string
 ): Promise<Contributions | null> {
+  'use cache'
+  cacheLife('hours')
+  cacheTag('github')
+
   if (!token) return null
 
   try {
@@ -82,7 +91,6 @@ export async function getContributions(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query: CALENDAR_QUERY, variables: { login } }),
-      next: { revalidate: 86400 },
     })
     if (!response.ok) return null
 
