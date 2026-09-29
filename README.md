@@ -1,6 +1,6 @@
 # Portfolio Page
 
-This repository contains a personal portfolio website built using Next.js, Tailwind CSS, and TypeScript. The portfolio showcases projects, skills, and personal information in a professional format, making it easy to view and navigate.
+This repository contains a personal portfolio website built using Next.js, Tailwind CSS, TypeScript and Markdown content. The portfolio showcases projects, skills, and personal information in a professional format, making it easy to view and navigate.
 
 ## Features
 
@@ -55,6 +55,38 @@ To build a production-ready version of the site, run:
 pnpm build & pnpm start
 ```
 
+## Content
+
+All content lives in Markdown files in `content/`. There is no CMS or database.
+
+- `content/site/en.md`: shared settings (name, email, stats, stack, skills, experience, socials) and the bio in the body.
+- `content/site/pl.md`: Polish overrides. Any field left out falls back to `en.md`.
+- `content/projects/<slug>/en.md` and `pl.md`: one folder per project. The folder name is the URL slug.
+
+Project frontmatter:
+
+```yaml
+title: Solvro Planer
+description: One sentence shown on cards and in meta tags.
+type: Web app
+role: Top contributor
+org: KN Solvro # optional
+period: 12/2024 – now # optional
+stat: 50.5k views # optional highlight on the card
+featured: true # featured projects get a large card
+order: 20 # lower numbers come first
+cover: /projects/planer-university-scheduler.webp # file in public/
+url: https://planer.solvro.pl # optional live site
+repo: https://github.com/Solvro/web-planer # optional
+tags: [Next.js, AdonisJS]
+```
+
+The body is regular Markdown. `<Stats data="50.5k|page views;13.2k|visits" />` renders a stats grid.
+
+Frontmatter is validated with zod in `lib/content.ts`, so a typo fails the build with the file name in the error.
+
+The GitHub heatmap needs `GITHUB_TOKEN` in `.env`. Without it the section is hidden.
+
 ## Contributing
 
 Feel free to open issues or pull requests if you have suggestions or improvements.
@@ -62,5 +94,3 @@ Feel free to open issues or pull requests if you have suggestions or improvement
 ---
 
 Thank you for visiting this portfolio project. Enjoy exploring!
-
-Let me know if you want any additions, such as sections on specific dependencies or additional setup steps.

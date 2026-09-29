@@ -1,42 +1,115 @@
 {
   "Metadata": {
-    "titleTemplate": "%s | Kamil Marczak's Portfolio",
+    "titleTemplate": "%s | Kamil Marczak",
     "titleDefault": "Kamil Marczak - Full-Stack Web Developer",
-    "description": "Portfolio Kamila Marczaka, programisty webowego specjalizującego się w responsywnym designie, front-endzie, back-endzie i cyberbezpieczeństwie.",
-    "keywords": "Kamil Marczak, Kamil Marczak Developer, Kamil Marczak Dev, Portfolio, Web Developer, Full-Stack, Front-End, Back-End, Cybersecurity, Responsive Design, Modern Websites, High-Quality Websites, Cybersecurity"
+    "description": "Kamil Marczak to full-stack web developer z Wrocławia. Buduje szybkie, dopracowane aplikacje webowe w Next.js i TypeScripcie. Projekty, doświadczenie i kontakt.",
+    "keywords": "Kamil Marczak, Kamil Marczak Developer, Portfolio, Web Developer, Full-Stack, Next.js, TypeScript, React, Wrocław, KN Solvro"
   },
-  "HomePage": {
-    "hello": "Witaj",
-    "name": "Kamil Marczak",
-    "about": {
-      "1": "Większość czasu jestem studentem i",
-      "2": "full-stack web developerem",
-      "3": "ale w wolnym czasie udzielam się w Kole Naukowym Solvro na PWr."
-    },
-    "motto": "Możesz zapytać mnie o wszystko lub zobaczyć moje projekty.",
-    "contactBtn": "Napisz do mnie",
-    "downloadCvBtn": "Pobierz CV",
-    "technologies": "Niektóre języki i technologie, które dobrze znam",
-    "projects": {
-      "1": "Moje",
-      "2": "Projekty"
-    },
-    "contact": {
-      "1": "Napisz",
-      "2": "do mnie"
-    }
-  },
-  "ContactSection": {
-    "name": "Imię",
-    "message": "Wiadomość",
-    "sendBtn": "Wyślij formularz",
-    "socials": "Moje socialki",
-    "socialsDescription": "Tutaj znajdziesz wszystkie moje konta w mediach społecznościowych i inne sposoby kontaktu."
-  },
-  "Topbar": {
-    "projects": "Moje projekty",
+  "Nav": {
+    "skip": "Przejdź do treści",
+    "home": "Kamil Marczak, strona główna",
+    "sections": "Sekcje",
+    "projects": "Projekty",
+    "experience": "Doświadczenie",
     "contact": "Kontakt",
-    "dashboard": "Dashboard",
-    "star": "Walnij gwiazdkę"
+    "search": "Szukaj",
+    "cta": "Napisz",
+    "theme": "Zmień motyw",
+    "language": "Język"
+  },
+  "Hero": {
+    "now": "Teraz",
+    "seeWork": "Zobacz projekty",
+    "downloadCv": "Pobierz CV",
+    "portraitAlt": "Portret Kamila Marczaka",
+    "stack": "Na co dzień"
+  },
+  "Projects": {
+    "eyebrow": "Portfolio",
+    "title": "Wybrane projekty",
+    "lead": "Od planera zajęć dla tysięcy studentów PWr po moją aplikację dla korepetytorów na iOS, Androida i web. Kliknij projekt, żeby zobaczyć szczegóły.",
+    "more": "Pozostałe realizacje",
+    "project": "Projekt",
+    "type": "Typ",
+    "stack": "Stack",
+    "screenshot": "{title}: zrzut ekranu"
+  },
+  "About": {
+    "eyebrow": "O mnie",
+    "title": "Uczę się na PWr. Buduję na produkcji.",
+    "skills": "Umiejętności",
+    "experience": "Doświadczenie",
+    "expert": "Ekspert",
+    "proficient": "Zaawansowany"
+  },
+  "Github": {
+    "title": "<b>{total}</b> {total, plural, one {kontrybucja} few {kontrybucje} many {kontrybucji} other {kontrybucji}} w ostatnich 12 miesiącach",
+    "sub": "W tym {private} w prywatnych repozytoriach. Na GitHubie od {since} roku.",
+    "profile": "Profil na GitHubie",
+    "commits": "commitów",
+    "pullRequests": "pull requestów",
+    "activeDays": "aktywnych dni z {days}",
+    "streak": "{count, plural, one {# dzień} other {# dni}}",
+    "longest": "najdłuższa seria",
+    "longestOngoing": "najdłuższa seria, trwa nadal",
+    "record": "Rekord: {count, plural, one {# kontrybucja} few {# kontrybucje} many {# kontrybucji} other {# kontrybucji}} · {date}",
+    "source": "Dane z GitHub API, odświeżane codziennie",
+    "less": "Mniej",
+    "more": "Więcej",
+    "none": "Brak kontrybucji · {date}",
+    "cell": "{count, plural, one {# kontrybucja} few {# kontrybucje} many {# kontrybucji} other {# kontrybucji}} · {date}",
+    "label": "Heatmapa aktywności: {total} kontrybucji w ostatnich 12 miesiącach"
+  },
+  "Contact": {
+    "eyebrow": "Kontakt",
+    "title": "Masz pomysł?",
+    "titleAccent": "Napisz do mnie.",
+    "lead": "Chętnie pogadam o nowym projekcie, współpracy albo stażu.",
+    "copyHint": "Kliknij, aby skopiować adres",
+    "copied": "Skopiowano adres e-mail",
+    "selected": "Adres zaznaczony, skopiuj go skrótem ⌘C",
+    "formTitle": "Albo zostaw wiadomość",
+    "name": "Imię",
+    "namePlaceholder": "Jan Kowalski",
+    "email": "E-mail",
+    "emailPlaceholder": "ty@firma.pl",
+    "message": "Wiadomość",
+    "messagePlaceholder": "Cześć Kamil, mam projekt…",
+    "send": "Wyślij wiadomość",
+    "note": "Chronione przez reCAPTCHA",
+    "success": "Wiadomość wysłana. Odezwę się wkrótce.",
+    "error": "Nie udało się wysłać wiadomości. Spróbuj ponownie albo napisz bezpośrednio na maila.",
+    "captchaError": "reCAPTCHA się nie załadowała. Odśwież stronę i spróbuj ponownie."
+  },
+  "Project": {
+    "back": "Wszystkie projekty",
+    "next": "Następny projekt",
+    "type": "Typ",
+    "role": "Rola",
+    "period": "Kiedy",
+    "stack": "Stack",
+    "links": "Linki",
+    "repo": "Repozytorium",
+    "live": "Strona na żywo"
+  },
+  "Command": {
+    "label": "Paleta poleceń",
+    "placeholder": "Szukaj projektu lub akcji…",
+    "navigate": "Nawigacja",
+    "projects": "Projekty",
+    "actions": "Akcje",
+    "home": "Strona główna",
+    "copyEmail": "Kopiuj adres e-mail",
+    "cv": "Pobierz CV (PDF)",
+    "theme": "Przełącz motyw",
+    "language": "English version",
+    "empty": "Brak wyników dla tej frazy",
+    "move": "wybierz",
+    "open": "otwórz",
+    "toggle": "otwórz / zamknij"
+  },
+  "Footer": {
+    "source": "Kod tej strony",
+    "built": "Next.js + Markdown"
   }
 }

@@ -22,6 +22,8 @@ import Captcha from 'react-google-recaptcha'
 import { usePlausible } from 'next-plausible'
 import { useTranslations } from 'next-intl'
 
+const CAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_CAPTCHA
+
 const formSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
@@ -30,7 +32,7 @@ const formSchema = z.object({
 })
 
 export default function ContactForm() {
-  const t = useTranslations('ContactSection')
+  const t = useTranslations('Contact')
   const plausible = usePlausible()
   const captchaRef = useRef<Captcha>(null)
   const [isPending, startTransition] = React.useTransition()
@@ -50,7 +52,7 @@ export default function ContactForm() {
       try {
         const captcha = await captchaRef.current?.executeAsync()
         if (!captcha) {
-          toast.error('Captcha error')
+          toast.error(t('captchaError'))
           return
         }
 
@@ -58,15 +60,15 @@ export default function ContactForm() {
         const res = await sendForm(values)
         if (res?.data?.success) {
           form.reset()
-          toast.success('Message sent successfully!')
+          toast.success(t('success'))
           plausible('Contact form submitted')
         } else {
           plausible('Contact form error')
-          toast.error(res?.data?.message || 'Failed to send message')
+          toast.error(t('error'))
         }
       } catch (error) {
         console.error(error)
-        toast.error('Failed to send message')
+        toast.error(t('error'))
         plausible('Contact form error')
       } finally {
         captchaRef.current?.reset()
@@ -75,102 +77,87 @@ export default function ContactForm() {
   }
 
   return (
-    <div
-      style={{ '--hero-width': 'calc(100%)' } as React.CSSProperties}
-      className="relative order-last md:order-first"
-    >
-      <div className="relative z-20 horizontal-line after:top-0"></div>
-      <div className="relative p-10 bg-background/40 backdrop-blur-xs z-10">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-6"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid gap-[18px] self-start rounded-[22px] border border-line bg-panel p-[clamp(22px,3vw,32px)] shadow-soft"
+      >
+        {CAPTCHA_SITE_KEY && (
+          <Captcha
+            ref={captchaRef}
+            size="invisible"
+            className="hidden"
+            sitekey={CAPTCHA_SITE_KEY}
+          />
+        )}
+        <h3 className="type-h3 mb-1 text-[1.45rem] font-[680]">
+          {t('formTitle')}
+        </h3>
+        <div className="grid gap-[18px] sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            disabled={isPending}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('name')}</FormLabel>
+                <FormControl>
+                  <Input
+                    autoComplete="name"
+                    placeholder={t('namePlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            disabled={isPending}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('email')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    placeholder={t('emailPlaceholder')}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={form.control}
+          disabled={isPending}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t('message')}</FormLabel>
+              <FormControl>
+                <Textarea placeholder={t('messagePlaceholder')} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          <p className="font-mono text-[0.72rem] text-faint">{t('note')}</p>
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="hover:[&_svg]:translate-x-[3px] hover:[&_svg]:-translate-y-[3px]"
           >
-            <Captcha
-              ref={captchaRef}
-              size="invisible"
-              className="hidden"
-              sitekey={process.env.NEXT_PUBLIC_CAPTCHA!}
-            />
-            <FormField
-              control={form.control}
-              disabled={isPending}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('name')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="John Smith"
-                      className="font-mono"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              disabled={isPending}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="you@domain.com"
-                      className="font-mono"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              disabled={isPending}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('message')}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="I'm writing to you cause..."
-                      className="font-mono"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center justify-end gap-2">
-              <Button
-                type="reset"
-                onClick={() => form.reset()}
-                disabled={isPending}
-                variant="outline"
-                className="cursor-pointer"
-              >
-                Reset
-              </Button>
-              <Button
-                disabled={isPending}
-                type="submit"
-                className="cursor-pointer"
-              >
-                {isPending && <Icons.Loading />} {t('sendBtn')}
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </div>
-      <div className="vertical-line z-10"></div>
-      <div className="relative horizontal-line z-10"></div>
-      <div className="vertical-line left-[unset]! right-0 z-10"></div>
-      <div className="absolute bottom-1/2 left-0 top-0 h-full w-full opacity-0 blur-[180px] [background-image:linear-gradient(to_bottom,#f43f5e,#f43f5e,transparent_40%)] animate-image-glow"></div>
-    </div>
+            {t('send')}
+            {isPending ? <Icons.Loading /> : <Icons.ArrowUpRight />}
+          </Button>
+        </div>
+      </form>
+    </Form>
   )
 }
