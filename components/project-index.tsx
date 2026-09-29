@@ -76,7 +76,7 @@ export function ProjectIndex({
       </div>
       <ul className="border-t border-line">
         {rows.map((row) => (
-          <li key={row.slug} className="relative isolate">
+          <li key={row.slug} className="scroll-in relative isolate">
             <Link
               href={`/${locale}/project/${row.slug}`}
               prefetch={true}
