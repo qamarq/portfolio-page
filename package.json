@@ -2,6 +2,10 @@
   "name": "portfolio-page",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.34.6",
+  "engines": {
+    "node": "22.x"
+  },
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
