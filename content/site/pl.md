@@ -30,6 +30,9 @@ skills:
   - name: React Native i Expo
     level: proficient
     detail: aplikacje na iOS i Androida, widżety, Live Activities, wydania ze sklepów z CI
+  - name: Android i Wear OS
+    level: proficient
+    detail: Kotlin, Jetpack Compose, Material 3 Expressive, widżety Glance, kafelki
   - name: Better Auth
     level: proficient
     detail: autor dwóch pluginów z oficjalnej dokumentacji, OAuth, passkeys

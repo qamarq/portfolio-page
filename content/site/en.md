@@ -43,6 +43,7 @@ stack:
   - Three.js
   - Elixir
   - Kotlin
+  - Jetpack Compose
 
 skills:
   - name: Next.js
@@ -57,6 +58,9 @@ skills:
   - name: React Native & Expo
     level: proficient
     detail: iOS and Android apps, widgets, Live Activities, store releases from CI
+  - name: Android & Wear OS
+    level: proficient
+    detail: Kotlin, Jetpack Compose, Material 3 Expressive, Glance widgets, tiles
   - name: Better Auth
     level: proficient
     detail: author of two plugins listed in the official docs, OAuth, passkeys
