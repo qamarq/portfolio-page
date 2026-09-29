@@ -1,25 +1,28 @@
 import type { Metadata } from 'next'
+import { Mona_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
-import 'cal-sans'
 import { ThemeProvider } from '@/components/theme-provider'
-import Topbar from '@/components/topbar'
+import { Nav } from '@/components/nav'
 import Footer from '@/components/footer'
+import { CommandMenu } from '@/components/command-menu'
+import { SmoothScroll } from '@/components/smooth-scroll'
 import { Toaster } from '@/components/ui/sonner'
 import { ViewTransitions } from 'next-view-transitions'
-import React, { Suspense } from 'react'
+import React from 'react'
 import Script from 'next/script'
 import { Locales, routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
 import { getMessages, setRequestLocale } from 'next-intl/server'
 import { NextIntlClientProvider } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
-import Head from 'next/head'
+import { getProjects, getSite } from '@/lib/content'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
+const monaSans = Mona_Sans({
+  subsets: ['latin', 'latin-ext'],
+  axes: ['wdth'],
+  variable: '--font-mona',
+  display: 'swap',
 })
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
@@ -46,11 +49,13 @@ export async function generateMetadata({
     authors: [{ name: 'Kamil Marczak' }],
     robots: 'index, follow',
     keywords: t('keywords').split(', '),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL!),
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SERVER_URL || 'https://kamilmarczak.pl'
+    ),
     openGraph: {
       title: t('titleDefault'),
       description: t('description'),
-      url: `https://kamilmarczak.pl/`,
+      url: `https://kamilmarczak.pl/${locale}`,
       images: [
         {
           url: '/assets/og-image.png',
@@ -67,6 +72,7 @@ export async function generateMetadata({
       languages: {
         en: 'https://kamilmarczak.pl/en',
         pl: 'https://kamilmarczak.pl/pl',
+        'x-default': 'https://kamilmarczak.pl/',
       },
     },
     twitter: {
@@ -92,70 +98,78 @@ export default async function RootLayout({
   children: React.ReactNode
   params: Promise<{ locale: Locales }>
 }>) {
-  function personJsonLd() {
-    return {
-      __html: `
-      {
-        "@context": "http://schema.org/",
-        "@type": "Person",
-        "name": "Kamil Marczak",
-        "image": "https://kamilmarczak.pl/assets/me.jpeg",
-        "url": "https://kamilmarczak.pl",
-        "jobTitle": "Full-Stack Web Developer",
-        "sameAs": ["https://www.linkedin.com/in/kamilmarczak/", "https://x.com/qamarq_"]
-      }`,
-    }
-  }
   const { locale } = await params
   if (!routing.locales.includes(locale)) {
     notFound()
   }
-  const messages = await getMessages()
   setRequestLocale(locale)
+  const messages = await getMessages()
+  const t = await getTranslations('Nav')
+  const site = getSite(locale)
+  const projects = getProjects(locale)
+
+  const personJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.name,
+    image: 'https://kamilmarczak.pl/assets/avatar.jpg',
+    url: 'https://kamilmarczak.pl',
+    jobTitle: site.role,
+    email: `mailto:${site.email}`,
+    address: { '@type': 'PostalAddress', addressLocality: 'Wrocław' },
+    sameAs: site.socials.map((social) => social.url),
+  }
 
   return (
     <ViewTransitions>
-      <html lang={locale} suppressHydrationWarning className="scroll-smooth">
-        <Head>
-          <link
-            rel="alternate"
-            hrefLang="en"
-            href="https://kamilmarczak.pl/en"
-          />
-          <link
-            rel="alternate"
-            hrefLang="pl"
-            href="https://kamilmarczak.pl/pl"
-          />
-          <link
-            rel="alternate"
-            hrefLang="x-default"
-            href="https://kamilmarczak.pl/"
-          />
-        </Head>
+      <html lang={locale} suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+          className={`${monaSans.variable} ${geistMono.variable} overflow-x-hidden`}
         >
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"
               defaultTheme="dark"
-              forcedTheme="dark"
               enableSystem={false}
+              themes={['dark', 'light']}
               disableTransitionOnChange
             >
-              <Suspense>
-                <Topbar locale={locale} />
-              </Suspense>
-              <main className="min-h-screen">{children}</main>
-              <Footer />
+              <a
+                href="#main"
+                className="fixed top-[-60px] left-3 z-[100] rounded-[10px] bg-fg px-3.5 py-2.5 text-bg focus:top-3"
+              >
+                {t('skip')}
+              </a>
+              <SmoothScroll />
+              <Nav />
+              <main id="main" className="min-h-screen">
+                {children}
+              </main>
+              <Footer repo={site.github.repo} cv={site.cv} />
+              <CommandMenu
+                email={site.email}
+                cv={site.cv}
+                projects={projects.map((project) => ({
+                  slug: project.slug,
+                  title: project.title,
+                  type: project.type,
+                  cover: project.cover,
+                  keywords: `${project.description} ${project.tags.join(' ')}`,
+                }))}
+                links={site.socials.flatMap((social) =>
+                  social.icon === 'github' || social.icon === 'linkedin'
+                    ? [{ ...social, icon: social.icon }]
+                    : []
+                )}
+              />
+              <Toaster />
             </ThemeProvider>
-            <Toaster richColors />
             <Script
               id="person-schema"
               type="application/ld+json"
-              dangerouslySetInnerHTML={personJsonLd()}
-              key="product-jsonld"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(personJsonLd),
+              }}
             />
           </NextIntlClientProvider>
         </body>

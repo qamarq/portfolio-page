@@ -1,42 +1,115 @@
 {
   "Metadata": {
-    "titleTemplate": "%s | Kamil Marczak's Portfolio",
+    "titleTemplate": "%s | Kamil Marczak",
     "titleDefault": "Kamil Marczak - Full-Stack Web Developer",
-    "description": "Kamil Marczak's portfolio showcasing expertise in web development, responsive design, front-end, back-end, and cybersecurity.",
-    "keywords": "Kamil Marczak, Kamil Marczak Developer, Kamil Marczak Dev, Portfolio, Web Developer, Full-Stack, Front-End, Back-End, Cybersecurity, Responsive Design, Modern Websites, High-Quality Websites, Cybersecurity"
+    "description": "Kamil Marczak is a full-stack web developer from Wrocław building fast, polished web apps with Next.js and TypeScript. Projects, experience and contact.",
+    "keywords": "Kamil Marczak, Kamil Marczak Developer, Portfolio, Web Developer, Full-Stack, Next.js, TypeScript, React, Wrocław, KN Solvro"
   },
-  "HomePage": {
-    "hello": "Hello there",
-    "name": "I'm Kamil Marczak",
-    "about": {
-      "1": "Most of the time I'm a student and",
-      "2": "full-stack web developer",
-      "3": "but in my free time I am active in the Solvro IT Student Science Club at WUST."
-    },
-    "motto": "You can ask me about anything or view my projects.",
-    "contactBtn": "Contact me",
-    "downloadCvBtn": "Download CV",
-    "technologies": "Some of languages and technologies I know well",
-    "projects": {
-      "1": "My",
-      "2": "Projects"
-    },
-    "contact": {
-      "1": "Contact",
-      "2": "Me"
-    }
+  "Nav": {
+    "skip": "Skip to content",
+    "home": "Kamil Marczak, home",
+    "sections": "Sections",
+    "projects": "Work",
+    "experience": "Experience",
+    "contact": "Contact",
+    "search": "Search",
+    "cta": "Let's talk",
+    "theme": "Toggle theme",
+    "language": "Language"
   },
-  "ContactSection": {
+  "Hero": {
+    "now": "Now",
+    "seeWork": "See my work",
+    "downloadCv": "Download CV",
+    "portraitAlt": "Portrait of Kamil Marczak",
+    "stack": "Daily stack"
+  },
+  "Projects": {
+    "eyebrow": "Portfolio",
+    "title": "Selected work",
+    "lead": "From a class scheduler used by thousands of WUST students to my own tutoring app on iOS, Android and the web. Open a project for the details.",
+    "more": "More projects",
+    "project": "Project",
+    "type": "Type",
+    "stack": "Stack",
+    "screenshot": "{title} screenshot"
+  },
+  "About": {
+    "eyebrow": "About",
+    "title": "Studying at WUST. Shipping to production.",
+    "skills": "Skills",
+    "experience": "Experience",
+    "expert": "Expert",
+    "proficient": "Proficient"
+  },
+  "Github": {
+    "title": "<b>{total}</b> contributions in the last 12 months",
+    "sub": "Including {private} in private repositories. On GitHub since {since}.",
+    "profile": "GitHub profile",
+    "commits": "commits",
+    "pullRequests": "pull requests",
+    "activeDays": "active days out of {days}",
+    "streak": "{count, plural, one {# day} other {# days}}",
+    "longest": "longest streak",
+    "longestOngoing": "longest streak, still going",
+    "record": "Record: {count, plural, one {# contribution} other {# contributions}} · {date}",
+    "source": "GitHub API data, refreshed daily",
+    "less": "Less",
+    "more": "More",
+    "none": "No contributions · {date}",
+    "cell": "{count, plural, one {# contribution} other {# contributions}} · {date}",
+    "label": "Activity heatmap: {total} contributions in the last 12 months"
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Got an idea?",
+    "titleAccent": "Let’s talk.",
+    "lead": "Happy to talk about a new project, a collaboration or an internship.",
+    "copyHint": "Click to copy the address",
+    "copied": "Email address copied",
+    "selected": "Address selected, copy it with ⌘C",
+    "formTitle": "Or leave a message",
     "name": "Name",
+    "namePlaceholder": "Jane Doe",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
     "message": "Message",
-    "sendBtn": "Submit form",
-    "socials": "Socials & Accounts",
-    "socialsDescription": "Here you can find all my social media accounts and other ways to contact."
+    "messagePlaceholder": "Hi Kamil, I have a project…",
+    "send": "Send message",
+    "note": "Protected by reCAPTCHA",
+    "success": "Message sent. I will get back to you soon.",
+    "error": "The message did not go through. Try again or email me directly.",
+    "captchaError": "reCAPTCHA did not load. Refresh the page and try again."
   },
-  "Topbar": {
-    "projects": "My projects",
-    "contact": "Contact me",
-    "dashboard": "Dashboard",
-    "star": "Star on GitHub"
+  "Project": {
+    "back": "All projects",
+    "next": "Next project",
+    "type": "Type",
+    "role": "Role",
+    "period": "When",
+    "stack": "Stack",
+    "links": "Links",
+    "repo": "Repository",
+    "live": "Live site"
+  },
+  "Command": {
+    "label": "Command palette",
+    "placeholder": "Search projects or actions…",
+    "navigate": "Navigate",
+    "projects": "Projects",
+    "actions": "Actions",
+    "home": "Home",
+    "copyEmail": "Copy email address",
+    "cv": "Download CV (PDF)",
+    "theme": "Toggle theme",
+    "language": "Wersja polska",
+    "empty": "Nothing matches that search",
+    "move": "select",
+    "open": "open",
+    "toggle": "open / close"
+  },
+  "Footer": {
+    "source": "Source code",
+    "built": "Next.js + Markdown"
   }
 }

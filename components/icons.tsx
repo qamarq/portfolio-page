@@ -1,35 +1,40 @@
-import { ArrowLeft, Command, Eye, Globe, Loader2, Send } from 'lucide-react'
 import {
-  SiAndroid,
-  SiDiscord,
-  SiFivem,
-  SiGithub,
-  SiGmail,
-  SiLinkedin,
-  SiNextdotjs,
-  SiOpenai,
-} from 'react-icons/si'
-import { FaStar } from 'react-icons/fa'
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Copy,
+  FileDown,
+  Globe,
+  Hash,
+  Loader2,
+  Moon,
+  Search,
+  Sun,
+} from 'lucide-react'
+import { SiDiscord, SiGithub, SiLinkedin, SiNpm, SiX } from 'react-icons/si'
 import { cn } from '@/lib/utils'
 
-export type ValidIcon = keyof typeof Icons
-
 export const Icons = {
-  Logo: Command,
-  Contact: Send,
-  Next: SiNextdotjs,
-  Android: SiAndroid,
-  Fivem: SiFivem,
-  OpenAI: SiOpenai,
-  Github: SiGithub,
-  Star: FaStar,
-  LinkedIn: SiLinkedin,
-  Discord: SiDiscord,
-  Gmail: SiGmail,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Copy,
+  FileDown,
+  Globe,
+  Hash,
+  Moon,
+  Search,
+  Sun,
+  github: SiGithub,
+  linkedin: SiLinkedin,
+  discord: SiDiscord,
+  x: SiX,
+  npm: SiNpm,
   Loading: ({ className }: React.HTMLAttributes<HTMLDivElement>) => (
     <Loader2 className={cn('animate-spin w-4 h-4', className)} />
   ),
-  ArrowLeft,
-  Eye,
-  Globe,
 }

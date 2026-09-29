@@ -1,40 +1,29 @@
 import type { MetadataRoute } from 'next'
+import { routing } from '@/i18n/routing'
+import { getProjects } from '@/lib/content'
 
-const projects = [
-  'planer-university-scheduler',
-  'hackerium',
-  'netnook',
-  '4lop',
-  'adam-marczak',
-  'islandhouse',
-  'glg-partner',
-  'precimed',
-]
+const BASE_URL = 'https://kamilmarczak.pl'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const generateProjectUrls = projects.map((project) => ({
-    url: `https://kamilmarczak.pl/projects/${project}`,
+export default function sitemap(): MetadataRoute.Sitemap {
+  const languages = (path: string) =>
+    Object.fromEntries(
+      routing.locales.map((locale) => [locale, `${BASE_URL}/${locale}${path}`])
+    )
+
+  const projectUrls = getProjects(routing.defaultLocale).map((project) => ({
+    url: `${BASE_URL}/${routing.defaultLocale}/project/${project.slug}`,
     lastModified: new Date(),
-    alternates: {
-      languages: {
-        en: `https://kamilmarczak.pl/en/projects/${project}`,
-        pl: `https://kamilmarczak.pl/pl/projects/${project}`,
-      },
-    },
+    alternates: { languages: languages(`/project/${project.slug}`) },
     priority: 0.8,
   }))
+
   return [
     {
-      url: 'https://kamilmarczak.pl',
+      url: BASE_URL,
       lastModified: new Date(),
-      alternates: {
-        languages: {
-          en: 'https://kamilmarczak.pl/en',
-          pl: 'https://kamilmarczak.pl/pl',
-        },
-      },
+      alternates: { languages: languages('') },
       priority: 1,
     },
-    ...generateProjectUrls,
+    ...projectUrls,
   ]
 }

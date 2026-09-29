@@ -3,7 +3,7 @@ import Markdown from 'markdown-to-jsx'
 
 export default function BetterUSOSPrivacy() {
   return (
-    <div className="py-24 container mx-auto">
+    <div className="wrap prose-case pt-36 pb-24">
       <Markdown>
         **Privacy Policy** This privacy policy applies to the Better USOS app
         (hereby referred to as &quot;Application&quot;) for mobile devices that

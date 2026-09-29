@@ -1,12 +1,67 @@
-import React from 'react'
+import { getTranslations } from 'next-intl/server'
+import { getRepoStars } from '@/lib/github'
+import { Icons } from './icons'
+import { SectionLink } from './section-link'
 
-export default function Footer() {
+export default async function Footer({
+  repo,
+  cv,
+}: {
+  repo: string
+  cv: string
+}) {
+  const [t, tNav, stars] = await Promise.all([
+    getTranslations('Footer'),
+    getTranslations('Nav'),
+    getRepoStars(repo),
+  ])
+
   return (
-    <div className="w-full flex flex-col items-center justify-center border-t py-10 border-border/40">
-      <p className="text-center text-gray-500 dark:text-gray-400 text-sm">
-        © {new Date().getFullYear()} Kamil Marczak. All rights reserved.
-      </p>
-      <p className="font-cal">Made with ❤️ by Kamil Marczak</p>
-    </div>
+    <footer className="border-t border-line pt-10 pb-[calc(40px+env(safe-area-inset-bottom))]">
+      <div className="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
+        <SectionLink
+          section="top"
+          aria-label={tNav('home')}
+          className="flex items-center gap-2.5 font-display text-[1.02rem] font-[680] tracking-[-0.02em] [font-stretch:112%]"
+        >
+          <span
+            aria-hidden
+            className="grid size-8 place-items-center rounded-[9px] border border-b-2 border-line bg-bg-2 font-sans text-[1.05rem] leading-none [font-stretch:100%]"
+          >
+            ⌘
+          </span>
+          Kamil Marczak
+        </SectionLink>
+        <nav className="flex flex-wrap gap-x-5 gap-y-1 text-[0.92rem] text-muted">
+          <SectionLink section="projects" className="hover:text-fg">
+            {tNav('projects')}
+          </SectionLink>
+          <SectionLink section="experience" className="hover:text-fg">
+            {tNav('experience')}
+          </SectionLink>
+          <SectionLink section="contact" className="hover:text-fg">
+            {tNav('contact')}
+          </SectionLink>
+          <a href={cv} target="_blank" className="hover:text-fg">
+            CV
+          </a>
+        </nav>
+        <a
+          href={`https://github.com/${repo}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-[7px] text-[0.88rem] text-muted transition-colors hover:border-faint hover:text-fg"
+        >
+          <Icons.github className="size-4" />
+          {t('source')}
+          {stars !== null && (
+            <b className="font-mono font-medium text-fg">★ {stars}</b>
+          )}
+        </a>
+        <span className="font-mono text-[0.74rem] text-faint">
+          © {new Date().getFullYear()} Kamil Marczak · {t('built')}
+        </span>
+      </div>
+    </footer>
   )
 }
