@@ -45,7 +45,7 @@ importers:
         specifier: ^7.9.9
         version: 7.10.4(next@16.3.7(@babel/core@7.29.7)(@playwright/test@1.63.0)(@types/node@20.17.24)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sass@1.77.4))(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(zod@3.24.2)
       next-themes:
-        specifier: ^0.4.5
+        specifier: ^0.4.6
         version: 0.4.6(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       nextjs-google-analytics:
         specifier: ^2.3.7

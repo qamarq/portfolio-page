@@ -6,14 +6,27 @@ import { routing } from '@/i18n/routing'
 
 const LOCALE_PREFIX = new RegExp(`^/(${routing.locales.join('|')})(?=/|$)`)
 
+function localizedPath(locale: string) {
+  return `/${locale}${window.location.pathname.replace(LOCALE_PREFIX, '')}`
+}
+
 export function useSwitchLocale() {
   const router = useRouter()
 
-  return useCallback(
+  const switchLocale = useCallback(
     (locale: string) => {
-      const { pathname, hash } = window.location
-      router.replace(`/${locale}${pathname.replace(LOCALE_PREFIX, '')}${hash}`)
+      router.replace(localizedPath(locale), {
+        scroll: false,
+        transitionTypes: ['locale'],
+      })
     },
     [router]
   )
+
+  const prefetchLocale = useCallback(
+    (locale: string) => router.prefetch(localizedPath(locale)),
+    [router]
+  )
+
+  return { switchLocale, prefetchLocale }
 }

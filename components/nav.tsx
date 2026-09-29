@@ -17,7 +17,7 @@ const SECTIONS = ['projects', 'experience', 'contact'] as const
 export function Nav() {
   const t = useTranslations('Nav')
   const locale = useLocale()
-  const switchLocale = useSwitchLocale()
+  const { switchLocale, prefetchLocale } = useSwitchLocale()
   const toggleTheme = useThemeToggle()
   const active = useActiveSection()
   const [scrolled, setScrolled] = useState(false)
@@ -82,6 +82,8 @@ export function Nav() {
                 type="button"
                 aria-pressed={code === locale}
                 onClick={() => switchLocale(code)}
+                onPointerEnter={() => prefetchLocale(code)}
+                onFocus={() => prefetchLocale(code)}
                 className="cursor-pointer rounded-full px-2 py-1 tracking-[0.06em] text-faint uppercase aria-pressed:bg-fg aria-pressed:text-bg"
               >
                 {code}
