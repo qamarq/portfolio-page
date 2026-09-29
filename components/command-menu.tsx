@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useLenis } from 'lenis/react'
 import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
 import { useCopyEmail } from './copy-email'
@@ -53,7 +52,6 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
   const locale = useLocale()
   const router = useRouter()
   const switchLocale = useSwitchLocale()
-  const lenis = useLenis()
   const scrollToSection = useScrollToSection()
   const toggleTheme = useThemeToggle()
   const copyEmail = useCopyEmail(email)
@@ -190,8 +188,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
     setQuery('')
     setActive(0)
     dialog.showModal()
-    lenis?.stop()
-  }, [lenis])
+  }, [])
 
   const close = useCallback(() => dialogRef.current?.close(), [])
 
@@ -240,7 +237,6 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
     <dialog
       ref={dialogRef}
       aria-label={t('label')}
-      onClose={() => lenis?.start()}
       onClick={(event) => {
         if (event.target === dialogRef.current) close()
       }}
@@ -286,7 +282,6 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
         ref={listRef}
         id="command-list"
         role="listbox"
-        data-lenis-prevent
         className="flex-1 overflow-y-auto p-2"
       >
         {shown.length === 0 && (

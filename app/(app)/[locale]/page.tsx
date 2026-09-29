@@ -6,7 +6,6 @@ import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import { LocalTime } from '@/components/local-time'
 import { SectionLink } from '@/components/section-link'
-import { Reveal } from '@/components/reveal'
 import { ProjectCard } from '@/components/project-card'
 import { ProjectIndex } from '@/components/project-index'
 import { GithubActivity } from '@/components/github-activity'
@@ -185,10 +184,7 @@ export default async function Home() {
         <section id="projects" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
             <div className="rule" aria-hidden />
-            <Reveal
-              as="header"
-              className="mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end"
-            >
+            <header className="mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end">
               <div className="flex flex-col gap-[18px]">
                 <p className="eyebrow">
                   {t('Projects.eyebrow')} ·{' '}
@@ -197,22 +193,21 @@ export default async function Home() {
                 <h2 className="type-h2">{t('Projects.title')}</h2>
               </div>
               <p className="lead">{t('Projects.lead')}</p>
-            </Reveal>
+            </header>
 
             <div className="grid gap-x-8 gap-y-14 min-[900px]:grid-cols-2">
               {featured.map((project, index) => (
-                <Reveal
+                <div
                   key={project.slug}
-                  delay={index * 0.12}
                   className={cn(index % 2 === 1 && 'min-[900px]:mt-24')}
                 >
                   <ProjectCard project={project} locale={locale} />
-                </Reveal>
+                </div>
               ))}
             </div>
 
             {rest.length > 0 && (
-              <Reveal className="mt-[clamp(72px,9vw,120px)]">
+              <div className="mt-[clamp(72px,9vw,120px)]">
                 <div className="mb-[18px] flex items-baseline justify-between gap-4">
                   <h3 className="type-h3 text-[1.4rem] font-[680] [font-stretch:112%]">
                     {t('Projects.more')}
@@ -236,7 +231,7 @@ export default async function Home() {
                     cover: project.cover,
                   }))}
                 />
-              </Reveal>
+              </div>
             )}
           </div>
         </section>
@@ -245,7 +240,7 @@ export default async function Home() {
           <div className="wrap">
             <div className="rule" aria-hidden />
             <div className="mt-10 grid gap-16 min-[900px]:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] min-[900px]:gap-[clamp(48px,7vw,112px)]">
-              <Reveal className="flex min-w-0 flex-col gap-6">
+              <div className="flex min-w-0 flex-col gap-6">
                 <p className="eyebrow">{t('About.eyebrow')}</p>
                 <h2 className="type-h2">{t('About.title')}</h2>
                 <MarkdownContent className="max-w-[52ch] [&_p]:mb-0 [&_p]:text-pretty">
@@ -275,8 +270,8 @@ export default async function Home() {
                     </li>
                   ))}
                 </ul>
-              </Reveal>
-              <Reveal>
+              </div>
+              <div>
                 <h3 className="label">{t('About.experience')}</h3>
                 <ol className="relative mt-[18px] before:absolute before:top-2.5 before:bottom-2.5 before:left-[5px] before:w-px before:bg-line">
                   {site.experience.map((item) => (
@@ -310,7 +305,7 @@ export default async function Home() {
                     </li>
                   ))}
                 </ol>
-              </Reveal>
+              </div>
             </div>
             <GithubActivity username={site.github.username} />
           </div>
@@ -320,7 +315,7 @@ export default async function Home() {
           <div className="wrap">
             <div className="rule" aria-hidden />
             <div className="mt-10 grid gap-14 min-[900px]:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] min-[900px]:gap-[clamp(40px,6vw,96px)]">
-              <Reveal className="flex min-w-0 flex-col gap-7">
+              <div className="flex min-w-0 flex-col gap-7">
                 <p className="eyebrow">{t('Contact.eyebrow')}</p>
                 <h2 className="type-display text-[clamp(2.5rem,5.4vw,4.6rem)] leading-[0.94] min-[900px]:text-[clamp(2.5rem,4.6vw,4.2rem)]">
                   {t('Contact.title')}
@@ -356,10 +351,10 @@ export default async function Home() {
                     )
                   })}
                 </ul>
-              </Reveal>
-              <Reveal>
+              </div>
+              <div>
                 <ContactForm />
-              </Reveal>
+              </div>
             </div>
           </div>
         </section>
