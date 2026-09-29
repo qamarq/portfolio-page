@@ -183,8 +183,8 @@ export default async function Home() {
 
         <section id="projects" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule" aria-hidden />
-            <header className="mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end">
+            <div className="rule scroll-draw" aria-hidden />
+            <header className="scroll-in mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end">
               <div className="flex flex-col gap-[18px]">
                 <p className="eyebrow">
                   {t('Projects.eyebrow')} ·{' '}
@@ -199,7 +199,10 @@ export default async function Home() {
               {featured.map((project, index) => (
                 <div
                   key={project.slug}
-                  className={cn(index % 2 === 1 && 'min-[900px]:mt-24')}
+                  className={cn(
+                    'scroll-in',
+                    index % 2 === 1 && 'min-[900px]:mt-24'
+                  )}
                 >
                   <ProjectCard project={project} locale={locale} />
                 </div>
@@ -208,7 +211,7 @@ export default async function Home() {
 
             {rest.length > 0 && (
               <div className="mt-[clamp(72px,9vw,120px)]">
-                <div className="mb-[18px] flex items-baseline justify-between gap-4">
+                <div className="scroll-in mb-[18px] flex items-baseline justify-between gap-4">
                   <h3 className="type-h3 text-[1.4rem] font-[680] [font-stretch:112%]">
                     {t('Projects.more')}
                   </h3>
@@ -238,12 +241,12 @@ export default async function Home() {
 
         <section id="experience" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule" aria-hidden />
+            <div className="rule scroll-draw" aria-hidden />
             <div className="mt-10 grid gap-16 min-[900px]:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] min-[900px]:gap-[clamp(48px,7vw,112px)]">
               <div className="flex min-w-0 flex-col gap-6">
                 <p className="eyebrow">{t('About.eyebrow')}</p>
-                <h2 className="type-h2">{t('About.title')}</h2>
-                <MarkdownContent className="max-w-[52ch] [&_p]:mb-0 [&_p]:text-pretty">
+                <h2 className="type-h2 scroll-in">{t('About.title')}</h2>
+                <MarkdownContent className="scroll-in max-w-[52ch] [&_p]:mb-0 [&_p]:text-pretty">
                   {site.bio}
                 </MarkdownContent>
                 <h3 className="label mt-4">{t('About.skills')}</h3>
@@ -251,7 +254,7 @@ export default async function Home() {
                   {site.skills.map((skill) => (
                     <li
                       key={skill.name}
-                      className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-0.5 border-b border-line py-3.5"
+                      className="scroll-in grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-0.5 border-b border-line py-3.5"
                     >
                       <span className="font-semibold">{skill.name}</span>
                       <span
@@ -273,12 +276,12 @@ export default async function Home() {
               </div>
               <div>
                 <h3 className="label">{t('About.experience')}</h3>
-                <ol className="relative mt-[18px] before:absolute before:top-2.5 before:bottom-2.5 before:left-[5px] before:w-px before:bg-line">
+                <ol className="timeline-line relative mt-[18px] before:absolute before:top-2.5 before:bottom-2.5 before:left-[5px] before:w-px before:bg-line">
                   {site.experience.map((item) => (
                     <li
                       key={`${item.org}-${item.period}`}
                       className={cn(
-                        'relative grid gap-1.5 pb-11 pl-9 last:pb-0 before:absolute before:top-[7px] before:left-0 before:size-[11px] before:rounded-full before:border before:border-faint before:bg-bg',
+                        'scroll-in relative grid gap-1.5 pb-11 pl-9 last:pb-0 before:absolute before:top-[7px] before:left-0 before:size-[11px] before:rounded-full before:border before:border-faint before:bg-bg',
                         item.current &&
                           'before:border-accent before:bg-accent before:shadow-[0_0_0_5px_var(--accent-soft)]'
                       )}
@@ -313,24 +316,24 @@ export default async function Home() {
 
         <section id="contact" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule" aria-hidden />
+            <div className="rule scroll-draw" aria-hidden />
             <div className="mt-10 grid gap-14 min-[900px]:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] min-[900px]:gap-[clamp(40px,6vw,96px)]">
               <div className="flex min-w-0 flex-col gap-7">
                 <p className="eyebrow">{t('Contact.eyebrow')}</p>
-                <h2 className="type-display text-[clamp(2.5rem,5.4vw,4.6rem)] leading-[0.94] min-[900px]:text-[clamp(2.5rem,4.6vw,4.2rem)]">
+                <h2 className="type-display scroll-in text-[clamp(2.5rem,5.4vw,4.6rem)] leading-[0.94] min-[900px]:text-[clamp(2.5rem,4.6vw,4.2rem)]">
                   {t('Contact.title')}
                   <br />
                   <span className="text-accent">
                     {t('Contact.titleAccent')}
                   </span>
                 </h2>
-                <p className="lead">{t('Contact.lead')}</p>
+                <p className="lead scroll-in">{t('Contact.lead')}</p>
                 <CopyEmail email={site.email} />
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {site.socials.map((social) => {
                     const SocialIcon = Icons[social.icon]
                     return (
-                      <li key={social.url}>
+                      <li key={social.url} className="scroll-in">
                         <a
                           href={social.url}
                           target="_blank"
@@ -352,7 +355,7 @@ export default async function Home() {
                   })}
                 </ul>
               </div>
-              <div>
+              <div className="scroll-in">
                 <ContactForm />
               </div>
             </div>

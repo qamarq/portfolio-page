@@ -28,13 +28,15 @@ export async function ProjectCard({
           fallback={project.title}
           className="transition-[border-color,transform] duration-[600ms] ease-soft group-hover:-translate-y-1 group-hover:border-faint"
         >
-          <Image
-            src={project.cover}
-            alt={t('screenshot', { title: project.title })}
-            fill
-            sizes="(min-width: 900px) 600px, 100vw"
-            className="object-cover object-top transition-transform duration-1000 ease-soft group-hover:scale-[1.04]"
-          />
+          <div className="scroll-parallax absolute inset-x-0 -inset-y-[6%]">
+            <Image
+              src={project.cover}
+              alt={t('screenshot', { title: project.title })}
+              fill
+              sizes="(min-width: 900px) 600px, 100vw"
+              className="object-cover object-top transition-transform duration-1000 ease-soft group-hover:scale-[1.04]"
+            />
+          </div>
         </BrowserFrame>
       </Morph>
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-5 gap-y-2.5">

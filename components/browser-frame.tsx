@@ -23,7 +23,7 @@ export function BrowserFrame({
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-[18px] border border-line bg-panel shadow-soft',
+        'frame-timeline overflow-hidden rounded-[18px] border border-line bg-panel shadow-soft',
         className
       )}
       style={style}

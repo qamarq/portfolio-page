@@ -138,14 +138,16 @@ async function ProjectDetails({
           fallback={project.title}
           ratio="aspect-[16/9]"
         >
-          <Image
-            src={project.cover}
-            alt={tProjects('screenshot', { title: project.title })}
-            fill
-            priority
-            sizes="(min-width: 1280px) 1240px, 100vw"
-            className="object-cover object-top"
-          />
+          <div className="scroll-parallax absolute inset-x-0 -inset-y-[6%]">
+            <Image
+              src={project.cover}
+              alt={tProjects('screenshot', { title: project.title })}
+              fill
+              priority
+              sizes="(min-width: 1280px) 1240px, 100vw"
+              className="object-cover object-top"
+            />
+          </div>
         </BrowserFrame>
       </Morph>
 
@@ -192,7 +194,7 @@ async function ProjectDetails({
           href={`/${locale}/project/${next.slug}`}
           prefetch={true}
           transitionTypes={['nav-forward']}
-          className="group mt-[clamp(72px,9vw,120px)] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border-t border-line pt-7"
+          className="group scroll-in mt-[clamp(72px,9vw,120px)] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border-t border-line pt-7"
         >
           <div>
             <p className="eyebrow mb-2.5">{t('next')}</p>
