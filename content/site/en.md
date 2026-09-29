@@ -11,9 +11,9 @@ cv: /assets/Kamil_Marczak_CV.pdf
 lead: I build fast, polished web and mobile apps, from the database schema to the last pixel. By day at **Alergeek Ventures**, after hours on **RozliczKorki** and **Solvro Planer**, used by thousands of WUST students.
 
 stats:
-  - value: '50.5'
+  - value: '420'
     unit: k
-    label: Solvro Planer page views in version 1.0
+    label: Solvro Planer page views
   - value: '8'
     label: stores and websites built for clients
   - value: '3.4'
