@@ -14,6 +14,7 @@ import { CopyEmail } from '@/components/copy-email'
 import ContactForm from '@/components/contact-form'
 import { PageTransition } from '@/components/page-transition'
 import { SectionSpy } from '@/components/section-spy'
+import { CountUp } from '@/components/count-up'
 import { cn } from '@/lib/utils'
 
 export default async function Home() {
@@ -141,7 +142,7 @@ export default async function Home() {
                   }
                 >
                   <dt className="font-display text-[clamp(2rem,3.6vw,2.9rem)] leading-none font-[700] tracking-[-0.035em] tabular-nums [font-stretch:112%]">
-                    {stat.value}
+                    <CountUp value={stat.value} />
                     {stat.unit && (
                       <small className="ml-1 text-[0.5em] font-[600] tracking-[-0.01em] text-muted">
                         {stat.unit}
@@ -158,7 +159,7 @@ export default async function Home() {
 
           <div
             aria-label={t('Hero.stack')}
-            className="mt-[clamp(32px,5vw,56px)] overflow-hidden border-y border-line py-7"
+            className="intro-fade mt-[clamp(32px,5vw,56px)] overflow-hidden border-y border-line py-7 [--delay:0.8s]"
           >
             <div className="flex items-center gap-7">
               <span className="label hidden shrink-0 pl-[max(var(--gutter),calc((100vw-1240px)/2))] min-[900px]:inline">
@@ -183,16 +184,20 @@ export default async function Home() {
 
         <section id="projects" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule scroll-draw" aria-hidden />
-            <header className="scroll-in mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end">
+            <div className="rule reveal-draw" aria-hidden />
+            <header className="mt-10 mb-[clamp(40px,6vw,72px)] grid gap-6 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,420px)] min-[900px]:items-end">
               <div className="flex flex-col gap-[18px]">
-                <p className="eyebrow">
+                <p className="eyebrow reveal">
                   {t('Projects.eyebrow')} ·{' '}
                   {String(projects.length).padStart(2, '0')}
                 </p>
-                <h2 className="type-h2">{t('Projects.title')}</h2>
+                <h2 className="type-h2 reveal-lines">
+                  <span className="line">
+                    <span>{t('Projects.title')}</span>
+                  </span>
+                </h2>
               </div>
-              <p className="lead">{t('Projects.lead')}</p>
+              <p className="lead reveal">{t('Projects.lead')}</p>
             </header>
 
             <div className="grid gap-x-8 gap-y-14 min-[900px]:grid-cols-2">
@@ -200,7 +205,7 @@ export default async function Home() {
                 <div
                   key={project.slug}
                   className={cn(
-                    'scroll-in',
+                    'reveal',
                     index % 2 === 1 && 'min-[900px]:mt-24'
                   )}
                 >
@@ -211,7 +216,7 @@ export default async function Home() {
 
             {rest.length > 0 && (
               <div className="mt-[clamp(72px,9vw,120px)]">
-                <div className="scroll-in mb-[18px] flex items-baseline justify-between gap-4">
+                <div className="reveal mb-[18px] flex items-baseline justify-between gap-4">
                   <h3 className="type-h3 text-[1.4rem] font-[680] [font-stretch:112%]">
                     {t('Projects.more')}
                   </h3>
@@ -241,12 +246,16 @@ export default async function Home() {
 
         <section id="experience" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule scroll-draw" aria-hidden />
+            <div className="rule reveal-draw" aria-hidden />
             <div className="mt-10 grid gap-16 min-[900px]:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] min-[900px]:gap-[clamp(48px,7vw,112px)]">
               <div className="flex min-w-0 flex-col gap-6">
-                <p className="eyebrow">{t('About.eyebrow')}</p>
-                <h2 className="type-h2 scroll-in">{t('About.title')}</h2>
-                <MarkdownContent className="scroll-in max-w-[52ch] [&_p]:mb-0 [&_p]:text-pretty">
+                <p className="eyebrow reveal">{t('About.eyebrow')}</p>
+                <h2 className="type-h2 reveal-lines">
+                  <span className="line">
+                    <span>{t('About.title')}</span>
+                  </span>
+                </h2>
+                <MarkdownContent className="reveal max-w-[52ch] [&_p]:mb-0 [&_p]:text-pretty">
                   {site.bio}
                 </MarkdownContent>
                 <h3 className="label mt-4">{t('About.skills')}</h3>
@@ -254,7 +263,7 @@ export default async function Home() {
                   {site.skills.map((skill) => (
                     <li
                       key={skill.name}
-                      className="scroll-in grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-0.5 border-b border-line py-3.5"
+                      className="reveal grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-0.5 border-b border-line py-3.5"
                     >
                       <span className="font-semibold">{skill.name}</span>
                       <span
@@ -276,12 +285,12 @@ export default async function Home() {
               </div>
               <div>
                 <h3 className="label">{t('About.experience')}</h3>
-                <ol className="timeline-line relative mt-[18px] before:absolute before:top-2.5 before:bottom-2.5 before:left-[5px] before:w-px before:bg-line">
+                <ol className="mt-[18px]">
                   {site.experience.map((item) => (
                     <li
                       key={`${item.org}-${item.period}`}
                       className={cn(
-                        'scroll-in relative grid gap-1.5 pb-11 pl-9 last:pb-0 before:absolute before:top-[7px] before:left-0 before:size-[11px] before:rounded-full before:border before:border-faint before:bg-bg',
+                        'reveal timeline-item relative grid gap-1.5 pb-11 pl-9 before:absolute before:top-[7px] before:left-0 before:size-[11px] before:rounded-full before:border before:border-faint before:bg-bg after:absolute after:top-[18px] after:-bottom-[7px] after:left-[5px] after:w-px after:origin-top after:bg-line last:pb-0 last:after:hidden',
                         item.current &&
                           'before:border-accent before:bg-accent before:shadow-[0_0_0_5px_var(--accent-soft)]'
                       )}
@@ -316,24 +325,27 @@ export default async function Home() {
 
         <section id="contact" className="py-[clamp(56px,7vw,100px)]">
           <div className="wrap">
-            <div className="rule scroll-draw" aria-hidden />
+            <div className="rule reveal-draw" aria-hidden />
             <div className="mt-10 grid gap-14 min-[900px]:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] min-[900px]:gap-[clamp(40px,6vw,96px)]">
               <div className="flex min-w-0 flex-col gap-7">
-                <p className="eyebrow">{t('Contact.eyebrow')}</p>
-                <h2 className="type-display scroll-in text-[clamp(2.5rem,5.4vw,4.6rem)] leading-[0.94] min-[900px]:text-[clamp(2.5rem,4.6vw,4.2rem)]">
-                  {t('Contact.title')}
-                  <br />
-                  <span className="text-accent">
-                    {t('Contact.titleAccent')}
+                <p className="eyebrow reveal">{t('Contact.eyebrow')}</p>
+                <h2 className="type-display reveal-lines text-[clamp(2.5rem,5.4vw,4.6rem)] leading-[0.94] min-[900px]:text-[clamp(2.5rem,4.6vw,4.2rem)]">
+                  <span className="line">
+                    <span>{t('Contact.title')}</span>
+                  </span>
+                  <span className="line">
+                    <span className="text-accent">
+                      {t('Contact.titleAccent')}
+                    </span>
                   </span>
                 </h2>
-                <p className="lead scroll-in">{t('Contact.lead')}</p>
+                <p className="lead reveal">{t('Contact.lead')}</p>
                 <CopyEmail email={site.email} />
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {site.socials.map((social) => {
                     const SocialIcon = Icons[social.icon]
                     return (
-                      <li key={social.url} className="scroll-in">
+                      <li key={social.url} className="reveal">
                         <a
                           href={social.url}
                           target="_blank"
@@ -355,7 +367,7 @@ export default async function Home() {
                   })}
                 </ul>
               </div>
-              <div className="scroll-in">
+              <div className="reveal">
                 <ContactForm />
               </div>
             </div>

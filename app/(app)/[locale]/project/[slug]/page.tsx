@@ -70,6 +70,10 @@ export default async function ProjectPage({
   return (
     <PageTransition>
       <article className="pt-[clamp(112px,14vw,150px)] pb-[clamp(80px,10vw,140px)]">
+        <div
+          aria-hidden
+          className="reading-progress pointer-events-none fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-accent"
+        />
         <div className="wrap">
           <Link
             href={`/${locale}#projects`}
@@ -120,7 +124,7 @@ async function ProjectDetails({
   return (
     <div>
       <header className="mt-11 mb-12 grid gap-[22px]">
-        <p className="eyebrow">
+        <p className="eyebrow intro-fade [--delay:0.1s]">
           {project.type}
           {project.org && ` · ${project.org}`}
         </p>
@@ -129,7 +133,7 @@ async function ProjectDetails({
             {project.title}
           </h1>
         </Morph>
-        <p className="lead">{project.description}</p>
+        <p className="lead intro-fade [--delay:0.2s]">{project.description}</p>
       </header>
 
       <Morph name={`project-${project.slug}-cover`}>
@@ -194,7 +198,7 @@ async function ProjectDetails({
           href={`/${locale}/project/${next.slug}`}
           prefetch={true}
           transitionTypes={['nav-forward']}
-          className="group scroll-in mt-[clamp(72px,9vw,120px)] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border-t border-line pt-7"
+          className="group reveal mt-[clamp(72px,9vw,120px)] grid grid-cols-[minmax(0,1fr)_auto] items-center gap-6 border-t border-line pt-7"
         >
           <div>
             <p className="eyebrow mb-2.5">{t('next')}</p>

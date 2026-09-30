@@ -28,6 +28,7 @@ export function ProjectIndex({
   const target = useRef({ x: 0, y: 0 })
   const current = useRef({ x: 0, y: 0 })
   const [active, setActive] = useState<string | null>(null)
+  const [shown, setShown] = useState(0)
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
@@ -75,8 +76,8 @@ export function ProjectIndex({
         <span />
       </div>
       <ul className="border-t border-line">
-        {rows.map((row) => (
-          <li key={row.slug} className="scroll-in relative isolate">
+        {rows.map((row, index) => (
+          <li key={row.slug} className="reveal relative isolate">
             <Link
               href={`/${locale}/project/${row.slug}`}
               prefetch={true}
@@ -86,6 +87,7 @@ export function ProjectIndex({
                 target.current = { x: event.clientX, y: event.clientY }
                 if (!active) current.current = { ...target.current }
                 setActive(row.slug)
+                setShown(index)
               }}
               onMouseMove={(event) => {
                 target.current = { x: event.clientX, y: event.clientY }
@@ -125,7 +127,7 @@ export function ProjectIndex({
             active ? 'scale-100 opacity-100' : 'scale-[0.85] opacity-0'
           )}
         >
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <Image
               key={row.slug}
               src={row.cover}
@@ -133,8 +135,12 @@ export function ProjectIndex({
               fill
               sizes="340px"
               className={cn(
-                'object-cover object-top transition-opacity duration-300',
-                active === row.slug ? 'opacity-100' : 'opacity-0'
+                'object-cover object-top transition-[clip-path,scale] duration-500 ease-soft',
+                index === shown
+                  ? '[clip-path:inset(0)]'
+                  : index < shown
+                    ? 'scale-110 [clip-path:inset(0_0_100%_0)]'
+                    : 'scale-110 [clip-path:inset(100%_0_0_0)]'
               )}
             />
           ))}

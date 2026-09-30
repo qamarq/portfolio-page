@@ -240,7 +240,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
       onClick={(event) => {
         if (event.target === dialogRef.current) close()
       }}
-      className="m-auto mt-[12vh] max-h-[min(560px,calc(100dvh-120px))] w-[min(640px,calc(100%-24px))] flex-col overflow-hidden rounded-[20px] border border-line bg-panel p-0 text-fg shadow-[0_40px_120px_-20px_rgb(0_0_0/0.6)] backdrop:bg-[rgb(8_5_6/0.55)] backdrop:backdrop-blur-[6px] open:flex open:animate-[pop_0.28s_var(--ease-soft)]"
+      className="m-auto mt-[12vh] max-h-[min(560px,calc(100dvh-120px))] w-[min(640px,calc(100%-24px))] -translate-y-2 scale-[0.97] flex-col overflow-hidden rounded-[20px] border border-line bg-panel p-0 text-fg opacity-0 shadow-[0_40px_120px_-20px_rgb(0_0_0/0.6)] transition-[opacity,translate,scale,display,overlay] transition-discrete duration-200 ease-soft backdrop:bg-[rgb(8_5_6/0.55)] backdrop:opacity-0 backdrop:backdrop-blur-[6px] backdrop:transition-[opacity,display,overlay] backdrop:transition-discrete backdrop:duration-200 open:flex open:translate-y-0 open:scale-100 open:opacity-100 open:duration-300 open:backdrop:opacity-100 starting:open:-translate-y-2 starting:open:scale-[0.97] starting:open:opacity-0 starting:open:backdrop:opacity-0"
     >
       <div className="flex items-center gap-3 border-b border-line px-[18px] py-4">
         <Icons.Search className="size-[18px] shrink-0 text-faint" />
@@ -298,7 +298,7 @@ export function CommandMenu({ projects, email, cv, links }: CommandMenuProps) {
               </p>
             ) : null
           const className =
-            'flex w-full cursor-pointer items-center gap-3 rounded-[10px] px-3 py-2.5 text-left text-[0.95rem] text-muted aria-selected:bg-line-soft aria-selected:text-fg [&>svg]:size-4 [&>svg]:shrink-0 aria-selected:[&>svg]:text-accent'
+            'flex w-full cursor-pointer items-center gap-3 rounded-[10px] px-3 py-2.5 text-left text-[0.95rem] text-muted transition-colors duration-150 aria-selected:bg-line-soft aria-selected:text-fg [&>svg]:size-4 [&>svg]:shrink-0 [&>svg]:transition-colors aria-selected:[&>svg]:text-accent'
           const content = (
             <>
               {item.icon}

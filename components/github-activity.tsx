@@ -28,8 +28,8 @@ export async function GithubActivity({ username }: { username: string }) {
 
   return (
     <div className="mt-[clamp(64px,8vw,104px)] grid gap-7">
-      <div className="rule scroll-draw" aria-hidden />
-      <div className="scroll-in flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+      <div className="rule reveal-draw" aria-hidden />
+      <div className="reveal flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
         <div className="grid min-w-0 gap-3.5">
           <p className="eyebrow">GitHub · @{username}</p>
           <h3 className="type-h3 text-[clamp(1.7rem,3.2vw,2.5rem)] font-[700] [font-stretch:115%]">
@@ -64,7 +64,7 @@ export async function GithubActivity({ username }: { username: string }) {
           <div
             key={stat.label}
             className={
-              'scroll-in grid gap-1 py-[18px] pr-4 ' +
+              'reveal grid gap-1 py-[18px] pr-4 ' +
               (index > 0
                 ? 'min-[900px]:border-l min-[900px]:border-line min-[900px]:pl-5'
                 : '')
