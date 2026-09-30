@@ -95,7 +95,7 @@ export function GithubHeatmap({
       <div
         ref={scrollRef}
         onScroll={() => setTip(null)}
-        className="heatmap-scroll overflow-x-auto pb-1.5 [scrollbar-width:thin]"
+        className="overflow-x-auto pb-1.5 [scrollbar-width:thin]"
       >
         <div className="grid min-w-[720px] grid-cols-[28px_minmax(0,1fr)] grid-rows-[auto_auto] gap-x-1.5 gap-y-2">
           <div
@@ -131,7 +131,7 @@ export function GithubHeatmap({
               total: counts.reduce((a, b) => a + b, 0),
             })}
             onPointerLeave={() => setTip(null)}
-            className="heatmap-grid col-start-2 row-start-2 grid grid-flow-col grid-rows-7 gap-[3px]"
+            className="reveal-cells col-start-2 row-start-2 grid grid-flow-col grid-rows-7 gap-[3px]"
             style={{ gridAutoColumns: 'minmax(0, 1fr)' }}
           >
             {Array.from({ length: lead }, (_, index) => (
@@ -144,6 +144,7 @@ export function GithubHeatmap({
                 style={
                   {
                     '--col': Math.floor((index + lead) / 7),
+                    '--row': (index + lead) % 7,
                   } as React.CSSProperties
                 }
                 className={`heat-cell heat-${level(count)} block aspect-square rounded-[3px] hover:outline-[1.5px] hover:outline-offset-1 hover:outline-fg ${index === counts.length - 1 ? 'shadow-[inset_0_0_0_1.5px_var(--fg)]' : ''}`}

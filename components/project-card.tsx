@@ -28,7 +28,7 @@ export async function ProjectCard({
           fallback={project.title}
           className="transition-[border-color,transform] duration-[600ms] ease-soft group-hover:-translate-y-1 group-hover:border-faint"
         >
-          <div className="scroll-parallax absolute inset-x-0 -inset-y-[6%]">
+          <div className="scroll-parallax scroll-zoom absolute inset-x-0 -inset-y-[6%]">
             <Image
               src={project.cover}
               alt={t('screenshot', { title: project.title })}

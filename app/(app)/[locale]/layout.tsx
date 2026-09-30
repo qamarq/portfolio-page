@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Nav } from '@/components/nav'
+import { Motion } from '@/components/motion'
 import Footer from '@/components/footer'
 import { CommandMenu } from '@/components/command-menu'
 import { Toaster } from '@/components/ui/sonner'
@@ -124,6 +125,7 @@ export default async function RootLayout({
             >
               {t('skip')}
             </a>
+            <Motion />
             <Nav />
             <main id="main" className="min-h-screen">
               {children}
