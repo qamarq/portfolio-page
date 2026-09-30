@@ -110,7 +110,6 @@ function parse<T extends z.ZodTypeAny>(schema: T, data: unknown, dir: string) {
   return result.data as z.infer<T>
 }
 
-// Content only changes on deploy, so it is cached for as long as possible.
 export async function getSite(locale: Locales): Promise<Site> {
   'use cache'
   cacheLife('max')

@@ -10,7 +10,6 @@ function format(timeZone: string) {
   }).format(new Date())
 }
 
-// The clock only renders in the browser; the prerendered shell cannot know the current time.
 export function LocalTime({ timeZone }: { timeZone: string }) {
   const [time, setTime] = useState<string | null>(null)
 
