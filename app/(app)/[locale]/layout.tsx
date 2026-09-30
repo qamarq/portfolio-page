@@ -49,14 +49,6 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t('titleDefault'),
       description: t('description'),
       url: `https://kamilmarczak.pl/${locale}`,
-      images: [
-        {
-          url: '/assets/og-image.png',
-          width: 2360,
-          height: 1337,
-          alt: t('titleDefault'),
-        },
-      ],
       locale,
       type: 'website',
     },
@@ -75,7 +67,6 @@ export async function generateMetadata(): Promise<Metadata> {
       site: '@kamilmarczak',
       creator: '@qamarq_',
       creatorId: '1403301074602270720',
-      images: ['/assets/og-image.png'],
     },
   }
 }
