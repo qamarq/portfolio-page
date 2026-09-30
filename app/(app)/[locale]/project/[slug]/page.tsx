@@ -43,7 +43,6 @@ export async function generateMetadata({
       description: project.description,
       url: `https://kamilmarczak.pl/${locale}/project/${slug}`,
       siteName: 'Kamil Marczak - Full-Stack Web Developer',
-      images: [{ url: project.cover, alt: project.title }],
       locale,
       type: 'website',
     },
@@ -54,7 +53,6 @@ export async function generateMetadata({
       site: '@kamilmarczak',
       creator: '@qamarq_',
       creatorId: '1403301074602270720',
-      images: [project.cover],
     },
   }
 }
