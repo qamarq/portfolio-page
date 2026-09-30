@@ -110,7 +110,6 @@ export async function getContributions(
       longestStreak = Math.max(longestStreak, run)
     }
 
-    // Today may still be empty, so the current streak can start from yesterday.
     let index = counts.at(-1) === 0 ? counts.length - 2 : counts.length - 1
     let currentStreak = 0
     while (index >= 0 && counts[index] > 0) {

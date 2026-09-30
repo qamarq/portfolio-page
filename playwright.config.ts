@@ -9,7 +9,6 @@ export default defineConfig({
     channel: process.env.CI ? undefined : 'chrome',
   },
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
-  // Prefetching only runs in production, so the tests need a real build.
   webServer: {
     command: `pnpm build && pnpm start --port ${PORT}`,
     url: `http://localhost:${PORT}/pl`,

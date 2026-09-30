@@ -8,7 +8,6 @@ type SectionLinkProps = Omit<ComponentProps<typeof Link>, 'href'> & {
   section: string
 }
 
-// Routes stay mounted in a hidden <Activity>, so a section can exist in the DOM without being on screen.
 function findVisible(id: string) {
   const element = document.getElementById(id)
   return element?.checkVisibility() ? element : null
