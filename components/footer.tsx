@@ -2,6 +2,7 @@ import { cacheLife } from 'next/cache'
 import { getTranslations } from 'next-intl/server'
 import { getRepoStars } from '@/lib/github'
 import { Icons } from './icons'
+import { Logo } from './logo'
 import { SectionLink } from './section-link'
 
 async function getYear() {
@@ -30,13 +31,13 @@ export default async function Footer({
         <SectionLink
           section="top"
           aria-label={tNav('home')}
-          className="flex items-center gap-2.5 font-display text-[1.02rem] font-[680] tracking-[-0.02em] [font-stretch:112%]"
+          className="group flex items-center gap-2.5 font-display text-[1.02rem] font-[680] tracking-[-0.02em] [font-stretch:112%]"
         >
           <span
             aria-hidden
-            className="grid size-8 place-items-center rounded-[9px] border border-b-2 border-line bg-bg-2 font-sans text-[1.05rem] leading-none [font-stretch:100%]"
+            className="grid size-8 place-items-center rounded-[9px] border border-b-2 border-line bg-bg-2"
           >
-            ⌘
+            <Logo className="w-5" />
           </span>
           Kamil Marczak
         </SectionLink>
@@ -66,8 +67,15 @@ export default async function Footer({
             <b className="font-mono font-medium text-fg">★ {stars}</b>
           )}
         </a>
-        <span className="font-mono text-[0.74rem] text-faint">
-          © {year} Kamil Marczak · {t('built')}
+        <span className="group/made font-mono text-[0.74rem] text-faint">
+          © {year} ·{' '}
+          {t.rich('made', {
+            heart: () => (
+              <span className="inline-block text-accent group-hover/made:motion-safe:animate-[heartbeat_1.1s_ease-in-out_infinite]">
+                ♥
+              </span>
+            ),
+          })}
         </span>
       </div>
     </footer>
